@@ -50,14 +50,14 @@ bool mouseClick = false;
 
 std::vector <std::string> meshFiles;
 std::vector <MeshInfo*> meshArray;
-std::vector <MeshInfo*> cubeMeshes;
+std::vector <MeshInfo*> teleport;
 
 void ReadFromFile();
 void ReadSceneDescription();
 void LoadModel(std::string fileName, sModelDrawInfo& plyModel);
 void ManageLights();
 float RandomFloat(float a, float b);
-bool RandomizePositions(MeshInfo* cube);
+bool RandomizePositions(MeshInfo* mesh);
 
 enum eEditMode
 {
@@ -577,292 +577,21 @@ void Render() {
     meshArray.push_back(long_sidewalk_mesh1);
     //long_sidewalk_mesh1->CopyVertices(long_sidewalk);
     
-    sModelDrawInfo lamp_post;
-    LoadModel(meshFiles[5], lamp_post);
-    if (!VAOMan->LoadModelIntoVAO("lamp_post", lamp_post, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* lamp_post_mesh = new MeshInfo();
-    lamp_post_mesh->meshName = "lamp_post";
-    lamp_post_mesh->isWireframe = wireFrame;
-    lamp_post_mesh->RGBAColour = glm::vec4(25.f, 25.f, 25.f, 1.f);
-    lamp_post_mesh->useRGBAColour = wireFrame;
-    meshArray.push_back(lamp_post_mesh);
-    
-    if (!VAOMan->LoadModelIntoVAO("lamp_post1", lamp_post, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* lamp_post_mesh1 = new MeshInfo();
-    lamp_post_mesh1->meshName = "lamp_post1";
-    lamp_post_mesh1->isWireframe = wireFrame;
-    lamp_post_mesh1->RGBAColour = glm::vec4(25.f, 25.f, 25.f, 1.f);
-    lamp_post_mesh1->useRGBAColour = true;
-    meshArray.push_back(lamp_post_mesh1);
-    
-    if (!VAOMan->LoadModelIntoVAO("lamp_post2", lamp_post, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* lamp_post_mesh2 = new MeshInfo();
-    lamp_post_mesh2->meshName = "lamp_post2";
-    lamp_post_mesh2->isWireframe = wireFrame;
-    lamp_post_mesh2->RGBAColour = glm::vec4(25.f, 25.f, 25.f, 1.f);
-    lamp_post_mesh2->useRGBAColour = true;
-    meshArray.push_back(lamp_post_mesh2);
-    
-    if (!VAOMan->LoadModelIntoVAO("lamp_post3", lamp_post, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* lamp_post_mesh3 = new MeshInfo();
-    lamp_post_mesh3->meshName = "lamp_post3";
-    lamp_post_mesh3->isWireframe = wireFrame;
-    lamp_post_mesh3->RGBAColour = glm::vec4(25.f, 25.f, 25.f, 1.f);
-    lamp_post_mesh3->useRGBAColour = true;
-    meshArray.push_back(lamp_post_mesh3);
-    
-    if (!VAOMan->LoadModelIntoVAO("lamp_post4", lamp_post, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* lamp_post_mesh4 = new MeshInfo();
-    lamp_post_mesh4->meshName = "lamp_post4";
-    lamp_post_mesh4->isWireframe = wireFrame;
-    lamp_post_mesh4->RGBAColour = glm::vec4(25.f, 25.f, 25.f, 1.f);
-    lamp_post_mesh4->useRGBAColour = true;
-    meshArray.push_back(lamp_post_mesh4);
-    
-    if (!VAOMan->LoadModelIntoVAO("lamp_post5", lamp_post, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* lamp_post_mesh5 = new MeshInfo();
-    lamp_post_mesh5->meshName = "lamp_post5";
-    lamp_post_mesh5->isWireframe = wireFrame;
-    lamp_post_mesh5->RGBAColour = glm::vec4(25.f, 25.f, 25.f, 1.f);
-    lamp_post_mesh5->useRGBAColour = true;
-    meshArray.push_back(lamp_post_mesh5);
-    
-    if (!VAOMan->LoadModelIntoVAO("lamp_post6", lamp_post, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* lamp_post_mesh6 = new MeshInfo();
-    lamp_post_mesh6->meshName = "lamp_post6";
-    lamp_post_mesh6->isWireframe = wireFrame;
-    lamp_post_mesh6->RGBAColour = glm::vec4(25.f, 25.f, 25.f, 1.f);
-    lamp_post_mesh6->useRGBAColour = true;
-    meshArray.push_back(lamp_post_mesh6);
-    
-    if (!VAOMan->LoadModelIntoVAO("lamp_post7", lamp_post, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* lamp_post_mesh7 = new MeshInfo();
-    lamp_post_mesh7->meshName = "lamp_post7";
-    lamp_post_mesh7->isWireframe = wireFrame;
-    lamp_post_mesh7->RGBAColour = glm::vec4(25.f, 25.f, 25.f, 1.f);
-    lamp_post_mesh7->useRGBAColour = true;
-    meshArray.push_back(lamp_post_mesh7);
-    
-    if (!VAOMan->LoadModelIntoVAO("lamp_post8", lamp_post, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* lamp_post_mesh8 = new MeshInfo();
-    lamp_post_mesh8->meshName = "lamp_post8";
-    lamp_post_mesh8->isWireframe = wireFrame;
-    lamp_post_mesh8->RGBAColour = glm::vec4(25.f, 25.f, 25.f, 1.f);
-    lamp_post_mesh8->useRGBAColour = true;
-    meshArray.push_back(lamp_post_mesh8); 
-    
-    if (!VAOMan->LoadModelIntoVAO("lamp_post9", lamp_post, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* lamp_post_mesh9 = new MeshInfo();
-    lamp_post_mesh9->meshName = "lamp_post9";
-    lamp_post_mesh9->isWireframe = wireFrame;
-    lamp_post_mesh9->RGBAColour = glm::vec4(25.f, 25.f, 25.f, 1.f);
-    lamp_post_mesh9->useRGBAColour = true;
-    meshArray.push_back(lamp_post_mesh9);
-    
-    if (!VAOMan->LoadModelIntoVAO("lamp_post10", lamp_post, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* lamp_post_mesh10 = new MeshInfo();
-    lamp_post_mesh10->meshName = "lamp_post10";
-    lamp_post_mesh10->isWireframe = wireFrame;
-    lamp_post_mesh10->RGBAColour = glm::vec4(25.f, 25.f, 25.f, 1.f);
-    lamp_post_mesh10->useRGBAColour = true;
-    meshArray.push_back(lamp_post_mesh10);
-    
-    if (!VAOMan->LoadModelIntoVAO("lamp_post11", lamp_post, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* lamp_post_mesh11 = new MeshInfo();
-    lamp_post_mesh11->meshName = "lamp_post11";
-    lamp_post_mesh11->isWireframe = wireFrame;
-    lamp_post_mesh11->RGBAColour = glm::vec4(25.f, 25.f, 25.f, 1.f);
-    lamp_post_mesh11->useRGBAColour = true;
-    meshArray.push_back(lamp_post_mesh11);
-    
-    LoadModel(meshFiles[6], player_obj);
+    LoadModel(meshFiles[9], player_obj);
     if (!VAOMan->LoadModelIntoVAO("player", player_obj, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
     player_mesh = new MeshInfo();
     player_mesh->meshName = "player";
     player_mesh->isWireframe = wireFrame;
-    player_mesh->RGBAColour = glm::vec4(25.f, 255.f, 25.f, 1.f);
-    player_mesh->useRGBAColour = true;
+    player_mesh->RGBAColour = glm::vec4(255.f, 255.f, 255.f, 1.f);
+    player_mesh->useRGBAColour = false;
     player_mesh->drawBBox = true;
     meshArray.push_back(player_mesh);
     player_mesh->CopyVertices(player_obj);
-    
-    sModelDrawInfo cube_obj;
-    LoadModel(meshFiles[7], cube_obj);
-    if (!VAOMan->LoadModelIntoVAO("cube", cube_obj, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    cube_mesh = new MeshInfo();
-    cube_mesh->meshName = "cube";
-    cube_mesh->isWireframe = wireFrame;
-    cube_mesh->RGBAColour = glm::vec4(255.f, 25.f, 0.f, 1.f);
-    cube_mesh->useRGBAColour = true;
-    cube_mesh->drawBBox = true;
-    cube_mesh->teleport = true;
-    meshArray.push_back(cube_mesh);
-    cubeMeshes.push_back(cube_mesh);
-    cube_mesh->CopyVertices(cube_obj);
-
-    if (!VAOMan->LoadModelIntoVAO("cube1", cube_obj, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* cube_mesh1 = new MeshInfo();
-    cube_mesh1->meshName = "cube1";
-    cube_mesh1->isWireframe = wireFrame;
-    cube_mesh1->RGBAColour = glm::vec4(255.f, 25.f, 0.f, 1.f);
-    cube_mesh1->useRGBAColour = true;
-    cube_mesh1->drawBBox = true;
-    cube_mesh1->teleport = true;
-    meshArray.push_back(cube_mesh1);
-    cubeMeshes.push_back(cube_mesh1);
-    cube_mesh1->CopyVertices(cube_obj);
-     
-    if (!VAOMan->LoadModelIntoVAO("cube2", cube_obj, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* cube_mesh2 = new MeshInfo();
-    cube_mesh2->meshName = "cube2";
-    cube_mesh2->isWireframe = wireFrame;
-    cube_mesh2->RGBAColour = glm::vec4(255.f, 25.f, 0.f, 1.f);
-    cube_mesh2->useRGBAColour = true;
-    cube_mesh2->drawBBox = true;
-    cube_mesh2->teleport = true;
-    meshArray.push_back(cube_mesh2);
-    cubeMeshes.push_back(cube_mesh2);
-    cube_mesh2->CopyVertices(cube_obj);
-    
-    if (!VAOMan->LoadModelIntoVAO("cube3", cube_obj, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* cube_mesh3 = new MeshInfo();
-    cube_mesh3->meshName = "cube3";
-    cube_mesh3->isWireframe = wireFrame;
-    cube_mesh3->RGBAColour = glm::vec4(255.f, 25.f, 0.f, 1.f);
-    cube_mesh3->useRGBAColour = true;
-    cube_mesh3->drawBBox = true;
-    cube_mesh3->teleport = true;
-    meshArray.push_back(cube_mesh3);
-    cubeMeshes.push_back(cube_mesh3);
-    cube_mesh3->CopyVertices(cube_obj);
-    
-    if (!VAOMan->LoadModelIntoVAO("cube4", cube_obj, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* cube_mesh4 = new MeshInfo();
-    cube_mesh4->meshName = "cube4";
-    cube_mesh4->isWireframe = wireFrame;
-    cube_mesh4->RGBAColour = glm::vec4(255.f, 25.f, 0.f, 1.f);
-    cube_mesh4->useRGBAColour = true;
-    cube_mesh4->drawBBox = true;
-    cube_mesh4->teleport = true;
-    meshArray.push_back(cube_mesh4);
-    cubeMeshes.push_back(cube_mesh4);
-    cube_mesh4->CopyVertices(cube_obj);
-    
-    if (!VAOMan->LoadModelIntoVAO("cube5", cube_obj, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* cube_mesh5 = new MeshInfo();
-    cube_mesh5->meshName = "cube5";
-    cube_mesh5->isWireframe = wireFrame;
-    cube_mesh5->RGBAColour = glm::vec4(255.f, 25.f, 0.f, 1.f);
-    cube_mesh5->useRGBAColour = true;
-    cube_mesh5->drawBBox = true;
-    cube_mesh5->teleport = true;
-    meshArray.push_back(cube_mesh5);
-    cubeMeshes.push_back(cube_mesh5);
-    cube_mesh5->CopyVertices(cube_obj);
-    
-    if (!VAOMan->LoadModelIntoVAO("cube6", cube_obj, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* cube_mesh6 = new MeshInfo();
-    cube_mesh6->meshName = "cube6";
-    cube_mesh6->isWireframe = wireFrame;
-    cube_mesh6->RGBAColour = glm::vec4(255.f, 25.f, 0.f, 1.f);
-    cube_mesh6->useRGBAColour = true;
-    cube_mesh6->drawBBox = true;
-    cube_mesh6->teleport = true;
-    meshArray.push_back(cube_mesh6);
-    cubeMeshes.push_back(cube_mesh6);
-    cube_mesh6->CopyVertices(cube_obj);
-
-    sModelDrawInfo wall_obj;
-    LoadModel(meshFiles[8], wall_obj);
-    if (!VAOMan->LoadModelIntoVAO("wall", wall_obj, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* wall_mesh = new MeshInfo();
-    wall_mesh->meshName = "wall";
-    wall_mesh->isWireframe = wireFrame;
-    wall_mesh->RGBAColour = glm::vec4(240, 195, 46, 1.f);
-    wall_mesh->useRGBAColour = true;
-    meshArray.push_back(wall_mesh);
-
-    if (!VAOMan->LoadModelIntoVAO("wall1", wall_obj, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* wall_mesh1 = new MeshInfo();
-    wall_mesh1->meshName = "wall1";
-    wall_mesh1->isWireframe = wireFrame;
-    wall_mesh1->RGBAColour = glm::vec4(240, 195, 46, 1.f);
-    wall_mesh1->useRGBAColour = true;
-    meshArray.push_back(wall_mesh1);
-
-    if (!VAOMan->LoadModelIntoVAO("wall2", wall_obj, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* wall_mesh2 = new MeshInfo();
-    wall_mesh2->meshName = "wall2";
-    wall_mesh2->isWireframe = wireFrame;
-    wall_mesh2->RGBAColour = glm::vec4(240, 195, 46, 1.f);
-    wall_mesh2->useRGBAColour = true;
-    meshArray.push_back(wall_mesh2);
-
-    if (!VAOMan->LoadModelIntoVAO("wall3", wall_obj, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
-    MeshInfo* wall_mesh3 = new MeshInfo();
-    wall_mesh3->meshName = "wall3";
-    wall_mesh3->isWireframe = wireFrame;
-    wall_mesh3->RGBAColour = glm::vec4(240, 195, 46, 1.f);
-    wall_mesh3->useRGBAColour = true;
-    meshArray.push_back(wall_mesh3);
 
     // reads scene descripion files for positioning and other info
     ReadSceneDescription();
-
-    for (int i = 0; i < cubeMeshes.size(); i++) {
-        auto currentCube = cubeMeshes[i];
-        currentCube->CopyVertices(cube_obj);
-    }
-
-    seconds = glfwGetTime();
 
     // initialize the particle to player position
     player_mesh->particle = partAcc.InitParticle(player_mesh->position);
@@ -903,7 +632,7 @@ void Update() {
     glUniform4f(eyeLocationLocation, cameraEye.x, cameraEye.y, cameraEye.z, 1.f);
 
     if (theEditMode == TAKE_CONTROL) {
-        cameraEye = player_mesh->position - glm::vec3(1.f, -4.f, 0.f);
+        cameraEye = player_mesh->position - glm::vec3(15.f, -4.f, 0.f);
     }
 
     /*for (int i = 0; i < cubeMeshes.size(); i++) {
@@ -975,14 +704,14 @@ void Update() {
         }
 
         // Randomize cube positions post every x amount of frames
-        elapsed_frames++;
+        /*elapsed_frames++;
         if (elapsed_frames > 5000) {
             for (int j = 0; j < cubeMeshes.size(); j++) {
                 auto theMesh = cubeMeshes[j];
                 RandomizePositions(theMesh);
             }
             elapsed_frames = 0;
-        }
+        }*/
 
         glm::vec3 cursorPos;
         // Division is expensive
@@ -1381,16 +1110,16 @@ float RandomFloat(float a, float b) {
     return a + r;
 }
 
-bool RandomizePositions(MeshInfo* cube) {
+bool RandomizePositions(MeshInfo* mesh) {
 
     int i = 0;
     float x, y, z, w;
 
     x = RandomFloat(-80, 80);
-    y = cube->position.y;
+    y = mesh->position.y;
     z = RandomFloat(-20, 20);
 
-    cube->position = glm::vec3(x, y, z);
+    mesh->position = glm::vec3(x, y, z);
     
     return true;
 }

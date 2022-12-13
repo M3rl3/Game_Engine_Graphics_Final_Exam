@@ -1,0 +1,9 @@
+../assets/meshes/bulb.ply
+../assets/meshes/bunny.ply
+../assets/meshes/long_highway.ply
+../assets/meshes/long_sidewalk.ply
+../assets/meshes/tesla_cybertruck_downscaled.ply
+../assets/meshes/street_lamp.ply
+../assets/meshes/pyramid.ply
+../assets/meshes/cube.ply
+../assets/meshes/wall.ply

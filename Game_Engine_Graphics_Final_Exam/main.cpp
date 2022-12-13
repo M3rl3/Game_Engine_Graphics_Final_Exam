@@ -635,11 +635,6 @@ void Update() {
         cameraEye = player_mesh->position - glm::vec3(15.f, -4.f, 0.f);
     }
 
-    /*for (int i = 0; i < cubeMeshes.size(); i++) {
-        auto currentCube = cubeMeshes[i];
-        currentCube->CopyVertices(cube_obj);
-    }*/
-
     // Update particle position per frame
     partAcc.UpdateStep(glm::vec3(1, 0, 0), speed);
     player_mesh->position = player_mesh->particle->position;

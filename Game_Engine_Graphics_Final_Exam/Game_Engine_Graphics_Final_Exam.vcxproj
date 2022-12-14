@@ -153,6 +153,9 @@
     <Text Include="sceneDescription.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cBasicTextureManager\C24BitBMPpixel.cpp" />
+    <ClCompile Include="cBasicTextureManager\cBasicTextureManager.cpp" />
+    <ClCompile Include="cBasicTextureManager\CTextureFromBMP.cpp" />
     <ClCompile Include="cRenderReticle.cpp" />
     <ClCompile Include="cShaderManager\cShader.cpp" />
     <ClCompile Include="cShaderManager\cShaderManager.cpp" />
@@ -168,11 +171,14 @@
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="LoadModel.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MeshInfo.cpp" />
+    <ClCompile Include="cMeshInfo.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleAccelerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cBasicTextureManager\C24BitBMPpixel.h" />
+    <ClInclude Include="cBasicTextureManager\cBasicTextureManager.h" />
+    <ClInclude Include="cBasicTextureManager\CTextureFromBMP.h" />
     <ClInclude Include="cRenderReticle.h" />
     <ClInclude Include="cShaderManager\cShaderManager.h" />
     <ClInclude Include="cVAOManager\cVAOManager.h" />
@@ -187,7 +193,7 @@
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="LoadModel.h" />
-    <ClInclude Include="MeshInfo.h" />
+    <ClInclude Include="cMeshInfo.h" />
     <ClInclude Include="OpenGL.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleAccelerator.h" />

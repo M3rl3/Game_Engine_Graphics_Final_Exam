@@ -8,3 +8,5 @@
 ../assets/meshes/cube.ply
 ../assets/meshes/wall.ply
 ../assets/meshes/BeholderSketchfab_xyz_n_rgba_uv.ply
+../assets/meshes/terrain.ply
+../assets/meshes/UV_Sphere_for_Skybox_inverted_Normals_xyz_uv_n_rgba.ply

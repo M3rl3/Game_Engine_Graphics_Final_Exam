@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MeshInfo.h"
+#include "cMeshInfo.h"
 #include <glm/mat4x4.hpp>
 
-void draw_bbox(MeshInfo* mesh, unsigned int shaderID, glm::mat4 meshTransform);
+void draw_bbox(cMeshInfo* mesh, unsigned int shaderID, glm::mat4 meshTransform);

@@ -1,5 +1,5 @@
 #include "OpenGL.h"
-#include "MeshInfo.h"
+#include "cMeshInfo.h"
 #include "LoadModel.h"
 #include "ParticleAccelerator.h"
 #include "DrawBoundingBox.h"
@@ -12,6 +12,7 @@
 
 #include "cShaderManager/cShaderManager.h"
 #include "cVAOManager/cVAOManager.h"
+#include "cBasicTextureManager/cBasicTextureManager.h"
 #include "cRenderReticle.h"
 
 #include <iostream>
@@ -26,15 +27,16 @@ GLint mvp_location = 0;
 GLuint shaderID = 0;
 
 cVAOManager* VAOMan;
+cBasicTextureManager* g_pTextureManager;
 ParticleAccelerator partAcc;
 cRenderReticle crosshair;
 
 sModelDrawInfo player_obj;
 sModelDrawInfo cube_obj;
 
-MeshInfo* player_mesh;
-MeshInfo* cube_mesh;
-MeshInfo* bulb_mesh;
+cMeshInfo* player_mesh;
+cMeshInfo* cube_mesh;
+cMeshInfo* bulb_mesh;
 
 unsigned int readIndex = 0;
 int object_index = 0;
@@ -49,15 +51,15 @@ bool doOnce = true;
 bool mouseClick = false;
 
 std::vector <std::string> meshFiles;
-std::vector <MeshInfo*> meshArray;
-std::vector <MeshInfo*> teleport;
+std::vector <cMeshInfo*> meshArray;
+std::vector <cMeshInfo*> teleport;
 
 void ReadFromFile();
 void ReadSceneDescription();
 void LoadModel(std::string fileName, sModelDrawInfo& plyModel);
 void ManageLights();
 float RandomFloat(float a, float b);
-bool RandomizePositions(MeshInfo* mesh);
+bool RandomizePositions(cMeshInfo* mesh);
 
 enum eEditMode
 {
@@ -439,21 +441,20 @@ void Render() {
     if (!VAOMan->LoadModelIntoVAO("long_highway", long_highway, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    MeshInfo* long_highway_mesh = new MeshInfo();
+    cMeshInfo* long_highway_mesh = new cMeshInfo();
     long_highway_mesh->meshName = "long_highway";
     long_highway_mesh->isWireframe = wireFrame;
     long_highway_mesh->RGBAColour = glm::vec4(15.f, 18.f, 13.f, 1.f);
     long_highway_mesh->useRGBAColour = true;
     long_highway_mesh->drawBBox = true;
     meshArray.push_back(long_highway_mesh);
-    //long_highway_mesh->CopyVertices(long_highway);
     
     sModelDrawInfo bulb;
     LoadModel(meshFiles[0], bulb);
     if (!VAOMan->LoadModelIntoVAO("bulb", bulb, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    bulb_mesh = new MeshInfo();
+    bulb_mesh = new cMeshInfo();
     bulb_mesh->meshName = "bulb";
     bulb_mesh->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh);
@@ -461,7 +462,7 @@ void Render() {
     if (!VAOMan->LoadModelIntoVAO("bulb1", bulb, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    MeshInfo* bulb_mesh1 = new MeshInfo();
+    cMeshInfo* bulb_mesh1 = new cMeshInfo();
     bulb_mesh1->meshName = "bulb1";
     bulb_mesh1->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh1);
@@ -469,7 +470,7 @@ void Render() {
     if (!VAOMan->LoadModelIntoVAO("bulb2", bulb, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    MeshInfo* bulb_mesh2 = new MeshInfo();
+    cMeshInfo* bulb_mesh2 = new cMeshInfo();
     bulb_mesh2->meshName = "bulb2";
     bulb_mesh2->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh2); 
@@ -477,7 +478,7 @@ void Render() {
     if (!VAOMan->LoadModelIntoVAO("bulb3", bulb, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    MeshInfo* bulb_mesh3 = new MeshInfo();
+    cMeshInfo* bulb_mesh3 = new cMeshInfo();
     bulb_mesh3->meshName = "bulb3";
     bulb_mesh3->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh3);
@@ -485,7 +486,7 @@ void Render() {
     if (!VAOMan->LoadModelIntoVAO("bulb4", bulb, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    MeshInfo* bulb_mesh4 = new MeshInfo();
+    cMeshInfo* bulb_mesh4 = new cMeshInfo();
     bulb_mesh4->meshName = "bulb4";
     bulb_mesh4->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh4);
@@ -493,7 +494,7 @@ void Render() {
     if (!VAOMan->LoadModelIntoVAO("bulb5", bulb, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    MeshInfo* bulb_mesh5 = new MeshInfo();
+    cMeshInfo* bulb_mesh5 = new cMeshInfo();
     bulb_mesh5->meshName = "bulb5";
     bulb_mesh5->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh5);
@@ -501,7 +502,7 @@ void Render() {
     if (!VAOMan->LoadModelIntoVAO("bulb6", bulb, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    MeshInfo* bulb_mesh6 = new MeshInfo();
+    cMeshInfo* bulb_mesh6 = new cMeshInfo();
     bulb_mesh6->meshName = "bulb6";
     bulb_mesh6->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh6);
@@ -509,7 +510,7 @@ void Render() {
     if (!VAOMan->LoadModelIntoVAO("bulb7", bulb, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    MeshInfo* bulb_mesh7 = new MeshInfo();
+    cMeshInfo* bulb_mesh7 = new cMeshInfo();
     bulb_mesh7->meshName = "bulb7";
     bulb_mesh7->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh7);
@@ -517,7 +518,7 @@ void Render() {
     if (!VAOMan->LoadModelIntoVAO("bulb8", bulb, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    MeshInfo* bulb_mesh8 = new MeshInfo();
+    cMeshInfo* bulb_mesh8 = new cMeshInfo();
     bulb_mesh8->meshName = "bulb8";
     bulb_mesh8->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh8);
@@ -525,7 +526,7 @@ void Render() {
     if (!VAOMan->LoadModelIntoVAO("bulb9", bulb, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    MeshInfo* bulb_mesh9 = new MeshInfo();
+    cMeshInfo* bulb_mesh9 = new cMeshInfo();
     bulb_mesh9->meshName = "bulb9";
     bulb_mesh9->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh9);
@@ -533,7 +534,7 @@ void Render() {
     if (!VAOMan->LoadModelIntoVAO("bulb10", bulb, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    MeshInfo* bulb_mesh10 = new MeshInfo();
+    cMeshInfo* bulb_mesh10 = new cMeshInfo();
     bulb_mesh10->meshName = "bulb10";
     bulb_mesh10->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh10);
@@ -541,7 +542,7 @@ void Render() {
     if (!VAOMan->LoadModelIntoVAO("bulb11", bulb, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    MeshInfo* bulb_mesh11 = new MeshInfo();
+    cMeshInfo* bulb_mesh11 = new cMeshInfo();
     bulb_mesh11->meshName = "bulb11";
     bulb_mesh11->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh11);
@@ -549,7 +550,7 @@ void Render() {
     if (!VAOMan->LoadModelIntoVAO("bulb12", bulb, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    MeshInfo* bulb_mesh12 = new MeshInfo();
+    cMeshInfo* bulb_mesh12 = new cMeshInfo();
     bulb_mesh12->meshName = "bulb12";
     bulb_mesh12->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh12);
@@ -559,7 +560,7 @@ void Render() {
     if (!VAOMan->LoadModelIntoVAO("long_sidewalk", long_sidewalk, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    MeshInfo* long_sidewalk_mesh = new MeshInfo();
+    cMeshInfo* long_sidewalk_mesh = new cMeshInfo();
     long_sidewalk_mesh->meshName = "long_sidewalk";
     long_sidewalk_mesh->isWireframe = wireFrame;
     long_sidewalk_mesh->RGBAColour = glm::vec4(1.f, 5.f, 1.f, 1.f);
@@ -569,7 +570,7 @@ void Render() {
     if (!VAOMan->LoadModelIntoVAO("long_sidewalk1", long_sidewalk, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    MeshInfo* long_sidewalk_mesh1 = new MeshInfo();
+    cMeshInfo* long_sidewalk_mesh1 = new cMeshInfo();
     long_sidewalk_mesh1->meshName = "long_sidewalk1";
     long_sidewalk_mesh1->isWireframe = wireFrame;
     long_sidewalk_mesh1->RGBAColour = glm::vec4(1.f, 5.f, 1.f, 1.f);
@@ -581,7 +582,7 @@ void Render() {
     if (!VAOMan->LoadModelIntoVAO("player", player_obj, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    player_mesh = new MeshInfo();
+    player_mesh = new cMeshInfo();
     player_mesh->meshName = "player";
     player_mesh->isWireframe = wireFrame;
     player_mesh->RGBAColour = glm::vec4(255.f, 255.f, 255.f, 1.f);
@@ -589,6 +590,31 @@ void Render() {
     player_mesh->drawBBox = true;
     meshArray.push_back(player_mesh);
     player_mesh->CopyVertices(player_obj);
+
+    sModelDrawInfo terrain_obj;
+    LoadModel(meshFiles[10], terrain_obj);
+    if (!VAOMan->LoadModelIntoVAO("terrain", terrain_obj, shaderID)) {
+        std::cerr << "Could not load model into VAO" << std::endl;
+    }
+    cMeshInfo* terrain_mesh = new cMeshInfo();
+    terrain_mesh->meshName = "terrain";
+    terrain_mesh->isWireframe = wireFrame;
+    terrain_mesh->RGBAColour = glm::vec4(25.f, 25.f, 25.f, 1.f);
+    terrain_mesh->useRGBAColour = true;
+    meshArray.push_back(terrain_mesh);
+
+    // skybox sphere with inverted normals
+    sModelDrawInfo skybox_sphere_obj;
+    LoadModel(meshFiles[11], skybox_sphere_obj);
+    if (!VAOMan->LoadModelIntoVAO("skybox_sphere", skybox_sphere_obj, shaderID)) {
+        std::cerr << "Could not load model into VAO" << std::endl;
+    }
+    cMeshInfo* skybox_sphere_mesh = new cMeshInfo();
+    skybox_sphere_mesh->meshName = "skybox_sphere";
+
+    // skybox textures
+    std::string errorString = "";
+
 
     // reads scene descripion files for positioning and other info
     ReadSceneDescription();
@@ -647,7 +673,7 @@ void Update() {
 
     for (int i = 0; i < meshArray.size(); i++) {
 
-        MeshInfo* currentMesh = meshArray[i];
+        cMeshInfo* currentMesh = meshArray[i];
         model = glm::mat4x4(1.f);
 
         if (currentMesh->isVisible == false) {
@@ -1105,7 +1131,7 @@ float RandomFloat(float a, float b) {
     return a + r;
 }
 
-bool RandomizePositions(MeshInfo* mesh) {
+bool RandomizePositions(cMeshInfo* mesh) {
 
     int i = 0;
     float x, y, z, w;

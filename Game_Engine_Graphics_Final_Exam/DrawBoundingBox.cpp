@@ -1,7 +1,7 @@
 #include "DrawBoundingBox.h"
 
 #include "OpenGL.h"
-#include "MeshInfo.h"
+#include "cMeshInfo.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -11,7 +11,7 @@
 // the compiled shader id, and the model matrix of  
 // the mesh after all transformations have been applied.
 
-void draw_bbox(MeshInfo* mesh, unsigned int shaderID, glm::mat4 meshTransform) {
+void draw_bbox(cMeshInfo* mesh, unsigned int shaderID, glm::mat4 meshTransform) {
     if (mesh->vertices.size() == 0)
         return;
 

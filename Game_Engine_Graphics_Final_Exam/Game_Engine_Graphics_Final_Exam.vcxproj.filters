@@ -37,6 +37,9 @@
     <Filter Include="ImGui">
       <UniqueIdentifier>{a74e5e45-02c5-4b22-b453-d129a6bac101}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Texture Manager">
+      <UniqueIdentifier>{1f468da5-92d4-4b9b-9a48-e90bd6a84e55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="cameraEye.txt">
@@ -59,7 +62,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MeshInfo.cpp">
+    <ClCompile Include="cMeshInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cVAOManager\cVAOManager.cpp">
@@ -107,6 +110,15 @@
     <ClCompile Include="imgui\imgui_widgets.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="cBasicTextureManager\C24BitBMPpixel.cpp">
+      <Filter>Texture Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="cBasicTextureManager\cBasicTextureManager.cpp">
+      <Filter>Texture Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="cBasicTextureManager\CTextureFromBMP.cpp">
+      <Filter>Texture Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cVAOManager\cVAOManager.h">
@@ -130,7 +142,7 @@
     <ClInclude Include="cRenderReticle.h">
       <Filter>Render Crosshair</Filter>
     </ClInclude>
-    <ClInclude Include="MeshInfo.h">
+    <ClInclude Include="cMeshInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OpenGL.h">
@@ -162,6 +174,15 @@
     </ClInclude>
     <ClInclude Include="imgui\imstb_truetype.h">
       <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="cBasicTextureManager\C24BitBMPpixel.h">
+      <Filter>Texture Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="cBasicTextureManager\cBasicTextureManager.h">
+      <Filter>Texture Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="cBasicTextureManager\CTextureFromBMP.h">
+      <Filter>Texture Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

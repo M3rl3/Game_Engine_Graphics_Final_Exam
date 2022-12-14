@@ -27,13 +27,14 @@ GLint mvp_location = 0;
 GLuint shaderID = 0;
 
 cVAOManager* VAOMan;
-cBasicTextureManager* g_pTextureManager;
+cBasicTextureManager* TextureMan;
 ParticleAccelerator partAcc;
 cRenderReticle crosshair;
 
 sModelDrawInfo player_obj;
 sModelDrawInfo cube_obj;
 
+cMeshInfo* skybox_sphere_mesh;
 cMeshInfo* player_mesh;
 cMeshInfo* cube_mesh;
 cMeshInfo* bulb_mesh;
@@ -241,7 +242,7 @@ static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, i
             }
             if (key == GLFW_KEY_S) {
                 player_mesh->particle->position.x -= 1.f;
-                partAcc.UpdateStep(glm::vec3(-1, 0, 0), 0.1f);
+                //partAcc.UpdateStep(glm::vec3(-1, 0, 0), 0.1f);
             }
             if (key == GLFW_KEY_A) {
                 player_mesh->particle->position.z -= 1.f;
@@ -446,7 +447,6 @@ void Render() {
     long_highway_mesh->isWireframe = wireFrame;
     long_highway_mesh->RGBAColour = glm::vec4(15.f, 18.f, 13.f, 1.f);
     long_highway_mesh->useRGBAColour = true;
-    long_highway_mesh->drawBBox = true;
     meshArray.push_back(long_highway_mesh);
     
     sModelDrawInfo bulb;
@@ -578,19 +578,18 @@ void Render() {
     meshArray.push_back(long_sidewalk_mesh1);
     //long_sidewalk_mesh1->CopyVertices(long_sidewalk);
     
-    LoadModel(meshFiles[9], player_obj);
-    if (!VAOMan->LoadModelIntoVAO("player", player_obj, shaderID)) {
+    sModelDrawInfo beholder_obj;
+    LoadModel(meshFiles[9], beholder_obj);
+    if (!VAOMan->LoadModelIntoVAO("beholder", beholder_obj, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    player_mesh = new cMeshInfo();
-    player_mesh->meshName = "player";
-    player_mesh->isWireframe = wireFrame;
-    player_mesh->RGBAColour = glm::vec4(255.f, 255.f, 255.f, 1.f);
-    player_mesh->useRGBAColour = false;
-    player_mesh->drawBBox = true;
-    meshArray.push_back(player_mesh);
-    player_mesh->CopyVertices(player_obj);
-
+    cMeshInfo* beholder_mesh = new cMeshInfo();
+    beholder_mesh->meshName = "beholder";
+    beholder_mesh->isWireframe = wireFrame;
+    beholder_mesh->RGBAColour = glm::vec4(34.5f, 34.5f, 34.5f, 1.f);
+    beholder_mesh->useRGBAColour = true;
+    meshArray.push_back(beholder_mesh);
+    
     sModelDrawInfo terrain_obj;
     LoadModel(meshFiles[10], terrain_obj);
     if (!VAOMan->LoadModelIntoVAO("terrain", terrain_obj, shaderID)) {
@@ -600,8 +599,36 @@ void Render() {
     terrain_mesh->meshName = "terrain";
     terrain_mesh->isWireframe = wireFrame;
     terrain_mesh->RGBAColour = glm::vec4(25.f, 25.f, 25.f, 1.f);
+    terrain_mesh->doNotLight = false;
     terrain_mesh->useRGBAColour = true;
+    terrain_mesh->isTerrainMesh = false;
     meshArray.push_back(terrain_mesh);
+
+    LoadModel(meshFiles[9], player_obj);
+    if (!VAOMan->LoadModelIntoVAO("player", player_obj, shaderID)) {
+        std::cerr << "Could not load model into VAO" << std::endl;
+    }
+    player_mesh = new cMeshInfo();
+    player_mesh->meshName = "player";
+    player_mesh->isWireframe = wireFrame;
+    player_mesh->RGBAColour = glm::vec4(25.f, 25.f, 25.f, 1.f);
+    player_mesh->useRGBAColour = false;
+    player_mesh->drawBBox = true;
+    player_mesh->CopyVertices(player_obj);
+    meshArray.push_back(player_mesh);
+
+    sModelDrawInfo pyramid_obj;
+    LoadModel(meshFiles[6], pyramid_obj);
+    if (!VAOMan->LoadModelIntoVAO("pyramid", pyramid_obj, shaderID)) {
+        std::cerr << "Could not load model into VAO" << std::endl;
+    }
+    cMeshInfo* pyramid_mesh = new cMeshInfo();
+    pyramid_mesh->meshName = "pyramid";
+    pyramid_mesh->isWireframe = wireFrame;
+    pyramid_mesh->RGBAColour = glm::vec4(25.f, 25.f, 25.f, 1.f);
+    pyramid_mesh->doNotLight = false;
+    pyramid_mesh->useRGBAColour = true;
+    meshArray.push_back(pyramid_mesh);
 
     // skybox sphere with inverted normals
     sModelDrawInfo skybox_sphere_obj;
@@ -609,12 +636,31 @@ void Render() {
     if (!VAOMan->LoadModelIntoVAO("skybox_sphere", skybox_sphere_obj, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    cMeshInfo* skybox_sphere_mesh = new cMeshInfo();
+    skybox_sphere_mesh = new cMeshInfo();
     skybox_sphere_mesh->meshName = "skybox_sphere";
+    skybox_sphere_mesh->isSkyBoxMesh = true;
+    meshArray.push_back(skybox_sphere_mesh);
 
     // skybox textures
     std::string errorString = "";
+    TextureMan = new cBasicTextureManager();
 
+    TextureMan->SetBasePath("../assets/textures");
+    const char* skybox_name = "NightSky";
+    if (TextureMan->CreateCubeTextureFromBMPFiles("NightSky",
+                                                  "SpaceBox_right1_posX.bmp",
+                                                  "SpaceBox_left2_negX.bmp",
+                                                  "SpaceBox_top3_posY.bmp",
+                                                  "SpaceBox_bottom4_negY.bmp",
+                                                  "SpaceBox_front5_posZ.bmp",
+                                                  "SpaceBox_back6_negZ.bmp",
+                                                  true, errorString)) 
+    {
+        std::cout << "\nLoaded skybox " << skybox_name << std::endl;
+    }
+    else {
+        std::cout << "\nError: failed to load skybox because " << errorString;
+    }
 
     // reads scene descripion files for positioning and other info
     ReadSceneDescription();
@@ -650,7 +696,7 @@ void Update() {
 
     view = glm::lookAt(cameraEye, cameraEye + cameraTarget, upVector);
     //projection = glm::perspective(0.6f, ratio, 0.1f, 10000.f);
-    projection = glm::perspective(glm::radians(fov), ratio, 0.1f, 100000.f);
+    projection = glm::perspective(glm::radians(fov), ratio, 0.1f, 10000.f);
 
     glm::vec4 viewport = glm::vec4(0, 0, width, height);
 
@@ -681,18 +727,34 @@ void Update() {
         }
 
         glm::mat4 translationMatrix = glm::translate(glm::mat4(1.f), currentMesh->position);
-        float scale = currentMesh->scale;
-        glm::mat4 scaling = glm::scale(glm::mat4(1.f), glm::vec3(scale));
+        glm::mat4 scaling = glm::scale(glm::mat4(1.f), currentMesh->scale);
 
-        glm::mat4 rotationX = glm::rotate(glm::mat4(1.f), currentMesh->rotation.x, glm::vec3(1.f, 0.f, 0.f));
-        glm::mat4 rotationY = glm::rotate(glm::mat4(1.f), currentMesh->rotation.y, glm::vec3(0.f, 1.f, 0.f));
-        glm::mat4 rotationZ = glm::rotate(glm::mat4(1.f), currentMesh->rotation.z, glm::vec3(0.f, 0.f, 1.f));
-  
-        model *= translationMatrix;
-        model *= rotationX;
-        model *= rotationY;
-        model *= rotationZ;
-        model *= scaling;
+        /*glm::mat4 scaling = glm::scale(glm::mat4(1.f), glm::vec3(currentMesh->scale.x,
+                                                                 currentMesh->scale.y,
+                                                                 currentMesh->scale.z));*/
+        if (currentMesh->isSkyBoxMesh) {
+            model = glm::mat4x4(1.f);
+        }
+        // just flatten the beholder for no reason
+        if (currentMesh->meshName == "beholder") {
+            glm::mat4 rotation = glm::mat4(currentMesh->rotation);
+
+            model *= translationMatrix;
+            model *= rotation;
+            model *= scaling;
+        }
+        else {
+
+            glm::mat4 rotationX = glm::rotate(glm::mat4(1.f), currentMesh->rotation.x, glm::vec3(1.f, 0.f, 0.f));
+            glm::mat4 rotationY = glm::rotate(glm::mat4(1.f), currentMesh->rotation.y, glm::vec3(0.f, 1.f, 0.f));
+            glm::mat4 rotationZ = glm::rotate(glm::mat4(1.f), currentMesh->rotation.z, glm::vec3(0.f, 0.f, 1.f));
+
+            model *= translationMatrix;
+            model *= rotationX;
+            model *= rotationY;
+            model *= rotationZ;
+            model *= scaling;
+        }
 
         glUniformMatrix4fv(modelLocaction, 1, GL_FALSE, glm::value_ptr(model));
         glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(view));
@@ -701,12 +763,24 @@ void Update() {
         glm::mat4 modelInverse = glm::inverse(glm::transpose(model));
         glUniformMatrix4fv(modelInverseLocation, 1, GL_FALSE, glm::value_ptr(modelInverse));
 
-        if (currentMesh->isWireframe) {
+        if (currentMesh->isWireframe) 
+        {
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         }
         else
         {
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        }
+
+        GLint useIsTerrainMeshLocation = glGetUniformLocation(shaderID, "bIsTerrainMesh");
+
+        if (currentMesh->isTerrainMesh) 
+        {
+            glUniform1f(useIsTerrainMeshLocation, (GLfloat)GL_TRUE);
+        }
+        else 
+        {
+            glUniform1f(useIsTerrainMeshLocation, (GLfloat)GL_FALSE);
         }
 
         GLint RGBAColourLocation = glGetUniformLocation(shaderID, "RGBAColour");
@@ -722,6 +796,28 @@ void Update() {
         else
         {
             glUniform1f(useRGBAColourLocation, (GLfloat)GL_FALSE);
+        }
+
+        GLint bHasTextureLocation = glGetUniformLocation(shaderID, "bHasTexture");
+
+        if (currentMesh->hasTexture) 
+        {
+            glUniform1f(bHasTextureLocation, (GLfloat)GL_TRUE);
+        }
+        else 
+        {
+            glUniform1f(bHasTextureLocation, (GLfloat)GL_FALSE);
+        }
+
+        GLint doNotLightLocation = glGetUniformLocation(shaderID, "doNotLight");
+
+        if (currentMesh->doNotLight) 
+        {
+            glUniform1f(doNotLightLocation, (GLfloat)GL_TRUE);
+        }
+        else 
+        {
+            glUniform1f(doNotLightLocation, (GLfloat)GL_FALSE);
         }
 
         // Randomize cube positions post every x amount of frames
@@ -747,6 +843,27 @@ void Update() {
             
         }
 
+        GLint bIsSkyboxObjectLocation = glGetUniformLocation(shaderID, "bIsSkyboxObject");
+
+        if (currentMesh->isSkyBoxMesh) {
+
+            //skybox texture
+            GLuint cubeMapTextureNumber = TextureMan->getTextureIDFromName("NightSky");
+            GLuint texture30Unit = 30;			// Texture unit go from 0 to 79
+            glActiveTexture(texture30Unit + GL_TEXTURE0);	// GL_TEXTURE0 = 33984
+            glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTextureNumber);
+            GLint skyboxTexture_UL = glGetUniformLocation(shaderID, "skyboxTexture");
+            glUniform1i(skyboxTexture_UL, texture30Unit);
+
+            glUniform1f(bIsSkyboxObjectLocation, (GLfloat)GL_TRUE);
+            currentMesh->position = cameraEye;
+            currentMesh->SetUniformScale(7500.f);
+            glm::mat4x4 matModel = glm::mat4x4(1.0f);
+        }
+        else {
+            glUniform1f(bIsSkyboxObjectLocation, (GLfloat)GL_FALSE);
+        }
+        
         sModelDrawInfo modelInfo;
         if (VAOMan->FindDrawInfoByModelName(meshArray[i]->meshName, modelInfo)) {
 
@@ -758,9 +875,14 @@ void Update() {
             std::cout << "Model not found." << std::endl;
         }
 
+        
+
         // Only draw bounding box around meshes with this boolean value set to true
         if (currentMesh->drawBBox) {
-            draw_bbox(currentMesh, shaderID, model);
+            draw_bbox(currentMesh, shaderID, model);  /* 
+                                                       *  pass in the model matrix after drawing
+                                                       *  so it doesnt screw with the matrix values
+                                                       */ 
         }
         else {
             currentMesh->drawBBox = false;
@@ -1076,7 +1198,7 @@ void ReadSceneDescription() {
 
     glm::vec3 position;
     glm::vec3 rotation;
-    float scale;
+    glm::vec3 scale;
 
     File >> number;
 
@@ -1084,12 +1206,13 @@ void ReadSceneDescription() {
         File >> input0                                                         
              >> input1 >> position.x >> position.y >> position.z 
              >> input2 >> rotation.x >> rotation.y >> rotation.z
-             >> input3 >> scale;
+             >> input3 >> scale.x >> scale.y >> scale.z;
 
-        /*long_highway
-        position 0.0 -1.0 0.0
-        rotation 0.0 0.0 0.0
-        scale 1.0*/
+        /*  long_highway
+            position 0.0 -1.0 0.0
+            rotation 0.0 0.0 0.0
+            scale 1.0 1.0 1.0
+        */
 
         temp = input0;
 
@@ -1104,7 +1227,9 @@ void ReadSceneDescription() {
             meshArray[i]->rotation.z = rotation.z;
         }
         if (input3 == "scale") {
-            meshArray[i]->scale = scale;             
+            meshArray[i]->scale.x = scale.x;             
+            meshArray[i]->scale.y = scale.y;             
+            meshArray[i]->scale.z = scale.z;             
         }
     }
     File.close();

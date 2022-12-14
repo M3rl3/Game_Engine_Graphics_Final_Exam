@@ -1,91 +1,101 @@
-17
+20
 
 long_highway 
-position 0.0 -1.0 0.0
+position -170.0 0.0 0.0
 rotation 0.0 0.0 0.0
-scale 1.0
+scale 1.0 1.0 1.0
 
 bulb
-position -50.0 30.0 0.0
+position -220.0 30.0 0.0
 rotation 0.0 0.0 0.0
-scale 0.1
+scale 0.1 0.1 0.1
 
 bulb1
-position -80.0 6.0 10.0
+position -250.0 8.0 10.0
 rotation 0.0 0.0 0.0
-scale 0.1
+scale 0.1 0.1 0.1
 
 bulb2
-position -50.0 6.0 10.0
+position -220.0 8.0 10.0
 rotation 0.0 0.0 0.0
-scale 0.1
+scale 0.1 0.1 0.1
 
 bulb3
-position -20.0 6.0 10.0
+position -190.0 8.0 10.0
 rotation 0.0 0.0 0.0
-scale 0.1
+scale 0.1 0.1 0.1
 
 bulb4
-position 10.0 6.0 10.0
+position -160.0 8.0 10.0
 rotation 0.0 0.0 0.0
-scale 0.1
+scale 0.1 0.1 0.1
 
 bulb5
-position 40.0 6.0 10.0
+position -130.0 8.0 10.0
 rotation 0.0 0.0 0.0
-scale 0.1
+scale 0.1 0.1 0.1
 
 bulb6
-position 70.0 6.0 10.0
+position -100.0 8.0 10.0
 rotation 0.0 0.0 0.0
-scale 0.1
+scale 0.1 0.1 0.1
 
 bulb7
-position -80.0 6.0 -10.0
+position -250.0 8.0 -10.0
 rotation 0.0 0.0 0.0
-scale 0.1
+scale 0.1 0.1 0.1
 
 bulb8
-position -50.0 6.0 -10.0
+position -220.0 8.0 -10.0
 rotation 0.0 0.0 0.0
-scale 0.1
+scale 0.1 0.1 0.1
 
 bulb9
-position -20.0 6.0 -10.0
+position -190.0 8.0 -10.0
 rotation 0.0 0.0 0.0
-scale 0.1
+scale 0.1 0.1 0.1
 
 bulb10
-position 10.0 6.0 -10.0
+position -160.0 8.0 -10.0
 rotation 0.0 0.0 0.0
-scale 0.1
+scale 0.1 0.1 0.1
 
 bulb11
-position 40.0 6.0 -10.0
+position -130.0 8.0 -10.0
 rotation 0.0 0.0 0.0
-scale 0.1
+scale 0.1 0.1 0.1
 
 bulb12
-position 70.0 6.0 -10.0
+position -100.0 8.0 -10.0
 rotation 0.0 0.0 0.0
-scale 0.1
+scale 0.1 0.1 0.1
 
 long_sidewalk
-position 0.0 0.0 -15.0
+position -170.0 1.0 -15.0
 rotation 0.0 0.0 0.0
-scale 1.0
+scale 1.0 1.0 1.0
 
 long_sidewalk1
-position 0.0 0.0 15.0
+position -170.0 1.0 15.0
 rotation 0.0 0.0 0.0
-scale 1.0
+scale 1.0 1.0 1.0
 
-player
-position -88.0 3 0.0
+beholder
+position -121.80 -1.0 0.0
 rotation 0.0 67.55 0.0
-scale 1.0
+scale 1.0 1.0 1.0
 
 terrain
 position 0.0 0.0 0.0
 rotation 0.0 0.0 0.0
-scale 1.0
+scale 1.0 1.0 1.0
+
+player
+position -260.0 4.0 0.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+pyramid
+position -100.0 4.0 0.0
+rotation 67.55 0.0 0.0
+scale 1.0 1.0 1.0

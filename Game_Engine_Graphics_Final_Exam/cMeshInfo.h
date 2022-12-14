@@ -4,6 +4,7 @@
 #include <string>
 #include <glm/glm.hpp>
 #include <glm/vec3.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 #include "Particle.h"
 #include "cVAOManager/cVAOManager.h"
@@ -18,18 +19,23 @@ public:
 	std::string meshName;
 
 	glm::vec3 position;
+	glm::vec3 scale;
 	glm::vec3 velocity;
 	glm::vec3 target;
-	glm::vec3 rotation;
+	glm::quat rotation;
 	glm::vec4 colour;
 	glm::vec4 RGBAColour;
 	
-	float scale;
+	//float scale;
 	bool isWireframe;
 	bool isVisible;
 	bool drawBBox;
 	bool useRGBAColour;
+	bool hasTexture;
 	bool teleport;
+	bool doNotLight;
+	bool isTerrainMesh;
+	bool isSkyBoxMesh;
 
 	int nTriangles;
 	int nIndices;
@@ -43,9 +49,14 @@ public:
 	std::vector <glm::vec3> vertices;
 	std::vector <glm::vec3> indices;
 
+	glm::vec3 min;
+	glm::vec3 max;
+
+	void SetRotationFromEuler(glm::vec3 newEulerAngleXYZ);
+	void AdjustRoationAngleFromEuler(glm::vec3 EulerAngleXYZ_Adjust);
+	void SetUniformScale(float newScale);
+
 	void CopyVertices(sModelDrawInfo model);
 	void CopyIndices(sModelDrawInfo model);
 
-	glm::vec3 min;
-	glm::vec3 max;
 };

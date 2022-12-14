@@ -40,6 +40,9 @@
     <Filter Include="Texture Manager">
       <UniqueIdentifier>{1f468da5-92d4-4b9b-9a48-e90bd6a84e55}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mesh Class">
+      <UniqueIdentifier>{6f51afb6-e239-4ff2-a783-2c67e032645b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="cameraEye.txt">
@@ -60,9 +63,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cMeshInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cVAOManager\cVAOManager.cpp">
@@ -119,6 +119,9 @@
     <ClCompile Include="cBasicTextureManager\CTextureFromBMP.cpp">
       <Filter>Texture Manager</Filter>
     </ClCompile>
+    <ClCompile Include="cMeshInfo.cpp">
+      <Filter>Mesh Class</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cVAOManager\cVAOManager.h">
@@ -141,9 +144,6 @@
     </ClInclude>
     <ClInclude Include="cRenderReticle.h">
       <Filter>Render Crosshair</Filter>
-    </ClInclude>
-    <ClInclude Include="cMeshInfo.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OpenGL.h">
       <Filter>Header Files</Filter>
@@ -183,6 +183,9 @@
     </ClInclude>
     <ClInclude Include="cBasicTextureManager\CTextureFromBMP.h">
       <Filter>Texture Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="cMeshInfo.h">
+      <Filter>Mesh Class</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

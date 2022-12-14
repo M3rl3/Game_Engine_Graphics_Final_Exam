@@ -5,6 +5,12 @@ in vec3 colour;
 in vec3 normal;
 in vec3 worldlocation;
 
+in vec4 uv2;
+in vec4 tangent;
+in vec4 biNormal;
+in vec4 boneID;
+in vec4 boneWeight;
+
 out vec4 outputColor;
 
 uniform vec4 RGBAColour;
@@ -17,6 +23,26 @@ uniform vec4 debugColour;
 uniform bool doNotLight;
 
 uniform vec4 eyeLocation;
+
+uniform bool bHasTexture;
+
+uniform sampler2D texture0;	
+uniform sampler2D texture1;	
+uniform sampler2D texture2;	
+uniform sampler2D texture3;	
+uniform sampler2D texture4;	
+uniform sampler2D texture5;	
+uniform sampler2D texture6;	
+uniform sampler2D texture7;	
+
+uniform vec4 texRatio_0_3;	
+uniform vec4 texRatio_4_7;
+
+uniform samplerCube skyboxTexture;
+// When true, applies the skybox texture
+uniform bool bIsSkyboxObject;
+
+uniform bool bIsTerrainMesh;
 
 struct sLight
 {
@@ -44,18 +70,81 @@ vec4 calculateLightContrib( vec3 vertexMaterialColour, vec3 vertexNormal,
 
 void main()
 {
-	vec3 matColour = colour;
 
-	if (useRGBAColour) {
+	if (bIsSkyboxObject)
+	{
+		vec3 cubeMapColour = texture( skyboxTexture, normal.xyz ).rgb;
+		outputColor.rgb = cubeMapColour.rgb;
+		outputColor.a = 1.0f;
+		return;
+	}
+
+	if (bIsTerrainMesh)
+	{
+		if ( worldlocation.y < -25.0f )
+		{	// Water
+			outputColor.rgb = vec3(0.0f, 0.0f, 1.0f);
+		}
+		else if ( worldlocation.y < -15.0f )
+		{	// Sand ( 89.8% red, 66.67% green and 43.92% )
+			outputColor.rgb = vec3(0.898f, 0.6667f, 0.4392f);
+		}
+		else if ( worldlocation.y < 30.0f )
+		{	// Grass
+			outputColor.rgb = vec3(0.0f, 1.0f, 0.0f);
+		}
+		else
+		{	// Snow
+			outputColor.rgb = vec3(1.0f, 1.0f, 1.0f);
+		}
+		outputColor.a = 1.0f;
+	
+		return;
+	}
+
+	vec3 matColour = colour.rgb;
+
+	float alphaTransparency = RGBAColour.w;
+
+	if (useRGBAColour) 
+	{
 		matColour = RGBAColour.rgb;
+	}
+	
+	if (bHasTexture)
+	{
+		vec3 textColour0 = texture( texture0, uv2.st ).rgb;		
+		vec3 textColour1 = texture( texture1, uv2.st ).rgb;	
+		vec3 textColour2 = texture( texture2, uv2.st ).rgb;	
+		vec3 textColour3 = texture( texture3, uv2.st ).rgb;	
+		
+		
+		matColour = (textColour0.rgb * texRatio_0_3.x) 
+				  + (textColour1.rgb * texRatio_0_3.y) 
+				  + (textColour2.rgb * texRatio_0_3.z) 
+				  + (textColour3.rgb * texRatio_0_3.w);
+	}
+
+	if ( doNotLight )
+	{
+		// Set the output colour and exit early
+		// (Don't apply the lighting to this)
+		outputColor = vec4(matColour.rgb, alphaTransparency);
+		return;
 	}
 
 	vec4 specColour = vec4(0.1f, 0.1f, 0.1f, 1.0f);
 
-	vec4 returnValue = calculateLightContrib( matColour.rgb, normal.xyz, 
+	// Cause it's lit, get it?
+	vec4 litColour = calculateLightContrib( matColour.rgb, normal.xyz, 
 	                                        worldlocation.xyz, specColour );
 	
-	outputColor = returnValue;
+	// If my blend function is (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA) 
+	// then it's reading whatever the 4th value of the output is:
+	outputColor = vec4(litColour.rgb, alphaTransparency);
+
+	float amountOfAmbientLight = 0.005f;
+	outputColor.rgb += (matColour.rgb * amountOfAmbientLight);
 }
 
 vec4 calculateLightContrib( vec3 vertexMaterialColour, vec3 vertexNormal, 

@@ -36,6 +36,43 @@ sModelDrawInfo::sModelDrawInfo()
 	return;
 }
 
+void sModelDrawInfo::CalculateExtents(void)
+{
+	// Do we even have an array?
+	if (this->pVertices)		// same as != NULL
+	{
+		// Assume that the 1st vertex is both the min and max
+		this->minX = this->maxX = this->pVertices[0].x;
+		this->minY = this->maxY = this->pVertices[0].y;
+		this->minZ = this->maxZ = this->pVertices[0].z;
+
+		for (unsigned int index = 0; index != this->numberOfVertices; index++)
+		{
+			// See if "this" vertex is smaller than the min
+			if (this->pVertices[index].x < this->minX) { this->minX = this->pVertices[index].x; }
+			if (this->pVertices[index].y < this->minY) { this->minY = this->pVertices[index].y; }
+			if (this->pVertices[index].z < this->minZ) { this->minZ = this->pVertices[index].z; }
+
+			// See if "this" vertex is larger than the max
+			if (this->pVertices[index].x > this->maxX) { this->maxX = this->pVertices[index].x; }
+			if (this->pVertices[index].y > this->maxY) { this->maxY = this->pVertices[index].y; }
+			if (this->pVertices[index].z > this->maxZ) { this->maxZ = this->pVertices[index].z; }
+		}//for (unsigned int index = 0...
+	}//if ( this->pVertices )
+
+	// Update the extents
+	this->extentX = this->maxX - this->minX;
+	this->extentY = this->maxY - this->minY;
+	this->extentZ = this->maxZ - this->minZ;
+
+	// What's the largest of the three extents
+	this->maxExtent = this->extentX;
+	if (this->extentY > this->maxExtent) { this->maxExtent = this->extentY; }
+	if (this->extentZ > this->maxExtent) { this->maxExtent = this->extentZ; }
+
+	return;
+}
+
 bool cVAOManager::LoadModelIntoVAO(
 		std::string fileName, 
 		sModelDrawInfo &drawInfo,
@@ -48,7 +85,8 @@ bool cVAOManager::LoadModelIntoVAO(
 
 	drawInfo.meshName = fileName;
 
-	// TODO: Load the model from file
+	// Calculate the min and max values
+	drawInfo.CalculateExtents();
 
 	// 
 	// Model is loaded and the vertices and indices are in the drawInfo struct
@@ -95,28 +133,35 @@ bool cVAOManager::LoadModelIntoVAO(
 
 	// Set the vertex attributes.
 
-	GLint vpos_location = glGetAttribLocation(shaderProgramID, "vPosition");	
-	GLint vcol_location = glGetAttribLocation(shaderProgramID, "vColour");
-	GLint vnormal_location = glGetAttribLocation(shaderProgramID, "vNormal");
+	GLint vPositionLocation = glGetAttribLocation(shaderProgramID, "vPosition");	
+	GLint vColourLocation = glGetAttribLocation(shaderProgramID, "vColour");
+	GLint vNormalLocation = glGetAttribLocation(shaderProgramID, "vNormal");
+	GLint vUV2Location = glGetAttribLocation(shaderProgramID, "vUV2");
 
 	// Set the vertex attributes for this shader
-	glEnableVertexAttribArray(vpos_location);	// vPos
-	glVertexAttribPointer( vpos_location, 3,		// vPos
-						   GL_FLOAT, GL_FALSE,
-						   sizeof(vertLayout),
-						   ( void* ) offsetof(vertLayout, x) );
+	glEnableVertexAttribArray(vPositionLocation);	// vPos
+	glVertexAttribPointer(vPositionLocation, 3,		// vPos
+						    GL_FLOAT, GL_FALSE,
+						    sizeof(vertLayout),
+						    (void*)offsetof(vertLayout, x));
 
-	glEnableVertexAttribArray(vcol_location);	// vCol
-	glVertexAttribPointer( vcol_location, 3,		// vCol
-						   GL_FLOAT, GL_FALSE,
-						   sizeof(vertLayout),
-						   ( void* ) offsetof(vertLayout, r) );
+	glEnableVertexAttribArray(vColourLocation);	// vCol
+	glVertexAttribPointer(vColourLocation, 3,		// vCol
+						    GL_FLOAT, GL_FALSE,
+						    sizeof(vertLayout),
+						    (void*)offsetof(vertLayout, r));
 
-	glEnableVertexAttribArray(vnormal_location);   // vNormal
-	glVertexAttribPointer(vnormal_location, 3,			// vNormal
+	glEnableVertexAttribArray(vNormalLocation);   // vNormal
+	glVertexAttribPointer(vNormalLocation, 3,			// vNormal
 							GL_FLOAT, GL_FALSE,
 							sizeof(vertLayout),
-							(void*) offsetof(vertLayout, nx));
+							(void*)offsetof(vertLayout, nx));
+
+	glEnableVertexAttribArray(vUV2Location);		// vUV2
+	glVertexAttribPointer(vUV2Location, 4,				// vUV2
+						    GL_FLOAT, GL_FALSE,
+							sizeof(vertLayout),						// Stride	(number of bytes)
+							(void*)offsetof(vertLayout, texture_u));
 
 	// Now that all the parts are set up, set the VAO to zero
 	glBindVertexArray(0);
@@ -124,9 +169,10 @@ bool cVAOManager::LoadModelIntoVAO(
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-	glDisableVertexAttribArray(vpos_location);
-	glDisableVertexAttribArray(vcol_location);
-	glDisableVertexAttribArray(vnormal_location);
+	glDisableVertexAttribArray(vPositionLocation);
+	glDisableVertexAttribArray(vColourLocation);
+	glDisableVertexAttribArray(vNormalLocation);
+	glDisableVertexAttribArray(vUV2Location);
 
 
 	// Store the draw information into the map

@@ -111,6 +111,9 @@ void LoadModel(std::string fileName, sModelDrawInfo& plyModel) {
         plyModel.pVertices[index].nx = modelArray[index].nx;
         plyModel.pVertices[index].ny = modelArray[index].ny;
         plyModel.pVertices[index].nz = modelArray[index].nz;
+
+        plyModel.pVertices[index].texture_u = modelArray[index].texture_u;
+        plyModel.pVertices[index].texture_v = modelArray[index].texture_v;
     }
 
     plyModel.numberOfIndices = plyModel.numberOfTriangles * 3;
@@ -126,6 +129,8 @@ void LoadModel(std::string fileName, sModelDrawInfo& plyModel) {
 
         indexIndices += 3;
     }
+
+    
 
     delete[] modelArray;
     delete[] triangleArray;

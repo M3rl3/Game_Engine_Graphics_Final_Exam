@@ -15,6 +15,8 @@ struct vertLayout
 	float x, y, z;		
 	float r, g, b;
 	float nx, ny, nz;
+	float texture_u;
+	float texture_v;
 };
 
 
@@ -39,6 +41,20 @@ struct sModelDrawInfo
 	vertLayout* pVertices;	//  = 0;
 	// The index buffer (CPU side)
 	unsigned int* pIndices;
+
+	// You could store the max and min values of the 
+	//  vertices here (determined when you load them):
+	float maxX, maxY, maxZ;
+	float minX, minY, minZ;
+	// These are the lengths of the bounding box that holds the model, 
+	//	so extentX = maxX - minX, etc. 
+	float extentX, extentY, extentZ;
+
+	//  scale = 1.5/maxExtent --> 1.5 x 1.5 x 1.5
+	//	scale = 5.0/maxExtent --> 5 x 5 x 5
+	float maxExtent;
+
+	void CalculateExtents(void);
 };
 
 

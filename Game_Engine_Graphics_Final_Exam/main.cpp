@@ -630,9 +630,24 @@ void Render() {
     pyramid_mesh->useRGBAColour = true;
     meshArray.push_back(pyramid_mesh);
 
+    sModelDrawInfo moon_obj;
+    LoadModel(meshFiles[11], moon_obj);
+    if (!VAOMan->LoadModelIntoVAO("moon", moon_obj, shaderID)) {
+        std::cerr << "Could not load model into VAO" << std::endl;
+    }
+    cMeshInfo* moon_mesh = new cMeshInfo();
+    moon_mesh->meshName = "moon";
+    moon_mesh->isWireframe = wireFrame;
+    moon_mesh->useRGBAColour = false;
+    moon_mesh->RGBAColour = glm::vec4(100.f, 25.f, 25.f, 1.f);
+    moon_mesh->hasTexture = true;
+    moon_mesh->textures[0] = "moon_texture.bmp";
+    moon_mesh->textureRatios[0] = 1.0f;
+    meshArray.push_back(moon_mesh);
+
     // skybox sphere with inverted normals
     sModelDrawInfo skybox_sphere_obj;
-    LoadModel(meshFiles[11], skybox_sphere_obj);
+    LoadModel(meshFiles[12], skybox_sphere_obj);
     if (!VAOMan->LoadModelIntoVAO("skybox_sphere", skybox_sphere_obj, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
@@ -656,10 +671,21 @@ void Render() {
                                                   "SpaceBox_back6_negZ.bmp",
                                                   true, errorString)) 
     {
-        std::cout << "\nLoaded skybox " << skybox_name << std::endl;
+        std::cout << "\nLoaded skybox: " << skybox_name << std::endl;
     }
-    else {
+    else 
+    {
         std::cout << "\nError: failed to load skybox because " << errorString;
+    }
+
+    // Basic textures
+    if (TextureMan->Create2DTextureFromBMPFile("moon_texture.bmp")) 
+    {
+        std::cout << "Loaded moon texture." << std::endl;
+    }
+    else 
+    {
+        std::cout << "Error: failed to load moon texture.";
     }
 
     // reads scene descripion files for positioning and other info
@@ -803,7 +829,29 @@ void Update() {
 
         if (currentMesh->hasTexture) 
         {
+           
             glUniform1f(bHasTextureLocation, (GLfloat)GL_TRUE);
+            std::string texture0 = currentMesh->textures[0];
+
+            if (texture0 == "moon_texture.bmp") {
+                //printf("Texture to be binded on the shader %s", currentMesh->textures[0].c_str());
+                GLuint texture0ID = TextureMan->getTextureIDFromName(texture0);
+
+                GLuint texture0Unit = 0;
+                glActiveTexture(texture0Unit + GL_TEXTURE0);
+
+                glBindTexture(GL_TEXTURE_2D, texture0ID);
+
+                GLint texture0Location = glGetUniformLocation(shaderID, "texture0");
+                glUniform1i(texture0Location, texture0Unit);
+
+                GLint texRatio_0_3 = glGetUniformLocation(shaderID, "texRatio_0_3");
+                glUniform4f(texRatio_0_3,
+                            currentMesh->textureRatios[0],
+                            currentMesh->textureRatios[1],
+                            currentMesh->textureRatios[2],
+                            currentMesh->textureRatios[3]);
+            }
         }
         else 
         {
@@ -827,7 +875,7 @@ void Update() {
         // Cause why not?
 
         /*elapsed_frames++;
-        if (elapsed_frames > 10) {
+        if (elapsed_frames > 100) {
             for (int j = 0; j < meshArray.size(); j++) {
                 cMeshInfo* theMesh = meshArray[j];
                 RandomizePositions(theMesh);
@@ -1263,9 +1311,9 @@ bool RandomizePositions(cMeshInfo* mesh) {
     int i = 0;
     float x, y, z, w;
 
-    x = RandomFloat(-80, 80);
+    x = RandomFloat(-500, 500);
     y = mesh->position.y;
-    z = RandomFloat(-20, 20);
+    z = RandomFloat(-200, 200);
 
     mesh->position = glm::vec3(x, y, z);
     

@@ -1,4 +1,4 @@
-//Fragment shader
+// Fragment shader
 #version 420
 
 in vec3 colour;
@@ -110,8 +110,7 @@ void main()
 	{
 		matColour = RGBAColour.rgb;
 	}
-	
-	if (bHasTexture)
+	else if (bHasTexture)
 	{
 		vec3 textColour0 = texture( texture0, uv2.st ).rgb;		
 		vec3 textColour1 = texture( texture1, uv2.st ).rgb;	

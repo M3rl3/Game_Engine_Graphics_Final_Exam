@@ -735,7 +735,8 @@ void Update() {
         if (currentMesh->isSkyBoxMesh) {
             model = glm::mat4x4(1.f);
         }
-        // just flatten the beholder for no reason
+
+        // just flatten a beholder for no reason
         if (currentMesh->meshName == "beholder") {
             glm::mat4 rotation = glm::mat4(currentMesh->rotation);
 
@@ -820,17 +821,22 @@ void Update() {
             glUniform1f(doNotLightLocation, (GLfloat)GL_FALSE);
         }
 
-        // Randomize cube positions post every x amount of frames
+        // Uncomment to:
+        // Randomize the positions of ALL the objects
+        // in the scene post every x amount of frames
+        // Cause why not?
+
         /*elapsed_frames++;
-        if (elapsed_frames > 5000) {
-            for (int j = 0; j < cubeMeshes.size(); j++) {
-                auto theMesh = cubeMeshes[j];
+        if (elapsed_frames > 10) {
+            for (int j = 0; j < meshArray.size(); j++) {
+                cMeshInfo* theMesh = meshArray[j];
                 RandomizePositions(theMesh);
             }
             elapsed_frames = 0;
         }*/
 
         glm::vec3 cursorPos;
+
         // Division is expensive
         cursorPos.x = width * 0.5;
         cursorPos.y = height * 0.5;
@@ -839,9 +845,7 @@ void Update() {
         
         glm::normalize(worldSpaceCoordinates);
         
-        if (mouseClick) {
-            
-        }
+        if (mouseClick) {}
 
         GLint bIsSkyboxObjectLocation = glGetUniformLocation(shaderID, "bIsSkyboxObject");
 
@@ -852,8 +856,8 @@ void Update() {
             GLuint texture30Unit = 30;			// Texture unit go from 0 to 79
             glActiveTexture(texture30Unit + GL_TEXTURE0);	// GL_TEXTURE0 = 33984
             glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTextureNumber);
-            GLint skyboxTexture_UL = glGetUniformLocation(shaderID, "skyboxTexture");
-            glUniform1i(skyboxTexture_UL, texture30Unit);
+            GLint skyboxTextureLocation = glGetUniformLocation(shaderID, "skyboxTexture");
+            glUniform1i(skyboxTextureLocation, texture30Unit);
 
             glUniform1f(bIsSkyboxObjectLocation, (GLfloat)GL_TRUE);
             currentMesh->position = cameraEye;
@@ -874,8 +878,6 @@ void Update() {
         else {
             std::cout << "Model not found." << std::endl;
         }
-
-        
 
         // Only draw bounding box around meshes with this boolean value set to true
         if (currentMesh->drawBBox) {

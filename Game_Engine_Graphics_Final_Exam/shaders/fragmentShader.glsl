@@ -125,7 +125,7 @@ void main()
 				  + (textColour3.rgb * texRatio_0_3.w);
 	}
 
-	if ( doNotLight )
+	if (doNotLight)
 	{
 		// Set the output colour and exit early
 		// (Don't apply the lighting to this)

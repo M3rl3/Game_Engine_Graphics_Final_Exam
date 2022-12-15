@@ -17,6 +17,8 @@ struct vertLayout
 	float nx, ny, nz;
 	float texture_u;
 	float texture_v;
+	float ignore1;
+	float ignore2;
 };
 
 

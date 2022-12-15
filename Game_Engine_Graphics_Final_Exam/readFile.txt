@@ -11,3 +11,4 @@
 ../assets/meshes/terrain.ply
 ../assets/meshes/moon.ply
 ../assets/meshes/skybox_sphere.ply
+../assets/meshes/SM_Env_Dwarf_Floor_04.ply

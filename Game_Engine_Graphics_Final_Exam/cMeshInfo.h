@@ -17,6 +17,7 @@ public:
 	~cMeshInfo();
 
 	std::string meshName;
+	std::string friendlyName;
 
 	glm::vec3 position;
 	glm::vec3 scale;

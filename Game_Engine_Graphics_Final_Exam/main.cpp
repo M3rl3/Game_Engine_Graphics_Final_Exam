@@ -444,6 +444,7 @@ void Render() {
     }
     cMeshInfo* long_highway_mesh = new cMeshInfo();
     long_highway_mesh->meshName = "long_highway";
+    long_highway_mesh->friendlyName = "long_highway";
     long_highway_mesh->isWireframe = wireFrame;
     long_highway_mesh->RGBAColour = glm::vec4(15.f, 18.f, 13.f, 1.f);
     long_highway_mesh->useRGBAColour = true;
@@ -456,70 +457,55 @@ void Render() {
     }
     bulb_mesh = new cMeshInfo();
     bulb_mesh->meshName = "bulb";
+    bulb_mesh->friendlyName = "bulb";
     bulb_mesh->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh);
     
-    if (!VAOMan->LoadModelIntoVAO("bulb1", bulb, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
     cMeshInfo* bulb_mesh1 = new cMeshInfo();
-    bulb_mesh1->meshName = "bulb1";
+    bulb_mesh1->meshName = "bulb";
+    bulb_mesh1->friendlyName = "bulb1";
     bulb_mesh1->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh1);
     
-    if (!VAOMan->LoadModelIntoVAO("bulb2", bulb, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
     cMeshInfo* bulb_mesh2 = new cMeshInfo();
-    bulb_mesh2->meshName = "bulb2";
+    bulb_mesh2->meshName = "bulb";
+    bulb_mesh2->friendlyName = "bulb2";
     bulb_mesh2->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh2); 
     
-    if (!VAOMan->LoadModelIntoVAO("bulb3", bulb, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
     cMeshInfo* bulb_mesh3 = new cMeshInfo();
-    bulb_mesh3->meshName = "bulb3";
+    bulb_mesh3->meshName = "bulb";
+    bulb_mesh3->friendlyName = "bulb3";
     bulb_mesh3->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh3);
     
-    if (!VAOMan->LoadModelIntoVAO("bulb4", bulb, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
     cMeshInfo* bulb_mesh4 = new cMeshInfo();
-    bulb_mesh4->meshName = "bulb4";
+    bulb_mesh4->meshName = "bulb";
+    bulb_mesh4->friendlyName = "bulb4";
     bulb_mesh4->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh4);
     
-    if (!VAOMan->LoadModelIntoVAO("bulb5", bulb, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
     cMeshInfo* bulb_mesh5 = new cMeshInfo();
-    bulb_mesh5->meshName = "bulb5";
+    bulb_mesh5->meshName = "bulb";
+    bulb_mesh5->friendlyName = "bulb5";
     bulb_mesh5->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh5);
     
-    if (!VAOMan->LoadModelIntoVAO("bulb6", bulb, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
     cMeshInfo* bulb_mesh6 = new cMeshInfo();
-    bulb_mesh6->meshName = "bulb6";
+    bulb_mesh6->meshName = "bulb";
+    bulb_mesh6->friendlyName = "bulb6";
     bulb_mesh6->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh6);
     
-    if (!VAOMan->LoadModelIntoVAO("bulb7", bulb, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
     cMeshInfo* bulb_mesh7 = new cMeshInfo();
-    bulb_mesh7->meshName = "bulb7";
+    bulb_mesh7->meshName = "bulb";
+    bulb_mesh7->friendlyName = "bulb7";
     bulb_mesh7->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh7);
     
-    if (!VAOMan->LoadModelIntoVAO("bulb8", bulb, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
     cMeshInfo* bulb_mesh8 = new cMeshInfo();
-    bulb_mesh8->meshName = "bulb8";
+    bulb_mesh8->meshName = "bulb";
+    bulb_mesh8->friendlyName = "bulb8";
     bulb_mesh8->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh8);
     
@@ -531,27 +517,21 @@ void Render() {
     bulb_mesh9->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh9);
     
-    if (!VAOMan->LoadModelIntoVAO("bulb10", bulb, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
     cMeshInfo* bulb_mesh10 = new cMeshInfo();
-    bulb_mesh10->meshName = "bulb10";
+    bulb_mesh10->meshName = "bulb";
+    bulb_mesh10->friendlyName = "bulb10";
     bulb_mesh10->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh10);
     
-    if (!VAOMan->LoadModelIntoVAO("bulb11", bulb, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
     cMeshInfo* bulb_mesh11 = new cMeshInfo();
-    bulb_mesh11->meshName = "bulb11";
+    bulb_mesh11->meshName = "bulb";
+    bulb_mesh11->friendlyName = "bulb11";
     bulb_mesh11->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh11);
     
-    if (!VAOMan->LoadModelIntoVAO("bulb12", bulb, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
     cMeshInfo* bulb_mesh12 = new cMeshInfo();
-    bulb_mesh12->meshName = "bulb12";
+    bulb_mesh12->meshName = "bulb";
+    bulb_mesh12->friendlyName = "bulb12";
     bulb_mesh12->isWireframe = wireFrame;
     meshArray.push_back(bulb_mesh12);
 
@@ -562,16 +542,15 @@ void Render() {
     }
     cMeshInfo* long_sidewalk_mesh = new cMeshInfo();
     long_sidewalk_mesh->meshName = "long_sidewalk";
+    long_sidewalk_mesh->friendlyName = "long_sidewalk";
     long_sidewalk_mesh->isWireframe = wireFrame;
     long_sidewalk_mesh->RGBAColour = glm::vec4(1.f, 5.f, 1.f, 1.f);
     long_sidewalk_mesh->useRGBAColour = true;
     meshArray.push_back(long_sidewalk_mesh);
     
-    if (!VAOMan->LoadModelIntoVAO("long_sidewalk1", long_sidewalk, shaderID)) {
-        std::cerr << "Could not load model into VAO" << std::endl;
-    }
     cMeshInfo* long_sidewalk_mesh1 = new cMeshInfo();
-    long_sidewalk_mesh1->meshName = "long_sidewalk1";
+    long_sidewalk_mesh1->meshName = "long_sidewalk";
+    long_sidewalk_mesh1->friendlyName = "long_sidewalk1";
     long_sidewalk_mesh1->isWireframe = wireFrame;
     long_sidewalk_mesh1->RGBAColour = glm::vec4(1.f, 5.f, 1.f, 1.f);
     long_sidewalk_mesh1->useRGBAColour = true;
@@ -585,6 +564,7 @@ void Render() {
     }
     cMeshInfo* beholder_mesh = new cMeshInfo();
     beholder_mesh->meshName = "beholder";
+    beholder_mesh->friendlyName = "beholder";
     beholder_mesh->isWireframe = wireFrame;
     beholder_mesh->RGBAColour = glm::vec4(34.5f, 34.5f, 34.5f, 1.f);
     beholder_mesh->useRGBAColour = true;
@@ -610,6 +590,7 @@ void Render() {
     }
     player_mesh = new cMeshInfo();
     player_mesh->meshName = "player";
+    player_mesh->friendlyName = "player";
     player_mesh->isWireframe = wireFrame;
     player_mesh->RGBAColour = glm::vec4(25.f, 25.f, 25.f, 1.f);
     player_mesh->useRGBAColour = false;
@@ -624,6 +605,7 @@ void Render() {
     }
     cMeshInfo* pyramid_mesh = new cMeshInfo();
     pyramid_mesh->meshName = "pyramid";
+    pyramid_mesh->friendlyName = "pyramid";
     pyramid_mesh->isWireframe = wireFrame;
     pyramid_mesh->RGBAColour = glm::vec4(25.f, 25.f, 25.f, 1.f);
     pyramid_mesh->doNotLight = false;
@@ -637,6 +619,7 @@ void Render() {
     }
     cMeshInfo* moon_mesh = new cMeshInfo();
     moon_mesh->meshName = "moon";
+    moon_mesh->friendlyName = "moon";
     moon_mesh->isWireframe = wireFrame;
     moon_mesh->useRGBAColour = false;
     moon_mesh->RGBAColour = glm::vec4(100.f, 25.f, 25.f, 1.f);
@@ -653,10 +636,253 @@ void Render() {
     }
     skybox_sphere_mesh = new cMeshInfo();
     skybox_sphere_mesh->meshName = "skybox_sphere";
+    skybox_sphere_mesh->friendlyName = "skybox_sphere";
     skybox_sphere_mesh->isSkyBoxMesh = true;
     meshArray.push_back(skybox_sphere_mesh);
 
-    // skybox textures
+    // Dungeon floor plan
+    sModelDrawInfo floor_obj;
+    LoadModel(meshFiles[13], floor_obj);
+    if (!VAOMan->LoadModelIntoVAO("floor", floor_obj, shaderID)) {
+        std::cerr << "Could not load model into VAO" << std::endl;
+    }
+    cMeshInfo* floor_mesh = new cMeshInfo();
+    floor_mesh->meshName = "floor";
+    floor_mesh->friendlyName = "floor0";
+    floor_mesh->isWireframe = wireFrame;
+    floor_mesh->useRGBAColour = true;
+    floor_mesh->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh->hasTexture = false;
+    floor_mesh->textures[0] = "";
+    floor_mesh->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh);
+    
+    cMeshInfo* floor_mesh1 = new cMeshInfo();
+    floor_mesh1->meshName = "floor";
+    floor_mesh1->friendlyName = "floor1";
+    floor_mesh1->isWireframe = wireFrame;
+    floor_mesh1->useRGBAColour = true;
+    floor_mesh1->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh1->hasTexture = false;
+    floor_mesh1->textures[0] = "";
+    floor_mesh1->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh1);
+    
+    cMeshInfo* floor_mesh2 = new cMeshInfo();
+    floor_mesh2->meshName = "floor";
+    floor_mesh2->friendlyName = "floor2";
+    floor_mesh2->isWireframe = wireFrame;
+    floor_mesh2->useRGBAColour = true;
+    floor_mesh2->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh2->hasTexture = false;
+    floor_mesh2->textures[0] = "";
+    floor_mesh2->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh2);
+    
+    cMeshInfo* floor_mesh3 = new cMeshInfo();
+    floor_mesh3->meshName = "floor";
+    floor_mesh3->friendlyName = "floor3";
+    floor_mesh3->isWireframe = wireFrame;
+    floor_mesh3->useRGBAColour = true;
+    floor_mesh3->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh3->hasTexture = false;
+    floor_mesh3->textures[0] = "";
+    floor_mesh3->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh3);
+    
+    cMeshInfo* floor_mesh4 = new cMeshInfo();
+    floor_mesh4->meshName = "floor";
+    floor_mesh4->friendlyName = "floor4";
+    floor_mesh4->isWireframe = wireFrame;
+    floor_mesh4->useRGBAColour = true;
+    floor_mesh4->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh4->hasTexture = false;
+    floor_mesh4->textures[0] = "";
+    floor_mesh4->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh4);
+    
+    cMeshInfo* floor_mesh5 = new cMeshInfo();
+    floor_mesh5->meshName = "floor";
+    floor_mesh5->friendlyName = "floor5";
+    floor_mesh5->isWireframe = wireFrame;
+    floor_mesh5->useRGBAColour = true;
+    floor_mesh5->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh5->hasTexture = false;
+    floor_mesh5->textures[0] = "";
+    floor_mesh5->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh5);
+    
+    cMeshInfo* floor_mesh6 = new cMeshInfo();
+    floor_mesh6->meshName = "floor";
+    floor_mesh6->friendlyName = "floor6";
+    floor_mesh6->isWireframe = wireFrame;
+    floor_mesh6->useRGBAColour = true;
+    floor_mesh6->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh6->hasTexture = false;
+    floor_mesh6->textures[0] = "";
+    floor_mesh6->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh6);
+    
+    cMeshInfo* floor_mesh7 = new cMeshInfo();
+    floor_mesh7->meshName = "floor";
+    floor_mesh7->friendlyName = "floor7";
+    floor_mesh7->isWireframe = wireFrame;
+    floor_mesh7->useRGBAColour = true;
+    floor_mesh7->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh7->hasTexture = false;
+    floor_mesh7->textures[0] = "";
+    floor_mesh7->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh7);
+    
+    cMeshInfo* floor_mesh8 = new cMeshInfo();
+    floor_mesh8->meshName = "floor";
+    floor_mesh8->friendlyName = "floor8";
+    floor_mesh8->isWireframe = wireFrame;
+    floor_mesh8->useRGBAColour = true;
+    floor_mesh8->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh8->hasTexture = false;
+    floor_mesh8->textures[0] = "";
+    floor_mesh8->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh8);
+    
+    cMeshInfo* floor_mesh9 = new cMeshInfo();
+    floor_mesh9->meshName = "floor";
+    floor_mesh9->friendlyName = "floor9";
+    floor_mesh9->isWireframe = wireFrame;
+    floor_mesh9->useRGBAColour = true;
+    floor_mesh9->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh9->hasTexture = false;
+    floor_mesh9->textures[0] = "";
+    floor_mesh9->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh9);
+    
+    cMeshInfo* floor_mesh10 = new cMeshInfo();
+    floor_mesh10->meshName = "floor";
+    floor_mesh10->friendlyName = "floor10";
+    floor_mesh10->isWireframe = wireFrame;
+    floor_mesh10->useRGBAColour = true;
+    floor_mesh10->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh10->hasTexture = false;
+    floor_mesh10->textures[0] = "";
+    floor_mesh10->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh10);
+
+    cMeshInfo* floor_mesh11 = new cMeshInfo();
+    floor_mesh11->meshName = "floor";
+    floor_mesh11->friendlyName = "floor11";
+    floor_mesh11->isWireframe = wireFrame;
+    floor_mesh11->useRGBAColour = true;
+    floor_mesh11->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh11->hasTexture = false;
+    floor_mesh11->textures[0] = "";
+    floor_mesh11->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh11);
+    
+    cMeshInfo* floor_mesh12 = new cMeshInfo();
+    floor_mesh12->meshName = "floor";
+    floor_mesh12->friendlyName = "floor12";
+    floor_mesh12->isWireframe = wireFrame;
+    floor_mesh12->useRGBAColour = true;
+    floor_mesh12->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh12->hasTexture = false;
+    floor_mesh12->textures[0] = "";
+    floor_mesh12->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh12);
+    
+    cMeshInfo* floor_mesh13 = new cMeshInfo();
+    floor_mesh13->meshName = "floor";
+    floor_mesh13->friendlyName = "floor13";
+    floor_mesh13->isWireframe = wireFrame;
+    floor_mesh13->useRGBAColour = true;
+    floor_mesh13->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh13->hasTexture = false;
+    floor_mesh13->textures[0] = "";
+    floor_mesh13->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh13);
+    
+    cMeshInfo* floor_mesh14 = new cMeshInfo();
+    floor_mesh14->meshName = "floor";
+    floor_mesh14->friendlyName = "floor14";
+    floor_mesh14->isWireframe = wireFrame;
+    floor_mesh14->useRGBAColour = true;
+    floor_mesh14->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh14->hasTexture = false;
+    floor_mesh14->textures[0] = "";
+    floor_mesh14->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh14);
+    
+    cMeshInfo* floor_mesh15 = new cMeshInfo();
+    floor_mesh15->meshName = "floor";
+    floor_mesh15->friendlyName = "floor15";
+    floor_mesh15->isWireframe = wireFrame;
+    floor_mesh15->useRGBAColour = true;
+    floor_mesh15->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh15->hasTexture = false;
+    floor_mesh15->textures[0] = "";
+    floor_mesh15->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh15);
+    
+    cMeshInfo* floor_mesh16 = new cMeshInfo();
+    floor_mesh16->meshName = "floor";
+    floor_mesh16->friendlyName = "floor16";
+    floor_mesh16->isWireframe = wireFrame;
+    floor_mesh16->useRGBAColour = true;
+    floor_mesh16->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh16->hasTexture = false;
+    floor_mesh16->textures[0] = "";
+    floor_mesh16->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh16);
+    
+    cMeshInfo* floor_mesh17 = new cMeshInfo();
+    floor_mesh17->meshName = "floor";
+    floor_mesh17->friendlyName = "floor17";
+    floor_mesh17->isWireframe = wireFrame;
+    floor_mesh17->useRGBAColour = true;
+    floor_mesh17->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh17->hasTexture = false;
+    floor_mesh17->textures[0] = "";
+    floor_mesh17->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh17);
+    
+    cMeshInfo* floor_mesh18 = new cMeshInfo();
+    floor_mesh18->meshName = "floor";
+    floor_mesh18->friendlyName = "floor18";
+    floor_mesh18->isWireframe = wireFrame;
+    floor_mesh18->useRGBAColour = true;
+    floor_mesh18->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh18->hasTexture = false;
+    floor_mesh18->textures[0] = "";
+    floor_mesh18->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh18);
+    
+    cMeshInfo* floor_mesh19 = new cMeshInfo();
+    floor_mesh19->meshName = "floor";
+    floor_mesh19->friendlyName = "floor19";
+    floor_mesh19->isWireframe = wireFrame;
+    floor_mesh19->useRGBAColour = true;
+    floor_mesh19->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh19->hasTexture = false;
+    floor_mesh19->textures[0] = "";
+    floor_mesh19->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh19);
+    
+    cMeshInfo* floor_mesh20 = new cMeshInfo();
+    floor_mesh20->meshName = "floor";
+    floor_mesh20->friendlyName = "floor20";
+    floor_mesh20->isWireframe = wireFrame;
+    floor_mesh20->useRGBAColour = true;
+    floor_mesh20->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    floor_mesh20->hasTexture = false;
+    floor_mesh20->textures[0] = "";
+    floor_mesh20->textureRatios[0] = 1.0f;
+    meshArray.push_back(floor_mesh20);
+
+
+    
+
+    // skybox/cubemap textures
+    std::cout << "\nLoading Textures";
+
     std::string errorString = "";
     TextureMan = new cBasicTextureManager();
 
@@ -671,7 +897,7 @@ void Render() {
                                                   "SpaceBox_back6_negZ.bmp",
                                                   true, errorString)) 
     {
-        std::cout << "\nLoaded skybox: " << skybox_name << std::endl;
+        std::cout << "\nLoaded skybox textures: " << skybox_name << std::endl;
     }
     else 
     {
@@ -679,7 +905,7 @@ void Render() {
     }
 
     // Basic textures
-    if (TextureMan->Create2DTextureFromBMPFile("moon_texture.bmp")) 
+    if (TextureMan->Create2DTextureFromBMPFile("moon_texture.bmp"))
     {
         std::cout << "Loaded moon texture." << std::endl;
     }
@@ -824,12 +1050,11 @@ void Update() {
         {
             glUniform1f(useRGBAColourLocation, (GLfloat)GL_FALSE);
         }
-
+        
         GLint bHasTextureLocation = glGetUniformLocation(shaderID, "bHasTexture");
 
         if (currentMesh->hasTexture) 
         {
-           
             glUniform1f(bHasTextureLocation, (GLfloat)GL_TRUE);
             std::string texture0 = currentMesh->textures[0];
 
@@ -910,7 +1135,6 @@ void Update() {
             glUniform1f(bIsSkyboxObjectLocation, (GLfloat)GL_TRUE);
             currentMesh->position = cameraEye;
             currentMesh->SetUniformScale(7500.f);
-            glm::mat4x4 matModel = glm::mat4x4(1.0f);
         }
         else {
             glUniform1f(bIsSkyboxObjectLocation, (GLfloat)GL_FALSE);
@@ -958,7 +1182,7 @@ void Update() {
 
         std::stringstream ss;
         ss << " Camera: " << "(" << cameraEye.x << ", " << cameraEye.y << ", " << cameraEye.z << ")"
-           << " Target: Index = " << object_index << ", MeshName: " << meshArray[object_index]->meshName << ", Position: (" << meshArray[object_index]->position.x << ", " << meshArray[object_index]->position.y << ", " << meshArray[object_index]->position.z << ")"
+           << " Target: Index = " << object_index << ", MeshName: " << meshArray[object_index]->friendlyName << ", Position: (" << meshArray[object_index]->position.x << ", " << meshArray[object_index]->position.y << ", " << meshArray[object_index]->position.z << ")"
            << " FPS: " << frameRate << " ms: " << frameTime << " Ship dt: " << speed << " GPU: " << renderer << " " << l << " Light atten: " << x << ", " << y << ", " << z;
 
         glfwSetWindowTitle(window, ss.str().c_str());

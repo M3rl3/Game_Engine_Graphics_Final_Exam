@@ -1,4 +1,4 @@
-21
+43
 
 long_highway 
 position -170.0 0.0 0.0
@@ -88,7 +88,7 @@ scale 1.0 1.0 1.0
 terrain
 position 0.0 0.0 0.0
 rotation 0.0 0.0 0.0
-scale 1.0 1.0 1.0
+scale 2.0 2.0 2.0
 
 player
 position -260.0 4.0 0.0
@@ -104,3 +104,108 @@ moon
 position -180.0 25.0 0.0
 rotation 0.0 0.0 0.0
 scale 10.0 10.0 10.0
+
+floor
+position 25.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor1
+position 25.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor2
+position 0.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor3
+position -25.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor4
+position -50.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor5
+position -75.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor6
+position 25.0 1.0 -185.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor7
+position 0.0 1.0 -185.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor8
+position -25.0 1.0 -185.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor9
+position -50.0 1.0 -185.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor10
+position -75.0 1.0 -185.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor11
+position 25.0 1.0 -210.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor12
+position 0.0 1.0 -210.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor13
+position -25.0 1.0 -210.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor14
+position -50.0 1.0 -210.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor15
+position -75.0 1.0 -210.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor16
+position 25.0 1.0 -235.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor17
+position 0.0 1.0 -235.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor18
+position -25.0 1.0 -235.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor19
+position -50.0 1.0 -235.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor20
+position -75.0 1.0 -235.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0

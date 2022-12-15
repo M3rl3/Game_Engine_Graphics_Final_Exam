@@ -40,6 +40,7 @@ void main()
 
 	colour = vColour;
 	uv2 = vUV2;
+
 	tangent = vTangent;
 	biNormal = vBiNormal;
 	boneID = vBoneID;

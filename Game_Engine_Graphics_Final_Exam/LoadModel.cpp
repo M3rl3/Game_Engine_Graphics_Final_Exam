@@ -114,6 +114,7 @@ void LoadModel(std::string fileName, sModelDrawInfo& plyModel) {
 
         plyModel.pVertices[index].texture_u = modelArray[index].texture_u;
         plyModel.pVertices[index].texture_v = modelArray[index].texture_v;
+        int breakpoint = 1;
     }
 
     plyModel.numberOfIndices = plyModel.numberOfTriangles * 3;

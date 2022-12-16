@@ -1,8 +1,8 @@
-43
+259
 
 long_highway 
-position -170.0 0.0 0.0
-rotation 0.0 0.0 0.0
+position -151.0 1.0 -465.0
+rotation 0.0 67.55 0.0
 scale 1.0 1.0 1.0
 
 bulb
@@ -11,42 +11,42 @@ rotation 0.0 0.0 0.0
 scale 0.1 0.1 0.1
 
 bulb1
-position -250.0 8.0 10.0
+position -180.0 8.0 -400.0
 rotation 0.0 0.0 0.0
 scale 0.1 0.1 0.1
 
 bulb2
-position -220.0 8.0 10.0
+position -180.0 8.0 -440.0
 rotation 0.0 0.0 0.0
 scale 0.1 0.1 0.1
 
 bulb3
-position -190.0 8.0 10.0
+position -180.0 8.0 -480.0
 rotation 0.0 0.0 0.0
 scale 0.1 0.1 0.1
 
 bulb4
-position -160.0 8.0 10.0
+position -180.0 8.0 -520.0
 rotation 0.0 0.0 0.0
 scale 0.1 0.1 0.1
 
 bulb5
-position -130.0 8.0 10.0
+position -120.0 8.0 -400.0
 rotation 0.0 0.0 0.0
 scale 0.1 0.1 0.1
 
 bulb6
-position -100.0 8.0 10.0
+position -120.0 8.0 -440.0
 rotation 0.0 0.0 0.0
 scale 0.1 0.1 0.1
 
 bulb7
-position -250.0 8.0 -10.0
+position -120.0 8.0 -480.0
 rotation 0.0 0.0 0.0
 scale 0.1 0.1 0.1
 
 bulb8
-position -220.0 8.0 -10.0
+position -120.0 8.0 -520.0
 rotation 0.0 0.0 0.0
 scale 0.1 0.1 0.1
 
@@ -71,13 +71,13 @@ rotation 0.0 0.0 0.0
 scale 0.1 0.1 0.1
 
 long_sidewalk
-position -170.0 1.0 -15.0
-rotation 0.0 0.0 0.0
+position -183.0 1.0 -465.0
+rotation 0.0 67.55 0.0
 scale 1.0 1.0 1.0
 
 long_sidewalk1
-position -170.0 1.0 15.0
-rotation 0.0 0.0 0.0
+position -119.0 1.0 -465.0
+rotation 0.0 67.55 0.0
 scale 1.0 1.0 1.0
 
 beholder
@@ -91,7 +91,7 @@ rotation 0.0 0.0 0.0
 scale 2.0 2.0 2.0
 
 player
-position -260.0 4.0 0.0
+position -150.0 1.0 -600.0
 rotation 0.0 67.55 0.0
 scale 1.0 1.0 1.0
 
@@ -207,5 +207,1090 @@ scale 1.0 1.0 1.0
 
 floor20
 position -75.0 1.0 -235.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor21
+position -25.0 1.0 -260.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor22
+position 25.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor23
+position 0.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor23
+position -25.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor24
+position -50.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor25
+position 25.0 1.0 -310.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor26
+position 0.0 1.0 -310.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor27
+position -25.0 1.0 -310.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor28
+position -50.0 1.0 -310.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor29
+position 25.0 1.0 -335.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor30
+position 0.0 1.0 -335.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor31
+position -25.0 1.0 -335.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor32
+position -50.0 1.0 -335.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor33
+position -25.0 1.0 -360.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor34
+position 25.0 1.0 -385.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor35
+position 0.0 1.0 -385.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor36
+position -25.0 1.0 -385.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor37
+position -50.0 1.0 -385.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor38
+position -75.0 1.0 -385.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor39
+position 25.0 1.0 -410.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor40
+position 0.0 1.0 -410.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor41
+position -25.0 1.0 -410.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor41
+position -50.0 1.0 -410.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor42
+position -75.0 1.0 -410.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor43
+position 25.0 1.0 -435.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor44
+position 0.0 1.0 -435.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor45
+position -25.0 1.0 -435.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor46
+position -50.0 1.0 -435.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor47
+position -75.0 1.0 -435.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor48
+position 25.0 1.0 -460.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor49
+position 0.0 1.0 -460.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor50
+position -25.0 1.0 -460.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor51
+position -50.0 1.0 -460.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor52
+position -75.0 1.0 -460.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor54
+position -25.0 1.0 -235.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor55
+position -200.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor56
+position -225.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor57
+position -250.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor58
+position -275.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor59
+position -300.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor60
+position -200.0 1.0 -185.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor61
+position -225.0 1.0 -185.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor62
+position -250.0 1.0 -185.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor63
+position -275.0 1.0 -185.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor64
+position -300.0 1.0 -185.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor65
+position -200.0 1.0 -210.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor66
+position -225.0 1.0 -210.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor67
+position -250.0 1.0 -210.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor68
+position -275.0 1.0 -210.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor69
+position -300.0 1.0 -210.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor70
+position -200.0 1.0 -235.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor71
+position -225.0 1.0 -235.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor72
+position -250.0 1.0 -235.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor73
+position -275.0 1.0 -235.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor74
+position -300.0 1.0 -235.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor75
+position -250.0 1.0 -260.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor76
+position -225.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor77
+position -250.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor78
+position -275.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor79
+position -300.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor80
+position -225.0 1.0 -310.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor81
+position -250.0 1.0 -310.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor82
+position -275.0 1.0 -310.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor83
+position -300.0 1.0 -310.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor84
+position -225.0 1.0 -335.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor85
+position -250.0 1.0 -335.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor86
+position -275.0 1.0 -335.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor87
+position -300.0 1.0 -335.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor88
+position -250.0 1.0 -360.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor89
+position -200.0 1.0 -385.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor90
+position -225.0 1.0 -385.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor91
+position -250.0 1.0 -385.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor92
+position -275.0 1.0 -385.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor93
+position -300.0 1.0 -385.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor94
+position -200.0 1.0 -410.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor95
+position -225.0 1.0 -410.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor96
+position -250.0 1.0 -410.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor97
+position -275.0 1.0 -410.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor98
+position -300.0 1.0 -410.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor99
+position -200.0 1.0 -435.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor100
+position -225.0 1.0 -435.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor101
+position -250.0 1.0 -435.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor102
+position -275.0 1.0 -435.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor103
+position -300.0 1.0 -435.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor104
+position -200.0 1.0 -460.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor105
+position -225.0 1.0 -460.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor106
+position -250.0 1.0 -460.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor107
+position -275.0 1.0 -460.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor108
+position -300.0 1.0 -460.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor109
+position -200.0 1.0 -310.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor110
+position -175.0 1.0 -310.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor111
+position -150.0 1.0 -310.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor112
+position -125.0 1.0 -310.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor113
+position -100.0 1.0 -310.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor114
+position -75.0 1.0 -310.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor115
+position -50.0 1.0 -310.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor116
+position -175.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor117
+position -150.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor118
+position -125.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor119
+position -100.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor120
+position -125.0 1.0 -335.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+floor121
+position -150.0 1.0 -335.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall
+position 25.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall1
+position 25.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall2
+position 0.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall3
+position -25.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall4
+position -50.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall5
+position -75.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall6
+position 0.0 1.0 -260.0
+rotation 0.0 135.10 0.0
+scale 1.0 1.0 1.0
+
+wall7
+position -25.0 1.0 -260.0
+rotation 0.0 135.10 0.0
+scale 1.0 1.0 1.0
+
+wall8
+position -50.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall9
+position -75.0 1.0 -260.0
+rotation 0.0 135.10 0.0
+scale 1.0 1.0 1.0
+
+wall10
+position -100.0 1.0 -260.0
+rotation 0.0 135.10 0.0
+scale 1.0 1.0 1.0
+
+wall11
+position 25.0 1.0 -185.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall12
+position 25.0 1.0 -210.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall13
+position 25.0 1.0 -235.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall14
+position 25.0 1.0 -260.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall15
+position -100.0 1.0 -160.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall16
+position -100.0 1.0 -185.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall17
+position -100.0 1.0 -210.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall18
+position -100.0 1.0 -235.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall19
+position 25.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall20
+position 0.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall21
+position -25.0 1.0 -285.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall22
+position 25.0 1.0 -310.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall23
+position 25.0 1.0 -335.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall24
+position -50.0 1.0 -260.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall25
+position 25.0 1.0 -360.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall26
+position 0.0 1.0 -360.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall27
+position -25.0 1.0 -360.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall28
+position -75.0 1.0 -360.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall29
+position -75.0 1.0 -335.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall30
+position -75.0 1.0 -285.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall31
+position -50.0 1.0 -360.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall32
+position -25.0 1.0 -385.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall33
+position 25.0 1.0 -410.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall34
+position 25.0 1.0 -435.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall35
+position 25.0 1.0 -460.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall36
+position 25.0 1.0 -485.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall37
+position 25.0 1.0 -385.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall38
+position 0.0 1.0 -385.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall39
+position -50.0 1.0 -385.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall40
+position -75.0 1.0 -385.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall41
+position 0.0 1.0 -485.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall42
+position -25.0 1.0 -485.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall43
+position -50.0 1.0 -485.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall44
+position -75.0 1.0 -485.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall45
+position -100.0 1.0 -485.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall46
+position -100.0 1.0 -385.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall47
+position -100.0 1.0 -410.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall48
+position -100.0 1.0 -435.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall49
+position -100.0 1.0 -460.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall50
+position -325.0 1.0 -160.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall51
+position -325.0 1.0 -185.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall52
+position -325.0 1.0 -210.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall53
+position -325.0 1.0 -235.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall54
+position -325.0 1.0 -285.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall55
+position -325.0 1.0 -310.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall56
+position -325.0 1.0 -335.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall57
+position -325.0 1.0 -385.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall58
+position -325.0 1.0 -410.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall59
+position -325.0 1.0 -435.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall60
+position -325.0 1.0 -460.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall61
+position -300.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall62
+position -275.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall63
+position -250.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall64
+position -225.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall65
+position -200.0 1.0 -160.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall66
+position -200.0 1.0 -185.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall67
+position -200.0 1.0 -210.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall68
+position -200.0 1.0 -235.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall69
+position -200.0 1.0 -260.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall70
+position -225.0 1.0 -260.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall71
+position -250.0 1.0 -260.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall72
+position -300.0 1.0 -260.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall73
+position -325.0 1.0 -260.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall74
+position -300.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall75
+position -275.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall76
+position -225.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall77
+position -225.0 1.0 -310.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall78
+position -225.0 1.0 -360.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall79
+position -250.0 1.0 -360.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall80
+position -300.0 1.0 -360.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall81
+position -325.0 1.0 -360.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall82
+position -250.0 1.0 -285.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall83
+position -250.0 1.0 -385.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall84
+position -275.0 1.0 -260.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall85
+position -275.0 1.0 -360.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall86
+position -300.0 1.0 -385.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall87
+position -275.0 1.0 -385.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall88
+position -225.0 1.0 -385.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall89
+position -200.0 1.0 -385.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall90
+position -200.0 1.0 -410.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall91
+position -200.0 1.0 -435.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall92
+position -200.0 1.0 -460.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall93
+position -200.0 1.0 -485.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall94
+position -225.0 1.0 -485.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall95
+position -250.0 1.0 -485.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall96
+position -275.0 1.0 -485.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall97
+position -300.0 1.0 -485.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall98
+position -325.0 1.0 -485.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall99
+position -225.0 1.0 -335.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall100
+position -200.0 1.0 -335.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall101
+position -125.0 1.0 -335.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall102
+position -100.0 1.0 -335.0
+rotation 0.0 -135.10 0.0
+scale 1.0 1.0 1.0
+
+wall103
+position -75.0 1.0 -310.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall104
+position -200.0 1.0 -310.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall105
+position -100.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall106
+position -125.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall107
+position -150.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall108
+position -175.0 1.0 -285.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+wall109
+position -200.0 1.0 -285.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall110
+position -100.0 1.0 -310.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+wall111
+position -175.0 1.0 -335.0
+rotation 0.0 67.55 0.0
+scale 1.0 1.0 1.0
+
+wall112
+position -125.0 1.0 -360.0
+rotation 0.0 -67.55 0.0
+scale 1.0 1.0 1.0
+
+arched_doorway1
+position -125.0 1.0 -360.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+arched_doorway2
+position -150.0 1.0 -360.0
 rotation 0.0 0.0 0.0
 scale 1.0 1.0 1.0

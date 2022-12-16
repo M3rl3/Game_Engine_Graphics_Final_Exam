@@ -1,4 +1,4 @@
-259
+287
 
 long_highway 
 position -151.0 1.0 -465.0
@@ -51,22 +51,22 @@ rotation 0.0 0.0 0.0
 scale 0.1 0.1 0.1
 
 bulb9
-position -190.0 8.0 -10.0
+position 23.0 15.0 -436.0
 rotation 0.0 0.0 0.0
 scale 0.1 0.1 0.1
 
 bulb10
-position -160.0 8.0 -10.0
+position -98.0 15.0 -436.0
 rotation 0.0 0.0 0.0
 scale 0.1 0.1 0.1
 
 bulb11
-position -130.0 8.0 -10.0
+position 23.0 15.0 -323.0
 rotation 0.0 0.0 0.0
 scale 0.1 0.1 0.1
 
 bulb12
-position -100.0 8.0 -10.0
+position 23.0 15.0 -210.0
 rotation 0.0 0.0 0.0
 scale 0.1 0.1 0.1
 
@@ -91,7 +91,7 @@ rotation 0.0 0.0 0.0
 scale 2.0 2.0 2.0
 
 player
-position -150.0 1.0 -600.0
+position -88.0 1.0 0.0
 rotation 0.0 67.55 0.0
 scale 1.0 1.0 1.0
 
@@ -1294,3 +1294,143 @@ arched_doorway2
 position -150.0 1.0 -360.0
 rotation 0.0 0.0 0.0
 scale 1.0 1.0 1.0
+
+torch1-0
+position -180.0 5.0 -395.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+torch1-1
+position -180.0 5.0 -435.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+torch1-2
+position -180.0 5.0 -475.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+torch1-3
+position -180.0 5.0 -515.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+torch1-4
+position -120.0 5.0 -395.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+torch1-5
+position -120.0 5.0 -435.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+torch1-6
+position -120.0 5.0 -475.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+torch1-7
+position -120.0 5.0 -515.0
+rotation 0.0 0.0 0.0
+scale 1.0 1.0 1.0
+
+torch2-0
+position 23.0 15.0 -436.0
+rotation 0.0 -67.55 0.0
+scale 2.0 2.0 2.0
+
+torch2-1
+position -98.0 15.0 -436.0
+rotation 0.0 67.55 0.0
+scale 2.0 2.0 2.0
+
+torch2-2
+position 23.0 15.0 -323.0
+rotation 0.0 -67.55 0.0
+scale 2.0 2.0 2.0
+
+torch2-3
+position 23.0 15.0 -210.0
+rotation 0.0 -67.55 0.0
+scale 2.0 2.0 2.0
+
+torch2-4
+position -98.0 15.0 -210.0
+rotation 0.0 67.55 0.0
+scale 2.0 2.0 2.0
+
+torch2-5
+position -98.0 15.0 -210.0
+rotation 0.0 67.55 0.0
+scale 2.0 2.0 2.0
+
+torch2-6
+position -323.0 15.0 -210.0
+rotation 0.0 67.55 0.0
+scale 2.0 2.0 2.0
+
+torch2-7
+position -323.0 15.0 -323.0
+rotation 0.0 67.55 0.0
+scale 2.0 2.0 2.0
+
+torch2-8
+position -323.0 15.0 -435.0
+rotation 0.0 67.55 0.0
+scale 2.0 2.0 2.0
+
+torch2-9
+position -202.0 15.0 -435.0
+rotation 0.0 -67.55 0.0
+scale 2.0 2.0 2.0
+
+torch2-10
+position -202.0 15.0 -209.0
+rotation 0.0 -67.55 0.0
+scale 2.0 2.0 2.0
+
+torch2-11
+position -150.0 15.0 -287.0
+rotation 0.0 0.0 0.0
+scale 2.0 2.0 2.0
+
+bulb13
+position -98.0 15.0 -210.0
+rotation 0.0 67.55 0.0
+scale 0.5 0.5 0.5
+
+bulb14
+position -323.0 15.0 -210.0
+rotation 0.0 67.55 0.0
+scale 0.5 0.5 0.5
+
+bulb15
+position -323.0 15.0 -323.0
+rotation 0.0 67.55 0.0
+scale 0.5 0.5 0.5
+
+bulb16
+position -323.0 15.0 -435.0
+rotation 0.0 67.55 0.0
+scale 0.5 0.5 0.5
+
+bulb17
+position -202.0 15.0 -435.0
+rotation 0.0 67.55 0.0
+scale 0.5 0.5 0.5
+
+bulb18
+position -150.0 15.0 -287.0
+rotation 0.0 67.55 0.0
+scale 0.5 0.5 0.5
+
+bulb19
+position -202.0 15.0 -209.0
+rotation 0.0 67.55 0.0
+scale 0.5 0.5 0.5
+
+bulb20
+position -202.0 15.0 -209.0
+rotation 0.0 67.55 0.0
+scale 0.5 0.5 0.5

@@ -643,7 +643,70 @@ void Render() {
 
     // Dungeon Models Loaded here
     LoadDungeonFloorPlan();
+
+    cMeshInfo* bulb_mesh13 = new cMeshInfo();
+    bulb_mesh13->meshName = "bulb";
+    bulb_mesh13->friendlyName = "bulb13";
+    bulb_mesh13->isWireframe = wireFrame;
+    meshArray.push_back(bulb_mesh13);
+
+    cMeshInfo* bulb_mesh14 = new cMeshInfo();
+    bulb_mesh14->meshName = "bulb";
+    bulb_mesh14->friendlyName = "bulb14";
+    bulb_mesh14->isWireframe = wireFrame;
+    meshArray.push_back(bulb_mesh14);
+
+    cMeshInfo* bulb_mesh15 = new cMeshInfo();
+    bulb_mesh15->meshName = "bulb";
+    bulb_mesh15->friendlyName = "bulb15";
+    bulb_mesh15->isWireframe = wireFrame;
+    meshArray.push_back(bulb_mesh15);
+
+    cMeshInfo* bulb_mesh16 = new cMeshInfo();
+    bulb_mesh16->meshName = "bulb";
+    bulb_mesh16->friendlyName = "bulb16";
+    bulb_mesh16->isWireframe = wireFrame;
+    meshArray.push_back(bulb_mesh16);
+
+    cMeshInfo* bulb_mesh17 = new cMeshInfo();
+    bulb_mesh17->meshName = "bulb";
+    bulb_mesh17->friendlyName = "bulb17";
+    bulb_mesh17->isWireframe = wireFrame;
+    meshArray.push_back(bulb_mesh17);
+
+    cMeshInfo* bulb_mesh18 = new cMeshInfo();
+    bulb_mesh18->meshName = "bulb";
+    bulb_mesh18->friendlyName = "bulb18";
+    bulb_mesh18->isWireframe = wireFrame;
+    meshArray.push_back(bulb_mesh18);
+
+    cMeshInfo* bulb_mesh19 = new cMeshInfo();
+    bulb_mesh19->meshName = "bulb";
+    bulb_mesh19->friendlyName = "bulb19";
+    bulb_mesh19->isWireframe = wireFrame;
+    meshArray.push_back(bulb_mesh19);
+
+    cMeshInfo* bulb_mesh20 = new cMeshInfo();
+    bulb_mesh20->meshName = "bulb";
+    bulb_mesh20->friendlyName = "bulb20";
+    bulb_mesh20->isWireframe = wireFrame;
+    meshArray.push_back(bulb_mesh20);
     
+    // Setting textures here
+    for (int i = 0; i < meshArray.size(); i++) {
+        cMeshInfo* currentMesh = meshArray[i];
+
+        if (currentMesh->meshName == "wall" || 
+            currentMesh->meshName == "floor" || 
+            currentMesh->meshName == "arched_doorway")
+        {
+            currentMesh->useRGBAColour = true;
+            currentMesh->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+            currentMesh->hasTexture = false;
+            currentMesh->textures[1] = "Dungeons_2_Texture_01_A.bmp";
+            currentMesh->textureRatios[1] = 1.f;
+        }
+    }
 
     // skybox/cubemap textures
     std::cout << "\nLoading Textures";
@@ -669,7 +732,7 @@ void Render() {
         std::cout << "\nError: failed to load skybox because " << errorString;
     }
 
-    // Basic textures
+    // Basic texture2D
     if (TextureMan->Create2DTextureFromBMPFile("moon_texture.bmp"))
     {
         std::cout << "Loaded moon texture." << std::endl;
@@ -677,6 +740,15 @@ void Render() {
     else 
     {
         std::cout << "Error: failed to load moon texture.";
+    }
+    
+    if (TextureMan->Create2DTextureFromBMPFile("Dungeons_2_Texture_01_A.bmp"))
+    {
+        std::cout << "Loaded dungeon texture." << std::endl;
+    }
+    else 
+    {
+        std::cout << "Error: failed to load dungeon texture.";
     }
 
     // reads scene descripion files for positioning and other info
@@ -821,7 +893,9 @@ void Update() {
         if (currentMesh->hasTexture) 
         {
             glUniform1f(bHasTextureLocation, (GLfloat)GL_TRUE);
-            std::string texture0 = currentMesh->textures[0];
+
+            std::string texture0 = currentMesh->textures[0];    // moon
+            std::string texture1 = currentMesh->textures[1];    // dungeon
 
             if (texture0 == "moon_texture.bmp") {
                 //printf("Texture to be binded on the shader %s", currentMesh->textures[0].c_str());
@@ -829,11 +903,28 @@ void Update() {
 
                 GLuint texture0Unit = 0;
                 glActiveTexture(texture0Unit + GL_TEXTURE0);
-
                 glBindTexture(GL_TEXTURE_2D, texture0ID);
 
                 GLint texture0Location = glGetUniformLocation(shaderID, "texture0");
                 glUniform1i(texture0Location, texture0Unit);
+
+                GLint texRatio_0_3 = glGetUniformLocation(shaderID, "texRatio_0_3");
+                glUniform4f(texRatio_0_3,
+                            currentMesh->textureRatios[0],
+                            currentMesh->textureRatios[1],
+                            currentMesh->textureRatios[2],
+                            currentMesh->textureRatios[3]);
+            }
+            else if (texture1 == "Dungeons_2_Texture_01_A.bmp") {
+
+                GLuint texture1ID = TextureMan->getTextureIDFromName(texture1);
+
+                GLuint texture1unit = 1;
+                glActiveTexture(texture1unit + GL_TEXTURE0);
+                glBindTexture(GL_TEXTURE_2D, texture1ID);
+
+                GLint texture1Location = glGetUniformLocation(shaderID, "texture1");
+                glUniform1i(texture1Location, texture1unit);
 
                 GLint texRatio_0_3 = glGetUniformLocation(shaderID, "texRatio_0_3");
                 glUniform4f(texRatio_0_3,
@@ -981,6 +1072,7 @@ void ReadFromFile() {
     }  
 }
 
+// All dungeon models loaded here
 void LoadDungeonFloorPlan() {
     // Dungeon floor plan
     sModelDrawInfo floor_obj;
@@ -3605,9 +3697,239 @@ void LoadDungeonFloorPlan() {
     arched_doorway_mesh2->textureRatios[0] = 1.0f;
     meshArray.push_back(arched_doorway_mesh2);
 
+    sModelDrawInfo torch1_obj;
+    LoadModel(meshFiles[16], torch1_obj);
+    if (!VAOMan->LoadModelIntoVAO("torch1", torch1_obj, shaderID)) {
+        std::cerr << "Could not load model into VAO" << std::endl;
+    }
+    cMeshInfo* torch1_mesh = new cMeshInfo();
+    torch1_mesh->meshName = "torch1";
+    torch1_mesh->friendlyName = "torch1-0";
+    torch1_mesh->isWireframe = wireFrame;
+    torch1_mesh->useRGBAColour = true;
+    torch1_mesh->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch1_mesh->hasTexture = false;
+    torch1_mesh->textures[0] = "";
+    torch1_mesh->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch1_mesh);
     
+    cMeshInfo* torch1_mesh1 = new cMeshInfo();
+    torch1_mesh1->meshName = "torch1";
+    torch1_mesh1->friendlyName = "torch1-1";
+    torch1_mesh1->isWireframe = wireFrame;
+    torch1_mesh1->useRGBAColour = true;
+    torch1_mesh1->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch1_mesh1->hasTexture = false;
+    torch1_mesh1->textures[0] = "";
+    torch1_mesh1->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch1_mesh1);
+    
+    cMeshInfo* torch1_mesh2 = new cMeshInfo();
+    torch1_mesh2->meshName = "torch1";
+    torch1_mesh2->friendlyName = "torch1-2";
+    torch1_mesh2->isWireframe = wireFrame;
+    torch1_mesh2->useRGBAColour = true;
+    torch1_mesh2->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch1_mesh2->hasTexture = false;
+    torch1_mesh2->textures[0] = "";
+    torch1_mesh2->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch1_mesh2);
+    
+    cMeshInfo* torch1_mesh3 = new cMeshInfo();
+    torch1_mesh3->meshName = "torch1";
+    torch1_mesh3->friendlyName = "torch1-3";
+    torch1_mesh3->isWireframe = wireFrame;
+    torch1_mesh3->useRGBAColour = true;
+    torch1_mesh3->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch1_mesh3->hasTexture = false;
+    torch1_mesh3->textures[0] = "";
+    torch1_mesh3->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch1_mesh3);
+    
+    cMeshInfo* torch1_mesh4 = new cMeshInfo();
+    torch1_mesh4->meshName = "torch1";
+    torch1_mesh4->friendlyName = "torch1-4";
+    torch1_mesh4->isWireframe = wireFrame;
+    torch1_mesh4->useRGBAColour = true;
+    torch1_mesh4->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch1_mesh4->hasTexture = false;
+    torch1_mesh4->textures[0] = "";
+    torch1_mesh4->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch1_mesh4);
+
+    cMeshInfo* torch1_mesh5 = new cMeshInfo();
+    torch1_mesh5->meshName = "torch1";
+    torch1_mesh5->friendlyName = "torch1-5";
+    torch1_mesh5->isWireframe = wireFrame;
+    torch1_mesh5->useRGBAColour = true;
+    torch1_mesh5->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch1_mesh5->hasTexture = false;
+    torch1_mesh5->textures[0] = "";
+    torch1_mesh5->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch1_mesh5);
+
+    cMeshInfo* torch1_mesh6 = new cMeshInfo();
+    torch1_mesh6->meshName = "torch1";
+    torch1_mesh6->friendlyName = "torch1-6";
+    torch1_mesh6->isWireframe = wireFrame;
+    torch1_mesh6->useRGBAColour = true;
+    torch1_mesh6->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch1_mesh6->hasTexture = false;
+    torch1_mesh6->textures[0] = "";
+    torch1_mesh6->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch1_mesh6);
+
+    cMeshInfo* torch1_mesh7 = new cMeshInfo();
+    torch1_mesh7->meshName = "torch1";
+    torch1_mesh7->friendlyName = "torch1-7";
+    torch1_mesh7->isWireframe = wireFrame;
+    torch1_mesh7->useRGBAColour = true;
+    torch1_mesh7->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch1_mesh7->hasTexture = false;
+    torch1_mesh7->textures[0] = "";
+    torch1_mesh7->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch1_mesh7);
+
+    sModelDrawInfo torch2_obj;
+    LoadModel(meshFiles[17], torch2_obj);
+    if (!VAOMan->LoadModelIntoVAO("torch2", torch2_obj, shaderID)) {
+        std::cerr << "Could not load model into VAO" << std::endl;
+    }
+    cMeshInfo* torch2_mesh = new cMeshInfo();
+    torch2_mesh->meshName = "torch2";
+    torch2_mesh->friendlyName = "torch2-0";
+    torch2_mesh->isWireframe = wireFrame;
+    torch2_mesh->useRGBAColour = true;
+    torch2_mesh->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch2_mesh->hasTexture = false;
+    torch2_mesh->textures[0] = "";
+    torch2_mesh->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch2_mesh);
+
+    cMeshInfo* torch2_mesh1 = new cMeshInfo();
+    torch2_mesh1->meshName = "torch2";
+    torch2_mesh1->friendlyName = "torch2-1";
+    torch2_mesh1->isWireframe = wireFrame;
+    torch2_mesh1->useRGBAColour = true;
+    torch2_mesh1->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch2_mesh1->hasTexture = false;
+    torch2_mesh1->textures[0] = "";
+    torch2_mesh1->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch2_mesh1);
+
+    cMeshInfo* torch2_mesh2 = new cMeshInfo();
+    torch2_mesh2->meshName = "torch2";
+    torch2_mesh2->friendlyName = "torch2-2";
+    torch2_mesh2->isWireframe = wireFrame;
+    torch2_mesh2->useRGBAColour = true;
+    torch2_mesh2->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch2_mesh2->hasTexture = false;
+    torch2_mesh2->textures[0] = "";
+    torch2_mesh2->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch2_mesh2);
+
+    cMeshInfo* torch2_mesh3 = new cMeshInfo();
+    torch2_mesh3->meshName = "torch2";
+    torch2_mesh3->friendlyName = "torch2-3";
+    torch2_mesh3->isWireframe = wireFrame;
+    torch2_mesh3->useRGBAColour = true;
+    torch2_mesh3->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch2_mesh3->hasTexture = false;
+    torch2_mesh3->textures[0] = "";
+    torch2_mesh3->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch2_mesh3);
+
+    cMeshInfo* torch2_mesh4 = new cMeshInfo();
+    torch2_mesh4->meshName = "torch2";
+    torch2_mesh4->friendlyName = "torch2-4";
+    torch2_mesh4->isWireframe = wireFrame;
+    torch2_mesh4->useRGBAColour = true;
+    torch2_mesh4->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch2_mesh4->hasTexture = false;
+    torch2_mesh4->textures[0] = "";
+    torch2_mesh4->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch2_mesh4);
+
+    cMeshInfo* torch2_mesh5 = new cMeshInfo();
+    torch2_mesh5->meshName = "torch2";
+    torch2_mesh5->friendlyName = "torch2-5";
+    torch2_mesh5->isWireframe = wireFrame;
+    torch2_mesh5->useRGBAColour = true;
+    torch2_mesh5->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch2_mesh5->hasTexture = false;
+    torch2_mesh5->textures[0] = "";
+    torch2_mesh5->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch2_mesh5);
+
+    cMeshInfo* torch2_mesh6 = new cMeshInfo();
+    torch2_mesh6->meshName = "torch2";
+    torch2_mesh6->friendlyName = "torch2-6";
+    torch2_mesh6->isWireframe = wireFrame;
+    torch2_mesh6->useRGBAColour = true;
+    torch2_mesh6->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch2_mesh6->hasTexture = false;
+    torch2_mesh6->textures[0] = "";
+    torch2_mesh6->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch2_mesh6);
+
+    cMeshInfo* torch2_mesh7 = new cMeshInfo();
+    torch2_mesh7->meshName = "torch2";
+    torch2_mesh7->friendlyName = "torch2-7";
+    torch2_mesh7->isWireframe = wireFrame;
+    torch2_mesh7->useRGBAColour = true;
+    torch2_mesh7->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch2_mesh7->hasTexture = false;
+    torch2_mesh7->textures[0] = "";
+    torch2_mesh7->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch2_mesh7);
+
+    cMeshInfo* torch2_mesh8 = new cMeshInfo();
+    torch2_mesh8->meshName = "torch2";
+    torch2_mesh8->friendlyName = "torch2-8";
+    torch2_mesh8->isWireframe = wireFrame;
+    torch2_mesh8->useRGBAColour = true;
+    torch2_mesh8->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch2_mesh8->hasTexture = false;
+    torch2_mesh8->textures[0] = "";
+    torch2_mesh8->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch2_mesh8);
+
+    cMeshInfo* torch2_mesh9 = new cMeshInfo();
+    torch2_mesh9->meshName = "torch2";
+    torch2_mesh9->friendlyName = "torch2-9";
+    torch2_mesh9->isWireframe = wireFrame;
+    torch2_mesh9->useRGBAColour = true;
+    torch2_mesh9->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch2_mesh9->hasTexture = false;
+    torch2_mesh9->textures[0] = "";
+    torch2_mesh9->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch2_mesh9);
+
+    cMeshInfo* torch2_mesh10 = new cMeshInfo();
+    torch2_mesh10->meshName = "torch2";
+    torch2_mesh10->friendlyName = "torch2-10";
+    torch2_mesh10->isWireframe = wireFrame;
+    torch2_mesh10->useRGBAColour = true;
+    torch2_mesh10->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch2_mesh10->hasTexture = false;
+    torch2_mesh10->textures[0] = "";
+    torch2_mesh10->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch2_mesh10);
+
+    cMeshInfo* torch2_mesh11 = new cMeshInfo();
+    torch2_mesh11->meshName = "torch2";
+    torch2_mesh11->friendlyName = "torch2-11";
+    torch2_mesh11->isWireframe = wireFrame;
+    torch2_mesh11->useRGBAColour = true;
+    torch2_mesh11->RGBAColour = glm::vec4(50.f, 50.f, 50.f, 1.f);
+    torch2_mesh11->hasTexture = false;
+    torch2_mesh11->textures[0] = "";
+    torch2_mesh11->textureRatios[0] = 1.0f;
+    meshArray.push_back(torch2_mesh11);
+
 }
 
+// All lights managed here
 void ManageLights() {
     
     GLint PositionLocation = glGetUniformLocation(shaderID, "sLightsArray[0].position");
@@ -3844,6 +4166,151 @@ void ManageLights() {
     glUniform4f(DirectionLocation12, 1.f, 1.f, 1.f, 1.f);
     glUniform4f(Param1Location12, 0.f, 0.f, 0.f, 1.f); //x = Light Type
     glUniform4f(Param2Location12, 1.f, 0.f, 0.f, 1.f); //x = Light on/off
+    
+    GLint PositionLocation13 = glGetUniformLocation(shaderID, "sLightsArray[13].position");
+    GLint DiffuseLocation13 = glGetUniformLocation(shaderID, "sLightsArray[13].diffuse");
+    GLint SpecularLocation13 = glGetUniformLocation(shaderID, "sLightsArray[13].specular");
+    GLint AttenLocation13 = glGetUniformLocation(shaderID, "sLightsArray[13].atten");
+    GLint DirectionLocation13 = glGetUniformLocation(shaderID, "sLightsArray[13].direction");
+    GLint Param1Location13 = glGetUniformLocation(shaderID, "sLightsArray[13].param1");
+    GLint Param2Location13 = glGetUniformLocation(shaderID, "sLightsArray[12].param2");
+
+    glm::vec3 lightPosition13 = meshArray[278]->position;
+    glUniform4f(PositionLocation13, lightPosition13.x, lightPosition13.y, lightPosition13.z, 1.0f);
+    //glUniform4f(PositionLocation, 0.f, 0.f, 0.f, 1.0f);
+    glUniform4f(DiffuseLocation13, 70.f, 50.f, 1.f, 1.f);
+    glUniform4f(SpecularLocation13, 1.f, 1.f, 1.f, 1.f);
+    glUniform4f(AttenLocation13, x, y, z, 1.f);
+    glUniform4f(DirectionLocation13, 1.f, 1.f, 1.f, 1.f);
+    glUniform4f(Param1Location13, 0.f, 0.f, 0.f, 1.f); //x = Light Type
+    glUniform4f(Param2Location13, 1.f, 0.f, 0.f, 1.f); //x = Light on/off
+    
+    GLint PositionLocation14 = glGetUniformLocation(shaderID, "sLightsArray[14].position");
+    GLint DiffuseLocation14 = glGetUniformLocation(shaderID, "sLightsArray[14].diffuse");
+    GLint SpecularLocation14 = glGetUniformLocation(shaderID, "sLightsArray[14].specular");
+    GLint AttenLocation14 = glGetUniformLocation(shaderID, "sLightsArray[14].atten");
+    GLint DirectionLocation14 = glGetUniformLocation(shaderID, "sLightsArray[14].direction");
+    GLint Param1Location14 = glGetUniformLocation(shaderID, "sLightsArray[14].param1");
+    GLint Param2Location14 = glGetUniformLocation(shaderID, "sLightsArray[14].param2");
+
+    glm::vec3 lightPosition14 = meshArray[279]->position;
+    glUniform4f(PositionLocation14, lightPosition14.x, lightPosition14.y, lightPosition14.z, 1.0f);
+    //glUniform4f(PositionLocation, 0.f, 0.f, 0.f, 1.0f);
+    glUniform4f(DiffuseLocation14, 70.f, 50.f, 1.f, 1.f);
+    glUniform4f(SpecularLocation14, 1.f, 1.f, 1.f, 1.f);
+    glUniform4f(AttenLocation14, x, y, z, 1.f);
+    glUniform4f(DirectionLocation14, 1.f, 1.f, 1.f, 1.f);
+    glUniform4f(Param1Location14, 0.f, 0.f, 0.f, 1.f); //x = Light Type
+    glUniform4f(Param2Location14, 1.f, 0.f, 0.f, 1.f); //x = Light on/off
+
+    GLint PositionLocation15 = glGetUniformLocation(shaderID, "sLightsArray[15].position");
+    GLint DiffuseLocation15 = glGetUniformLocation(shaderID, "sLightsArray[15].diffuse");
+    GLint SpecularLocation15 = glGetUniformLocation(shaderID, "sLightsArray[15].specular");
+    GLint AttenLocation15 = glGetUniformLocation(shaderID, "sLightsArray[15].atten");
+    GLint DirectionLocation15 = glGetUniformLocation(shaderID, "sLightsArray[15].direction");
+    GLint Param1Location15 = glGetUniformLocation(shaderID, "sLightsArray[15].param1");
+    GLint Param2Location15 = glGetUniformLocation(shaderID, "sLightsArray[15].param2");
+
+    glm::vec3 lightPosition15 = meshArray[280]->position;
+    glUniform4f(PositionLocation15, lightPosition15.x, lightPosition15.y, lightPosition15.z, 1.0f);
+    //glUniform4f(PositionLocation, 0.f, 0.f, 0.f, 1.0f);
+    glUniform4f(DiffuseLocation15, 70.f, 50.f, 1.f, 1.f);
+    glUniform4f(SpecularLocation15, 1.f, 1.f, 1.f, 1.f);
+    glUniform4f(AttenLocation15, x, y, z, 1.f);
+    glUniform4f(DirectionLocation15, 1.f, 1.f, 1.f, 1.f);
+    glUniform4f(Param1Location15, 0.f, 0.f, 0.f, 1.f); //x = Light Type
+    glUniform4f(Param2Location15, 1.f, 0.f, 0.f, 1.f); //x = Light on/off
+
+    GLint PositionLocation16 = glGetUniformLocation(shaderID, "sLightsArray[16].position");
+    GLint DiffuseLocation16 = glGetUniformLocation(shaderID, "sLightsArray[16].diffuse");
+    GLint SpecularLocation16 = glGetUniformLocation(shaderID, "sLightsArray[16].specular");
+    GLint AttenLocation16 = glGetUniformLocation(shaderID, "sLightsArray[16].atten");
+    GLint DirectionLocation16 = glGetUniformLocation(shaderID, "sLightsArray[16].direction");
+    GLint Param1Location16 = glGetUniformLocation(shaderID, "sLightsArray[16].param1");
+    GLint Param2Location16 = glGetUniformLocation(shaderID, "sLightsArray[16].param2");
+
+    glm::vec3 lightPosition16 = meshArray[281]->position;
+    glUniform4f(PositionLocation16, lightPosition16.x, lightPosition16.y, lightPosition16.z, 1.0f);
+    //glUniform4f(PositionLocation, 0.f, 0.f, 0.f, 1.0f);
+    glUniform4f(DiffuseLocation16, 70.f, 50.f, 1.f, 1.f);
+    glUniform4f(SpecularLocation16, 1.f, 1.f, 1.f, 1.f);
+    glUniform4f(AttenLocation16, x, y, z, 1.f);
+    glUniform4f(DirectionLocation16, 1.f, 1.f, 1.f, 1.f);
+    glUniform4f(Param1Location16, 0.f, 0.f, 0.f, 1.f); //x = Light Type
+    glUniform4f(Param2Location16, 1.f, 0.f, 0.f, 1.f); //x = Light on/off
+
+    GLint PositionLocation17 = glGetUniformLocation(shaderID, "sLightsArray[17].position");
+    GLint DiffuseLocation17 = glGetUniformLocation(shaderID, "sLightsArray[17].diffuse");
+    GLint SpecularLocation17 = glGetUniformLocation(shaderID, "sLightsArray[17].specular");
+    GLint AttenLocation17 = glGetUniformLocation(shaderID, "sLightsArray[17].atten");
+    GLint DirectionLocation17 = glGetUniformLocation(shaderID, "sLightsArray[17].direction");
+    GLint Param1Location17 = glGetUniformLocation(shaderID, "sLightsArray[17].param1");
+    GLint Param2Location17 = glGetUniformLocation(shaderID, "sLightsArray[17].param2");
+
+    glm::vec3 lightPosition17 = meshArray[282]->position;
+    glUniform4f(PositionLocation17, lightPosition17.x, lightPosition17.y, lightPosition17.z, 1.0f);
+    //glUniform4f(PositionLocation, 0.f, 0.f, 0.f, 1.0f);
+    glUniform4f(DiffuseLocation17, 70.f, 50.f, 1.f, 1.f);
+    glUniform4f(SpecularLocation17, 1.f, 1.f, 1.f, 1.f);
+    glUniform4f(AttenLocation17, x, y, z, 1.f);
+    glUniform4f(DirectionLocation17, 1.f, 1.f, 1.f, 1.f);
+    glUniform4f(Param1Location17, 0.f, 0.f, 0.f, 1.f); //x = Light Type
+    glUniform4f(Param2Location17, 1.f, 0.f, 0.f, 1.f); //x = Light on/off
+
+    GLint PositionLocation18 = glGetUniformLocation(shaderID, "sLightsArray[18].position");
+    GLint DiffuseLocation18 = glGetUniformLocation(shaderID, "sLightsArray[18].diffuse");
+    GLint SpecularLocation18 = glGetUniformLocation(shaderID, "sLightsArray[18].specular");
+    GLint AttenLocation18 = glGetUniformLocation(shaderID, "sLightsArray[18].atten");
+    GLint DirectionLocation18 = glGetUniformLocation(shaderID, "sLightsArray[18].direction");
+    GLint Param1Location18 = glGetUniformLocation(shaderID, "sLightsArray[18].param1");
+    GLint Param2Location18 = glGetUniformLocation(shaderID, "sLightsArray[18].param2");
+
+    glm::vec3 lightPosition18 = meshArray[283]->position;
+    glUniform4f(PositionLocation18, lightPosition18.x, lightPosition18.y, lightPosition18.z, 1.0f);
+    //glUniform4f(PositionLocation, 0.f, 0.f, 0.f, 1.0f);
+    glUniform4f(DiffuseLocation18, 70.f, 50.f, 1.f, 1.f);
+    glUniform4f(SpecularLocation18, 1.f, 1.f, 1.f, 1.f);
+    glUniform4f(AttenLocation18, x, y, z, 1.f);
+    glUniform4f(DirectionLocation18, 1.f, 1.f, 1.f, 1.f);
+    glUniform4f(Param1Location18, 0.f, 0.f, 0.f, 1.f); //x = Light Type
+    glUniform4f(Param2Location18, 1.f, 0.f, 0.f, 1.f); //x = Light on/off
+
+    GLint PositionLocation19 = glGetUniformLocation(shaderID, "sLightsArray[19].position");
+    GLint DiffuseLocation19 = glGetUniformLocation(shaderID, "sLightsArray[19].diffuse");
+    GLint SpecularLocation19 = glGetUniformLocation(shaderID, "sLightsArray[19].specular");
+    GLint AttenLocation19 = glGetUniformLocation(shaderID, "sLightsArray[19].atten");
+    GLint DirectionLocation19 = glGetUniformLocation(shaderID, "sLightsArray[19].direction");
+    GLint Param1Location19 = glGetUniformLocation(shaderID, "sLightsArray[19].param1");
+    GLint Param2Location19 = glGetUniformLocation(shaderID, "sLightsArray[19].param2");
+
+    glm::vec3 lightPosition19 = meshArray[284]->position;
+    glUniform4f(PositionLocation19, lightPosition19.x, lightPosition19.y, lightPosition19.z, 1.0f);
+    //glUniform4f(PositionLocation, 0.f, 0.f, 0.f, 1.0f);
+    glUniform4f(DiffuseLocation19, 70.f, 50.f, 1.f, 1.f);
+    glUniform4f(SpecularLocation19, 1.f, 1.f, 1.f, 1.f);
+    glUniform4f(AttenLocation19, x, y, z, 1.f);
+    glUniform4f(DirectionLocation19, 1.f, 1.f, 1.f, 1.f);
+    glUniform4f(Param1Location19, 0.f, 0.f, 0.f, 1.f); //x = Light Type
+    glUniform4f(Param2Location19, 1.f, 0.f, 0.f, 1.f); //x = Light on/off
+
+    GLint PositionLocation20 = glGetUniformLocation(shaderID, "sLightsArray[20].position");
+    GLint DiffuseLocation20 = glGetUniformLocation(shaderID, "sLightsArray[20].diffuse");
+    GLint SpecularLocation20 = glGetUniformLocation(shaderID, "sLightsArray[20].specular");
+    GLint AttenLocation20 = glGetUniformLocation(shaderID, "sLightsArray[20].atten");
+    GLint DirectionLocation20 = glGetUniformLocation(shaderID, "sLightsArray[20].direction");
+    GLint Param1Location20 = glGetUniformLocation(shaderID, "sLightsArray[20].param1");
+    GLint Param2Location20 = glGetUniformLocation(shaderID, "sLightsArray[20].param2");
+
+    glm::vec3 lightPosition20 = meshArray[285]->position;
+    glUniform4f(PositionLocation20, lightPosition20.x, lightPosition20.y, lightPosition20.z, 1.0f);
+    //glUniform4f(PositionLocation, 0.f, 0.f, 0.f, 1.0f);
+    glUniform4f(DiffuseLocation20, 70.f, 50.f, 1.f, 1.f);
+    glUniform4f(SpecularLocation20, 1.f, 1.f, 1.f, 1.f);
+    glUniform4f(AttenLocation20, x, y, z, 1.f);
+    glUniform4f(DirectionLocation20, 1.f, 1.f, 1.f, 1.f);
+    glUniform4f(Param1Location20, 0.f, 0.f, 0.f, 1.f); //x = Light Type
+    glUniform4f(Param2Location20, 1.f, 0.f, 0.f, 1.f); //x = Light on/off
+
 }
 
 //read scene description files

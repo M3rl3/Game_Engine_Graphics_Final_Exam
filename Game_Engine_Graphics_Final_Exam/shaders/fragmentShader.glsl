@@ -63,7 +63,7 @@ const int PointLight = 0;
 const int SpotLight = 1;
 const int DirectionalLight = 2;
 
-const int NUMBEROFLIGHTS = 13;
+const int NUMBEROFLIGHTS = 21;
 uniform sLight sLightsArray[NUMBEROFLIGHTS];
 
 vec4 calculateLightContrib( vec3 vertexMaterialColour, vec3 vertexNormal, 
@@ -119,10 +119,10 @@ void main()
 		vec3 textColour3 = texture( texture3, uv2.st ).rgb;
 		
 		
-//		matColour = (textColour0.rgb * texRatio_0_3.x) 
-//				  + (textColour1.rgb * texRatio_0_3.y) 
-//				  + (textColour2.rgb * texRatio_0_3.z) 
-//				  + (textColour3.rgb * texRatio_0_3.w);
+		matColour = (textColour0.rgb * texRatio_0_3.x) 
+				  + (textColour1.rgb * texRatio_0_3.y) 
+				  + (textColour2.rgb * texRatio_0_3.z) 
+				  + (textColour3.rgb * texRatio_0_3.w);
 
 //		matColour.rg = uv2.st;
 //
@@ -130,10 +130,10 @@ void main()
 		
 		// setting the output color to the uv coordinates
 
-		matColour = textColour0;
-		outputColor.rg = uv2.st;
-		outputColor.b = 0.f;
-		return;
+//		matColour = textColour1;
+//		outputColor.rg = uv2.st;
+//		outputColor.b = 0.f;
+//		return;
 		
 	}
 

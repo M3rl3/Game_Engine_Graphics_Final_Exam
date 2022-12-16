@@ -56,6 +56,7 @@ public:
 	void SetRotationFromEuler(glm::vec3 newEulerAngleXYZ);
 	void AdjustRoationAngleFromEuler(glm::vec3 EulerAngleXYZ_Adjust);
 	void SetUniformScale(float newScale);
+	void SetTextureRatiosAcrossTheBoard(float newTextureRatio);
 
 	void CopyVertices(sModelDrawInfo model);
 	void CopyIndices(sModelDrawInfo model);

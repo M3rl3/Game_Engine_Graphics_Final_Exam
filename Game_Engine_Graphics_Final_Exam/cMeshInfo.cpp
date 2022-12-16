@@ -17,6 +17,7 @@ cMeshInfo::cMeshInfo() {
 	this->isSkyBoxMesh = false;
 	this->min = glm::vec3(FLT_MAX, FLT_MAX, FLT_MAX);
 	this->max = glm::vec3(FLT_MIN, FLT_MIN, FLT_MIN);
+	this->SetTextureRatiosAcrossTheBoard(1.f);
 }
 
 cMeshInfo::~cMeshInfo() {
@@ -43,6 +44,13 @@ void cMeshInfo::AdjustRoationAngleFromEuler(glm::vec3 EulerAngleXYZ_Adjust)
 void cMeshInfo::SetUniformScale(float newScale)
 {
 	this->scale = glm::vec3(newScale, newScale, newScale);
+}
+
+void cMeshInfo::SetTextureRatiosAcrossTheBoard(float newTextureRatio)
+{
+	for (int i = 0; i < 8; i++) {
+		this->textureRatios[i] = newTextureRatio;
+	}
 }
 
 // Make a copy of the vertices from the model file

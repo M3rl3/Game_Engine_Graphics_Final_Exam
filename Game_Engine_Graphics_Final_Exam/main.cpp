@@ -165,6 +165,7 @@ static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, i
     }
     if (key == GLFW_KEY_F6 && action == GLFW_PRESS) {
         theEditMode = SPECTATE;
+        counter++;
     }
 
     switch (theEditMode)
@@ -1088,12 +1089,12 @@ void Update() {
         }*/
 
         if (theEditMode == SPECTATE) {
-            f_count++;
+           /* f_count++;
             
             if (f_count > 100000) {
                 counter++;
                 f_count = 0;
-            }
+            }*/
             if (counter > 2) {
                 counter = 0;
             }

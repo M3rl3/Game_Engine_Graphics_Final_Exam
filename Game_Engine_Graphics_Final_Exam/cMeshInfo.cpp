@@ -15,6 +15,7 @@ cMeshInfo::cMeshInfo() {
 	this->isTerrainMesh = false;
 	this->hasTexture = false;
 	this->isSkyBoxMesh = false;
+	this->hasChildMeshes = false;
 	this->min = glm::vec3(FLT_MAX, FLT_MAX, FLT_MAX);
 	this->max = glm::vec3(FLT_MIN, FLT_MIN, FLT_MIN);
 	this->SetTextureRatiosAcrossTheBoard(1.f);

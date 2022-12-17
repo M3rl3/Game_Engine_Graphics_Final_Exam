@@ -37,6 +37,7 @@ public:
 	bool doNotLight;
 	bool isTerrainMesh;
 	bool isSkyBoxMesh;
+	bool hasChildMeshes;
 
 	int nTriangles;
 	int nIndices;
@@ -61,4 +62,5 @@ public:
 	void CopyVertices(sModelDrawInfo model);
 	void CopyIndices(sModelDrawInfo model);
 
+	std::vector <cMeshInfo*> vecChildMeshes;
 };

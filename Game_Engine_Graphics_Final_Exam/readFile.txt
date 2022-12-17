@@ -16,3 +16,5 @@
 ../assets/meshes/SM_Env_Dwarf_Wall_Archway_01.ply
 ../assets/meshes/SM_Prop_Dwarf_Torch_01.ply
 ../assets/meshes/SM_Prop_Dwarf_Torch_02.ply
+../assets/meshes/sphere.ply
+../assets/meshes/vision_cone.ply

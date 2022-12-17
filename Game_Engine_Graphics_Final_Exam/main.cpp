@@ -46,6 +46,7 @@ int mouse_hover = 0;
 float x, y, z, l = 1.f;
 float speed = 0.f;
 double seconds = 0.0;
+int f_count = 0;
 
 bool wireFrame = false;
 bool doOnce = true;
@@ -53,7 +54,7 @@ bool mouseClick = false;
 
 std::vector <std::string> meshFiles;
 std::vector <cMeshInfo*> meshArray;
-std::vector <cMeshInfo*> teleport;
+std::vector <cMeshInfo*> waypoints;
 
 void ReadFromFile();
 void ReadSceneDescription();
@@ -560,16 +561,16 @@ void Render() {
     
     sModelDrawInfo beholder_obj;
     LoadModel(meshFiles[9], beholder_obj);
-    if (!VAOMan->LoadModelIntoVAO("beholder", beholder_obj, shaderID)) {
+    if (!VAOMan->LoadModelIntoVAO("beholderr", beholder_obj, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    cMeshInfo* beholder_mesh = new cMeshInfo();
-    beholder_mesh->meshName = "beholder";
-    beholder_mesh->friendlyName = "beholder";
-    beholder_mesh->isWireframe = wireFrame;
-    beholder_mesh->RGBAColour = glm::vec4(34.5f, 34.5f, 34.5f, 1.f);
-    beholder_mesh->useRGBAColour = true;
-    meshArray.push_back(beholder_mesh);
+    cMeshInfo* flat_beholder_mesh = new cMeshInfo();
+    flat_beholder_mesh->meshName = "beholderr";
+    flat_beholder_mesh->friendlyName = "flat_beholder_mesh";
+    flat_beholder_mesh->isWireframe = wireFrame;
+    flat_beholder_mesh->RGBAColour = glm::vec4(34.5f, 34.5f, 34.5f, 1.f);
+    flat_beholder_mesh->useRGBAColour = true;
+    meshArray.push_back(flat_beholder_mesh);
     
     sModelDrawInfo terrain_obj;
     LoadModel(meshFiles[10], terrain_obj);
@@ -644,53 +645,125 @@ void Render() {
     // Dungeon Models Loaded here
     LoadDungeonFloorPlan();
 
-    cMeshInfo* bulb_mesh13 = new cMeshInfo();
-    bulb_mesh13->meshName = "bulb";
-    bulb_mesh13->friendlyName = "bulb13";
-    bulb_mesh13->isWireframe = wireFrame;
-    meshArray.push_back(bulb_mesh13);
+    //Beholder0
+    if (!VAOMan->LoadModelIntoVAO("beholder", beholder_obj, shaderID)) {
+        std::cerr << "Could not load model into VAO" << std::endl;
+    }
+    cMeshInfo* beholder_mesh = new cMeshInfo();
+    beholder_mesh->meshName = "beholder";
+    beholder_mesh->friendlyName = "beholder0";
+    beholder_mesh->isWireframe = wireFrame;
+    beholder_mesh->RGBAColour = glm::vec4(34.5f, 34.5f, 34.5f, 1.f);
+    beholder_mesh->useRGBAColour = false;
+    beholder_mesh->hasChildMeshes = true;
+    meshArray.push_back(beholder_mesh);
 
-    cMeshInfo* bulb_mesh14 = new cMeshInfo();
-    bulb_mesh14->meshName = "bulb";
-    bulb_mesh14->friendlyName = "bulb14";
-    bulb_mesh14->isWireframe = wireFrame;
-    meshArray.push_back(bulb_mesh14);
+    sModelDrawInfo vision_cone;
+    LoadModel(meshFiles[19], vision_cone);
+    if (!VAOMan->LoadModelIntoVAO("vision_cone", vision_cone, shaderID)) {
+        std::cerr << "Could not load model into VAO" << std::endl;
+    }
+    cMeshInfo* beholder0_cone = new cMeshInfo();
+    beholder0_cone->meshName = "vision_cone";
+    beholder0_cone->friendlyName = "beholder0_cone";
+    beholder_mesh->vecChildMeshes.push_back(beholder0_cone);
 
-    cMeshInfo* bulb_mesh15 = new cMeshInfo();
-    bulb_mesh15->meshName = "bulb";
-    bulb_mesh15->friendlyName = "bulb15";
-    bulb_mesh15->isWireframe = wireFrame;
-    meshArray.push_back(bulb_mesh15);
+    //Beholder1
+    cMeshInfo* beholder_mesh1 = new cMeshInfo();
+    beholder_mesh1->meshName = "beholder";
+    beholder_mesh1->friendlyName = "beholder1";
+    beholder_mesh1->isWireframe = wireFrame;
+    beholder_mesh1->RGBAColour = glm::vec4(34.5f, 34.5f, 34.5f, 1.f);
+    beholder_mesh1->useRGBAColour = false;
+    beholder_mesh1->hasChildMeshes = true;
+    meshArray.push_back(beholder_mesh1);
 
-    cMeshInfo* bulb_mesh16 = new cMeshInfo();
-    bulb_mesh16->meshName = "bulb";
-    bulb_mesh16->friendlyName = "bulb16";
-    bulb_mesh16->isWireframe = wireFrame;
-    meshArray.push_back(bulb_mesh16);
+    cMeshInfo* beholder1_cone = new cMeshInfo();
+    beholder1_cone->meshName = "vision_cone";
+    beholder1_cone->friendlyName = "beholder1_cone";
+    beholder_mesh1->vecChildMeshes.push_back(beholder1_cone);
 
-    cMeshInfo* bulb_mesh17 = new cMeshInfo();
-    bulb_mesh17->meshName = "bulb";
-    bulb_mesh17->friendlyName = "bulb17";
-    bulb_mesh17->isWireframe = wireFrame;
-    meshArray.push_back(bulb_mesh17);
+    //Beholder2
+    cMeshInfo* beholder_mesh2 = new cMeshInfo();
+    beholder_mesh2->meshName = "beholder";
+    beholder_mesh2->friendlyName = "beholder2";
+    beholder_mesh2->isWireframe = wireFrame;
+    beholder_mesh2->RGBAColour = glm::vec4(34.5f, 34.5f, 34.5f, 1.f);
+    beholder_mesh2->useRGBAColour = false;
+    beholder_mesh2->hasChildMeshes = true;
+    meshArray.push_back(beholder_mesh2);
 
-    cMeshInfo* bulb_mesh18 = new cMeshInfo();
-    bulb_mesh18->meshName = "bulb";
-    bulb_mesh18->friendlyName = "bulb18";
-    bulb_mesh18->isWireframe = wireFrame;
-    meshArray.push_back(bulb_mesh18);
+    cMeshInfo* beholder2_cone = new cMeshInfo();
+    beholder2_cone->meshName = "vision_cone";
+    beholder2_cone->friendlyName = "beholder2_cone";
+    beholder_mesh2->vecChildMeshes.push_back(beholder2_cone);
 
-    cMeshInfo* bulb_mesh19 = new cMeshInfo();
-    bulb_mesh19->meshName = "bulb";
-    bulb_mesh19->friendlyName = "bulb19";
-    bulb_mesh19->isWireframe = wireFrame;
-    meshArray.push_back(bulb_mesh19);
+    //Waypoints
+    sModelDrawInfo waypoint_sphere;
+    LoadModel(meshFiles[18], waypoint_sphere);
+    if (!VAOMan->LoadModelIntoVAO("waypoint_sphere", waypoint_sphere, shaderID)) {
+        std::cerr << "Could not load model into VAO" << std::endl;
+    }
+    cMeshInfo* waypoint_sphere0 = new cMeshInfo();
+    waypoint_sphere0->meshName = "waypoint_sphere";
+    waypoint_sphere0->friendlyName = "waypoint0";
+    meshArray.push_back(waypoint_sphere0);
 
-    cMeshInfo* bulb_mesh20 = new cMeshInfo();
-    bulb_mesh20->meshName = "bulb";
-    bulb_mesh20->friendlyName = "bulb20";
-    bulb_mesh20->isWireframe = wireFrame;
-    meshArray.push_back(bulb_mesh20);
+    cMeshInfo* waypoint_sphere1 = new cMeshInfo();
+    waypoint_sphere1->meshName = "waypoint_sphere";
+    waypoint_sphere1->friendlyName = "waypoint1";
+    meshArray.push_back(waypoint_sphere1);
+    
+    cMeshInfo* waypoint_sphere2 = new cMeshInfo();
+    waypoint_sphere2->meshName = "waypoint_sphere";
+    waypoint_sphere2->friendlyName = "waypoint2";
+    meshArray.push_back(waypoint_sphere2);
+
+    cMeshInfo* waypoint_sphere3 = new cMeshInfo();
+    waypoint_sphere3->meshName = "waypoint_sphere";
+    waypoint_sphere3->friendlyName = "waypoint3";
+    meshArray.push_back(waypoint_sphere3);
+
+    cMeshInfo* waypoint_sphere4 = new cMeshInfo();
+    waypoint_sphere4->meshName = "waypoint_sphere";
+    waypoint_sphere4->friendlyName = "waypoint4";
+    meshArray.push_back(waypoint_sphere4);
+
+    cMeshInfo* waypoint_sphere5 = new cMeshInfo();
+    waypoint_sphere5->meshName = "waypoint_sphere";
+    waypoint_sphere5->friendlyName = "waypoint5";
+    meshArray.push_back(waypoint_sphere5);
+
+    cMeshInfo* waypoint_sphere6 = new cMeshInfo();
+    waypoint_sphere6->meshName = "waypoint_sphere";
+    waypoint_sphere6->friendlyName = "waypoint6";
+    meshArray.push_back(waypoint_sphere6);
+
+    cMeshInfo* waypoint_sphere7 = new cMeshInfo();
+    waypoint_sphere7->meshName = "waypoint_sphere";
+    waypoint_sphere7->friendlyName = "waypoint7";
+    meshArray.push_back(waypoint_sphere7);
+
+    cMeshInfo* waypoint_sphere8 = new cMeshInfo();
+    waypoint_sphere8->meshName = "waypoint_sphere";
+    waypoint_sphere8->friendlyName = "waypoint8";
+    meshArray.push_back(waypoint_sphere8);
+
+    cMeshInfo* waypoint_sphere9 = new cMeshInfo();
+    waypoint_sphere9->meshName = "waypoint_sphere";
+    waypoint_sphere9->friendlyName = "waypoint9";
+    meshArray.push_back(waypoint_sphere9);
+
+    cMeshInfo* waypoint_sphere10 = new cMeshInfo();
+    waypoint_sphere10->meshName = "waypoint_sphere";
+    waypoint_sphere10->friendlyName = "waypoint10";
+    meshArray.push_back(waypoint_sphere10);
+
+    cMeshInfo* waypoint_sphere11 = new cMeshInfo();
+    waypoint_sphere11->meshName = "waypoint_sphere";
+    waypoint_sphere11->friendlyName = "waypoint11";
+    meshArray.push_back(waypoint_sphere11);
+
     
     // Setting textures here
     for (int i = 0; i < meshArray.size(); i++) {
@@ -753,6 +826,24 @@ void Render() {
 
     // reads scene descripion files for positioning and other info
     ReadSceneDescription();
+
+    waypoints.push_back(waypoint_sphere0);
+    waypoints.push_back(waypoint_sphere1);
+    waypoints.push_back(waypoint_sphere2);
+    waypoints.push_back(waypoint_sphere3);
+    waypoints.push_back(waypoint_sphere4);
+    waypoints.push_back(waypoint_sphere5);
+    waypoints.push_back(waypoint_sphere6);
+    waypoints.push_back(waypoint_sphere7);
+    waypoints.push_back(waypoint_sphere8);
+    waypoints.push_back(waypoint_sphere9);
+    waypoints.push_back(waypoint_sphere10);
+    waypoints.push_back(waypoint_sphere11);
+
+    for (int i = 0; i < waypoints.size(); i++) {
+        cMeshInfo* currentWaypoint = waypoints[i];
+        currentWaypoint->isVisible = false;
+    }
 
     // initialize the particle to player position
     player_mesh->particle = partAcc.InitParticle(player_mesh->position);
@@ -824,9 +915,8 @@ void Update() {
         if (currentMesh->isSkyBoxMesh) {
             model = glm::mat4x4(1.f);
         }
-
         // just flatten a beholder for no reason
-        if (currentMesh->meshName == "beholder") {
+        if (currentMesh->meshName == "beholderr") {
             glm::mat4 rotation = glm::mat4(currentMesh->rotation);
 
             model *= translationMatrix;
@@ -964,6 +1054,103 @@ void Update() {
             elapsed_frames = 0;
         }*/
 
+        if (currentMesh->meshName == "beholder") {
+
+            if (currentMesh->friendlyName == "beholder2") {
+                if (currentMesh->position.x == waypoints[0]->position.x && 
+                    currentMesh->position.z == waypoints[0]->position.z) 
+                {
+                    currentMesh->target = waypoints[1]->position - currentMesh->position;
+                    currentMesh->rotation.y = 0.f;
+                }
+                if (currentMesh->position.x == waypoints[1]->position.x &&
+                    currentMesh->position.z == waypoints[1]->position.z) 
+                {
+                    currentMesh->target = waypoints[2]->position - currentMesh->position;
+                    currentMesh->rotation.y = 67.55f;
+                }
+                if (currentMesh->position.x == waypoints[2]->position.x &&
+                    currentMesh->position.z == waypoints[2]->position.z) 
+                {
+                    currentMesh->target = waypoints[3]->position - currentMesh->position;
+                    currentMesh->rotation.y = -135.10f;
+                }
+                if (currentMesh->position.x == waypoints[3]->position.x &&
+                    currentMesh->position.z == waypoints[3]->position.z) 
+                {
+                    currentMesh->target = waypoints[0]->position - currentMesh->position;
+                    currentMesh->rotation.y = -67.55f;
+                }
+                
+                currentMesh->target = glm::normalize(currentMesh->target);
+                currentMesh->velocity = currentMesh->target * 0.25f;
+                currentMesh->position += currentMesh->velocity;
+            }
+            
+            if (currentMesh->friendlyName == "beholder0") {
+                if (currentMesh->position.x == waypoints[4]->position.x && 
+                    currentMesh->position.z == waypoints[4]->position.z) 
+                {
+                    currentMesh->target = waypoints[5]->position - currentMesh->position;
+                    currentMesh->rotation.y = 0.f;
+                }
+                if (currentMesh->position.x == waypoints[5]->position.x &&
+                    currentMesh->position.z == waypoints[5]->position.z) 
+                {
+                    currentMesh->target = waypoints[6]->position - currentMesh->position;
+                    currentMesh->rotation.y = 67.55f;
+                }
+                if (currentMesh->position.x == waypoints[6]->position.x &&
+                    currentMesh->position.z == waypoints[6]->position.z) 
+                {
+                    currentMesh->target = waypoints[7]->position - currentMesh->position;
+                    currentMesh->rotation.y = -135.10f;
+                }
+                if (currentMesh->position.x == waypoints[7]->position.x &&
+                    currentMesh->position.z == waypoints[7]->position.z) 
+                {
+                    currentMesh->target = waypoints[4]->position - currentMesh->position;
+                    currentMesh->rotation.y = -67.55f;
+                }
+                
+                currentMesh->target = glm::normalize(currentMesh->target);
+                currentMesh->velocity = currentMesh->target * 0.25f;
+                currentMesh->position += currentMesh->velocity;
+            }
+
+            if (currentMesh->friendlyName == "beholder1") {
+                if (currentMesh->position.x == waypoints[8]->position.x && 
+                    currentMesh->position.z == waypoints[8]->position.z) 
+                {
+                    currentMesh->target = waypoints[9]->position - currentMesh->position;
+
+                    currentMesh->rotation.y = -67.55f;
+                }
+                if (currentMesh->position.x == waypoints[9]->position.x &&
+                    currentMesh->position.z == waypoints[9]->position.z) 
+                {
+                    currentMesh->target = waypoints[10]->position - currentMesh->position;
+                    currentMesh->rotation.y = 0.f;
+                }
+                if (currentMesh->position.x == waypoints[10]->position.x &&
+                    currentMesh->position.z == waypoints[10]->position.z) 
+                {
+                    currentMesh->target = waypoints[11]->position - currentMesh->position;
+                    currentMesh->rotation.y = 67.55f;
+                }
+                if (currentMesh->position.x == waypoints[11]->position.x &&
+                    currentMesh->position.z == waypoints[11]->position.z) 
+                {
+                    currentMesh->target = waypoints[8]->position - currentMesh->position;
+                    currentMesh->rotation.y = -135.10f;
+                }
+                
+                currentMesh->target = glm::normalize(currentMesh->target);
+                currentMesh->velocity = currentMesh->target * 0.25f;
+                currentMesh->position += currentMesh->velocity;
+            }   
+        }
+
         glm::vec3 cursorPos;
 
         // Division is expensive
@@ -1006,6 +1193,21 @@ void Update() {
         else {
             std::cout << "Model not found." << std::endl;
         }
+
+        if (currentMesh->hasChildMeshes) {
+
+            sModelDrawInfo modelInfo;
+            if (VAOMan->FindDrawInfoByModelName(currentMesh->vecChildMeshes[0]->meshName, modelInfo)) {
+
+                glBindVertexArray(modelInfo.VAO_ID);
+                glDrawElements(GL_TRIANGLES, modelInfo.numberOfIndices, GL_UNSIGNED_INT, (void*)0);
+                glBindVertexArray(0);
+            }
+            else {
+                std::cout << "Model not found." << std::endl;
+            }
+        }
+
 
         // Only draw bounding box around meshes with this boolean value set to true
         if (currentMesh->drawBBox) {
@@ -3927,6 +4129,53 @@ void LoadDungeonFloorPlan() {
     torch2_mesh11->textureRatios[0] = 1.0f;
     meshArray.push_back(torch2_mesh11);
 
+    cMeshInfo* bulb_mesh13 = new cMeshInfo();
+    bulb_mesh13->meshName = "bulb";
+    bulb_mesh13->friendlyName = "bulb13";
+    bulb_mesh13->isWireframe = wireFrame;
+    meshArray.push_back(bulb_mesh13);
+
+    cMeshInfo* bulb_mesh14 = new cMeshInfo();
+    bulb_mesh14->meshName = "bulb";
+    bulb_mesh14->friendlyName = "bulb14";
+    bulb_mesh14->isWireframe = wireFrame;
+    meshArray.push_back(bulb_mesh14);
+
+    cMeshInfo* bulb_mesh15 = new cMeshInfo();
+    bulb_mesh15->meshName = "bulb";
+    bulb_mesh15->friendlyName = "bulb15";
+    bulb_mesh15->isWireframe = wireFrame;
+    meshArray.push_back(bulb_mesh15);
+
+    cMeshInfo* bulb_mesh16 = new cMeshInfo();
+    bulb_mesh16->meshName = "bulb";
+    bulb_mesh16->friendlyName = "bulb16";
+    bulb_mesh16->isWireframe = wireFrame;
+    meshArray.push_back(bulb_mesh16);
+
+    cMeshInfo* bulb_mesh17 = new cMeshInfo();
+    bulb_mesh17->meshName = "bulb";
+    bulb_mesh17->friendlyName = "bulb17";
+    bulb_mesh17->isWireframe = wireFrame;
+    meshArray.push_back(bulb_mesh17);
+
+    cMeshInfo* bulb_mesh18 = new cMeshInfo();
+    bulb_mesh18->meshName = "bulb";
+    bulb_mesh18->friendlyName = "bulb18";
+    bulb_mesh18->isWireframe = wireFrame;
+    meshArray.push_back(bulb_mesh18);
+
+    cMeshInfo* bulb_mesh19 = new cMeshInfo();
+    bulb_mesh19->meshName = "bulb";
+    bulb_mesh19->friendlyName = "bulb19";
+    bulb_mesh19->isWireframe = wireFrame;
+    meshArray.push_back(bulb_mesh19);
+
+    cMeshInfo* bulb_mesh20 = new cMeshInfo();
+    bulb_mesh20->meshName = "bulb";
+    bulb_mesh20->friendlyName = "bulb20";
+    bulb_mesh20->isWireframe = wireFrame;
+    meshArray.push_back(bulb_mesh20);
 }
 
 // All lights managed here

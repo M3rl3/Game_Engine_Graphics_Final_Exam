@@ -1,4 +1,4 @@
-287
+302
 
 long_highway 
 position -151.0 1.0 -465.0
@@ -1434,3 +1434,78 @@ bulb20
 position -202.0 15.0 -209.0
 rotation 0.0 67.55 0.0
 scale 0.5 0.5 0.5
+
+beholder0
+position -310.0 14.0 -300.0
+rotation 0.0 0.0 0.0
+scale 5.0 5.0 5.0
+
+beholder1
+position 10.0 14.0 -300.0
+rotation 0.0 0.0 0.0
+scale 5.0 5.0 5.0
+
+beholder2
+position -310.0 14.0 -175.0
+rotation 0.0 0.0 0.0
+scale 5.0 5.0 5.0
+
+waypoint0
+position -310.0 14.0 -175.0
+rotation 0.0 0.0 0.0
+scale 2.0 2.0 2.0
+
+waypoint1
+position -310.0 14.0 -245.0
+rotation 0.0 0.0 0.0
+scale 2.0 2.0 2.0
+
+waypoint2
+position -215.0 14.0 -245.0
+rotation 0.0 0.0 0.0
+scale 2.0 2.0 2.0
+
+waypoint3
+position -215.0 14.0 -175.0
+rotation 0.0 0.0 0.0
+scale 2.0 2.0 2.0
+
+waypoint4
+position -310.0 14.0 -300.0
+rotation 0.0 0.0 0.0
+scale 2.0 2.0 2.0
+
+waypoint5
+position -310.0 14.0 -345.0
+rotation 0.0 0.0 0.0
+scale 2.0 2.0 2.0
+
+waypoint6
+position -240.0 14.0 -345.0
+rotation 0.0 0.0 0.0
+scale 2.0 2.0 2.0
+
+waypoint7
+position -240.0 14.0 -300.0
+rotation 0.0 0.0 0.0
+scale 2.0 2.0 2.0
+
+waypoint8
+position 10.0 14.0 -300.0
+rotation 0.0 0.0 0.0
+scale 2.0 2.0 2.0
+
+waypoint9
+position -60.0 14.0 -300.0
+rotation 0.0 0.0 0.0
+scale 2.0 2.0 2.0
+
+waypoint10
+position -60.0 14.0 -350.0
+rotation 0.0 0.0 0.0
+scale 2.0 2.0 2.0
+
+waypoint11
+position 10.0 14.0 -350.0
+rotation 0.0 0.0 0.0
+scale 2.0 2.0 2.0

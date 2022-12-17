@@ -122,6 +122,9 @@
     <ClCompile Include="cMeshInfo.cpp">
       <Filter>Mesh Class</Filter>
     </ClCompile>
+    <ClCompile Include="cBasicTextureManager\cTextureManager.cpp">
+      <Filter>Texture Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cVAOManager\cVAOManager.h">
@@ -186,6 +189,9 @@
     </ClInclude>
     <ClInclude Include="cMeshInfo.h">
       <Filter>Mesh Class</Filter>
+    </ClInclude>
+    <ClInclude Include="cBasicTextureManager\cTextureManager.h">
+      <Filter>Texture Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

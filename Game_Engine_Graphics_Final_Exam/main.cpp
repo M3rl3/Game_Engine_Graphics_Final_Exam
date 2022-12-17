@@ -13,6 +13,7 @@
 #include "cShaderManager/cShaderManager.h"
 #include "cVAOManager/cVAOManager.h"
 #include "cBasicTextureManager/cBasicTextureManager.h"
+#include "cBasicTextureManager/cTextureManager.h"
 #include "cRenderReticle.h"
 
 #include <iostream>
@@ -28,6 +29,7 @@ GLuint shaderID = 0;
 
 cVAOManager* VAOMan;
 cBasicTextureManager* TextureMan;
+cTextureManager* man;
 ParticleAccelerator partAcc;
 cRenderReticle crosshair;
 
@@ -59,6 +61,8 @@ bool doOnce = true;
 bool enableMouse = false;
 bool mouseClick = false;
 bool spectating = false;
+bool yes = false;
+bool no = false;
 
 std::vector <std::string> meshFiles;
 std::vector <cMeshInfo*> meshArray;
@@ -78,7 +82,8 @@ enum eEditMode
     MOVING_LIGHT,
     MOVING_SELECTED_OBJECT,
     TAKE_CONTROL,
-    SPECTATE
+    SPECTATE,
+    FIGHTCLUB
 };
 
 glm::vec3 cameraEye; //loaded from external file
@@ -89,6 +94,7 @@ glm::vec3 cameraTarget = glm::vec3(0.f, 0.f, -1.f);
 eEditMode theEditMode = MOVING_CAMERA;
 
 glm::vec3 cameraDest = glm::vec3(0.f);
+glm::vec3 cameraVelocity = glm::vec3(0.f);
 
 float yaw = 0.f;
 float pitch = 0.f;
@@ -165,7 +171,11 @@ static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, i
     }
     if (key == GLFW_KEY_F6 && action == GLFW_PRESS) {
         theEditMode = SPECTATE;
+        yes = true;
         counter++;
+    }
+    if (key == GLFW_KEY_F7 && action == GLFW_PRESS) {
+        theEditMode = FIGHTCLUB;
     }
 
     switch (theEditMode)
@@ -783,6 +793,51 @@ void Render() {
     waypoint_sphere11->meshName = "waypoint_sphere";
     waypoint_sphere11->friendlyName = "waypoint11";
     meshArray.push_back(waypoint_sphere11);
+    
+    cMeshInfo* waypoint_sphere12 = new cMeshInfo();
+    waypoint_sphere12->meshName = "waypoint_sphere";
+    waypoint_sphere12->friendlyName = "waypoint12";
+    meshArray.push_back(waypoint_sphere12);
+
+    cMeshInfo* waypoint_sphere13 = new cMeshInfo();
+    waypoint_sphere13->meshName = "waypoint_sphere";
+    waypoint_sphere13->friendlyName = "waypoint13";
+    meshArray.push_back(waypoint_sphere13);
+
+    cMeshInfo* waypoint_sphere14 = new cMeshInfo();
+    waypoint_sphere14->meshName = "waypoint_sphere";
+    waypoint_sphere14->friendlyName = "waypoint14";
+    meshArray.push_back(waypoint_sphere14);
+    
+    cMeshInfo* waypoint_sphere15 = new cMeshInfo();
+    waypoint_sphere15->meshName = "waypoint_sphere";
+    waypoint_sphere15->friendlyName = "waypoint15";
+    meshArray.push_back(waypoint_sphere15);
+
+    cMeshInfo* waypoint_sphere16 = new cMeshInfo();
+    waypoint_sphere16->meshName = "waypoint_sphere";
+    waypoint_sphere16->friendlyName = "waypoint16";
+    meshArray.push_back(waypoint_sphere16);
+
+    cMeshInfo* waypoint_sphere17 = new cMeshInfo();
+    waypoint_sphere17->meshName = "waypoint_sphere";
+    waypoint_sphere17->friendlyName = "waypoint17";
+    meshArray.push_back(waypoint_sphere17);
+
+    cMeshInfo* waypoint_sphere18 = new cMeshInfo();
+    waypoint_sphere18->meshName = "waypoint_sphere";
+    waypoint_sphere18->friendlyName = "waypoint18";
+    meshArray.push_back(waypoint_sphere18);
+
+    cMeshInfo* waypoint_sphere19 = new cMeshInfo();
+    waypoint_sphere19->meshName = "waypoint_sphere";
+    waypoint_sphere19->friendlyName = "waypoint19";
+    meshArray.push_back(waypoint_sphere19);
+
+    cMeshInfo* waypoint_sphere20 = new cMeshInfo();
+    waypoint_sphere20->meshName = "waypoint_sphere";
+    waypoint_sphere20->friendlyName = "waypoint20";
+    meshArray.push_back(waypoint_sphere20);
 
     
     // Setting textures here
@@ -806,8 +861,11 @@ void Render() {
 
     std::string errorString = "";
     TextureMan = new cBasicTextureManager();
+    man = new cTextureManager();
 
     TextureMan->SetBasePath("../assets/textures");
+    man->setBasePath("../assets/textures");
+    
     const char* skybox_name = "NightSky";
     if (TextureMan->CreateCubeTextureFromBMPFiles("NightSky",
                                                   "SpaceBox_right1_posX.bmp",
@@ -816,7 +874,7 @@ void Render() {
                                                   "SpaceBox_bottom4_negY.bmp",
                                                   "SpaceBox_front5_posZ.bmp",
                                                   "SpaceBox_back6_negZ.bmp",
-                                                  true, errorString)) 
+                                                  true, errorString))
     {
         std::cout << "\nLoaded skybox textures: " << skybox_name << std::endl;
     }
@@ -826,7 +884,7 @@ void Render() {
     }
 
     // Basic texture2D
-    if (TextureMan->Create2DTextureFromBMPFile("moon_texture.bmp"))
+    if (man->create2DTextureFromBMP("moon_texture.bmp"))
     {
         std::cout << "Loaded moon texture." << std::endl;
     }
@@ -859,6 +917,9 @@ void Render() {
     waypoints.push_back(waypoint_sphere9);
     waypoints.push_back(waypoint_sphere10);
     waypoints.push_back(waypoint_sphere11);
+    waypoints.push_back(waypoint_sphere12);
+    waypoints.push_back(waypoint_sphere13);
+    waypoints.push_back(waypoint_sphere14);
 
     beholders.push_back(beholder_mesh);
     beholders.push_back(beholder_mesh1);
@@ -866,7 +927,7 @@ void Render() {
 
     for (int i = 0; i < waypoints.size(); i++) {
         cMeshInfo* currentWaypoint = waypoints[i];
-        currentWaypoint->isVisible = false;
+        currentWaypoint->isVisible = true;
     }
 
     // initialize the particle to player position
@@ -1023,7 +1084,8 @@ void Update() {
 
             if (texture0 == "moon_texture.bmp") {
                 
-                GLuint texture0ID = TextureMan->getTextureIDFromName(texture0);
+                //GLuint texture0ID = TextureMan->getTextureIDFromName(texture0);
+                GLuint texture0ID = man->getTexttureID(texture0);
 
                 GLuint texture0Unit = 0;
                 glActiveTexture(texture0Unit + GL_TEXTURE0);
@@ -1088,21 +1150,46 @@ void Update() {
             elapsed_frames = 0;
         }*/
 
+        // camera follows a beholder
         if (theEditMode == SPECTATE) {
-           /* f_count++;
-            
-            if (f_count > 100000) {
-                counter++;
-                f_count = 0;
-            }*/
+
             if (counter > 2) {
                 counter = 0;
             }
-            if (cameraTarget == beholders[counter]->position)
-            cameraEye = beholders[counter]->position - glm::vec3(100.f, -75.f, 0.f);
+            if (counter == 0 && yes == true) {
+                cameraDest = waypoints[13]->position - cameraEye;
+                yes == false;
+            }
+            if (counter == 1 && yes == true) {
+                cameraDest = waypoints[12]->position - cameraEye;
+                yes == false;
+            }
+            if (counter == 2 && yes == true) {
+                cameraDest = waypoints[14]->position - cameraEye;
+                yes == false;
+            }
+
+            cameraVelocity = glm::vec3(0.f);
             cameraTarget = beholders[counter]->position;
+            
+            if (glm::distance(cameraEye, waypoints[12]->position) < 5.f && counter == 1) {
+                cameraEye = waypoints[12]->position;
+            }
+            if (glm::distance(cameraEye, waypoints[13]->position) < 5.f && counter == 0) {
+                cameraEye = waypoints[13]->position;
+            }
+            if (glm::distance(cameraEye, waypoints[14]->position) < 5.f && counter == 2) {
+                cameraEye = waypoints[14]->position;
+            }
+
+            if (yes == true) {
+                cameraDest = glm::normalize(cameraDest);
+                cameraVelocity = cameraDest * 0.05f;
+                cameraEye += cameraVelocity;
+            }
         }
 
+        // Beholder patrol
         if (currentMesh->meshName == "beholder") {
 
             if (currentMesh->friendlyName == "beholder2") {

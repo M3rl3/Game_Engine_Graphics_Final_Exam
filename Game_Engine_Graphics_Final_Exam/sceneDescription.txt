@@ -1,4 +1,4 @@
-302
+305
 
 long_highway 
 position -151.0 1.0 -465.0
@@ -1507,5 +1507,20 @@ scale 2.0 2.0 2.0
 
 waypoint11
 position 10.0 14.0 -350.0
+rotation 0.0 0.0 0.0
+scale 2.0 2.0 2.0
+
+waypoint12
+position 55.0 75.0 -325.0
+rotation 0.0 0.0 0.0
+scale 2.0 2.0 2.0
+
+waypoint13
+position -355.0 75.0 -325.0
+rotation 0.0 0.0 0.0
+scale 2.0 2.0 2.0
+
+waypoint14
+position -360.0 75.0 -205.0
 rotation 0.0 0.0 0.0
 scale 2.0 2.0 2.0

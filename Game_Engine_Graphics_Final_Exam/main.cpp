@@ -39,6 +39,11 @@ cMeshInfo* player_mesh;
 cMeshInfo* cube_mesh;
 cMeshInfo* bulb_mesh;
 
+cMeshInfo* beholder_mesh;
+cMeshInfo* beholder_mesh1;
+cMeshInfo* beholder_mesh2;
+std::vector <cMeshInfo*> beholders;
+
 unsigned int readIndex = 0;
 int object_index = 0;
 int elapsed_frames = 0;
@@ -47,10 +52,13 @@ float x, y, z, l = 1.f;
 float speed = 0.f;
 double seconds = 0.0;
 int f_count = 0;
+int counter = 0;
 
 bool wireFrame = false;
 bool doOnce = true;
+bool enableMouse = false;
 bool mouseClick = false;
+bool spectating = false;
 
 std::vector <std::string> meshFiles;
 std::vector <cMeshInfo*> meshArray;
@@ -69,7 +77,8 @@ enum eEditMode
     MOVING_CAMERA,
     MOVING_LIGHT,
     MOVING_SELECTED_OBJECT,
-    TAKE_CONTROL
+    TAKE_CONTROL,
+    SPECTATE
 };
 
 glm::vec3 cameraEye; //loaded from external file
@@ -78,6 +87,8 @@ glm::vec3 cameraEye; //loaded from external file
 // now controlled by mouse!
 glm::vec3 cameraTarget = glm::vec3(0.f, 0.f, -1.f);
 eEditMode theEditMode = MOVING_CAMERA;
+
+glm::vec3 cameraDest = glm::vec3(0.f);
 
 float yaw = 0.f;
 float pitch = 0.f;
@@ -148,6 +159,12 @@ static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, i
     }
     if (key == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE) {
         mouseClick = false;
+    }
+    if (key == GLFW_KEY_F1 && action == GLFW_PRESS) {
+        enableMouse = !enableMouse;
+    }
+    if (key == GLFW_KEY_F6 && action == GLFW_PRESS) {
+        theEditMode = SPECTATE;
     }
 
     switch (theEditMode)
@@ -325,7 +342,9 @@ static void MouseCallBack(GLFWwindow* window, double xposition, double yposition
     front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
     front.y = sin(glm::radians(pitch));
     front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-    cameraTarget = glm::normalize(front);
+    if (enableMouse) {
+        cameraTarget = glm::normalize(front);
+    }
 }
 
 static void ScrollCallBack(GLFWwindow* window, double xoffset, double yoffset) {
@@ -649,7 +668,7 @@ void Render() {
     if (!VAOMan->LoadModelIntoVAO("beholder", beholder_obj, shaderID)) {
         std::cerr << "Could not load model into VAO" << std::endl;
     }
-    cMeshInfo* beholder_mesh = new cMeshInfo();
+    beholder_mesh = new cMeshInfo();
     beholder_mesh->meshName = "beholder";
     beholder_mesh->friendlyName = "beholder0";
     beholder_mesh->isWireframe = wireFrame;
@@ -669,7 +688,7 @@ void Render() {
     beholder_mesh->vecChildMeshes.push_back(beholder0_cone);
 
     //Beholder1
-    cMeshInfo* beholder_mesh1 = new cMeshInfo();
+    beholder_mesh1 = new cMeshInfo();
     beholder_mesh1->meshName = "beholder";
     beholder_mesh1->friendlyName = "beholder1";
     beholder_mesh1->isWireframe = wireFrame;
@@ -684,7 +703,7 @@ void Render() {
     beholder_mesh1->vecChildMeshes.push_back(beholder1_cone);
 
     //Beholder2
-    cMeshInfo* beholder_mesh2 = new cMeshInfo();
+    beholder_mesh2 = new cMeshInfo();
     beholder_mesh2->meshName = "beholder";
     beholder_mesh2->friendlyName = "beholder2";
     beholder_mesh2->isWireframe = wireFrame;
@@ -840,6 +859,10 @@ void Render() {
     waypoints.push_back(waypoint_sphere10);
     waypoints.push_back(waypoint_sphere11);
 
+    beholders.push_back(beholder_mesh);
+    beholders.push_back(beholder_mesh1);
+    beholders.push_back(beholder_mesh2);
+
     for (int i = 0; i < waypoints.size(); i++) {
         cMeshInfo* currentWaypoint = waypoints[i];
         currentWaypoint->isVisible = false;
@@ -874,14 +897,24 @@ void Update() {
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    view = glm::lookAt(cameraEye, cameraEye + cameraTarget, upVector);
-    //projection = glm::perspective(0.6f, ratio, 0.1f, 10000.f);
-    projection = glm::perspective(glm::radians(fov), ratio, 0.1f, 10000.f);
+    // mouse support
+    if (enableMouse) {
+        view = glm::lookAt(cameraEye, cameraEye + cameraTarget, upVector);
+        projection = glm::perspective(glm::radians(fov), ratio, 0.1f, 10000.f);
+    }
+    else {
+        view = glm::lookAt(cameraEye, cameraTarget, upVector);
+        projection = glm::perspective(0.6f, ratio, 0.1f, 10000.f);
+    }
 
     glm::vec4 viewport = glm::vec4(0, 0, width, height);
 
     GLint eyeLocationLocation = glGetUniformLocation(shaderID, "eyeLocation");
     glUniform4f(eyeLocationLocation, cameraEye.x, cameraEye.y, cameraEye.z, 1.f);
+
+    currentTime = glfwGetTime();
+    timeDiff = currentTime - beginTime;
+    frameCount++;
 
     if (theEditMode == TAKE_CONTROL) {
         cameraEye = player_mesh->position - glm::vec3(15.f, -4.f, 0.f);
@@ -988,7 +1021,7 @@ void Update() {
             std::string texture1 = currentMesh->textures[1];    // dungeon
 
             if (texture0 == "moon_texture.bmp") {
-                //printf("Texture to be binded on the shader %s", currentMesh->textures[0].c_str());
+                
                 GLuint texture0ID = TextureMan->getTextureIDFromName(texture0);
 
                 GLuint texture0Unit = 0;
@@ -1054,29 +1087,40 @@ void Update() {
             elapsed_frames = 0;
         }*/
 
+        if (theEditMode == SPECTATE) {
+            f_count++;
+            
+            if (f_count > 100000) {
+                counter++;
+                f_count = 0;
+            }
+            if (counter > 2) {
+                counter = 0;
+            }
+            if (cameraTarget == beholders[counter]->position)
+            cameraEye = beholders[counter]->position - glm::vec3(100.f, -75.f, 0.f);
+            cameraTarget = beholders[counter]->position;
+        }
+
         if (currentMesh->meshName == "beholder") {
 
             if (currentMesh->friendlyName == "beholder2") {
-                if (currentMesh->position.x == waypoints[0]->position.x && 
-                    currentMesh->position.z == waypoints[0]->position.z) 
+                if (currentMesh->position == waypoints[0]->position)
                 {
                     currentMesh->target = waypoints[1]->position - currentMesh->position;
                     currentMesh->rotation.y = 0.f;
                 }
-                if (currentMesh->position.x == waypoints[1]->position.x &&
-                    currentMesh->position.z == waypoints[1]->position.z) 
+                if (currentMesh->position == waypoints[1]->position)
                 {
                     currentMesh->target = waypoints[2]->position - currentMesh->position;
                     currentMesh->rotation.y = 67.55f;
                 }
-                if (currentMesh->position.x == waypoints[2]->position.x &&
-                    currentMesh->position.z == waypoints[2]->position.z) 
+                if (currentMesh->position == waypoints[2]->position)
                 {
                     currentMesh->target = waypoints[3]->position - currentMesh->position;
                     currentMesh->rotation.y = -135.10f;
                 }
-                if (currentMesh->position.x == waypoints[3]->position.x &&
-                    currentMesh->position.z == waypoints[3]->position.z) 
+                if (currentMesh->position == waypoints[3]->position)
                 {
                     currentMesh->target = waypoints[0]->position - currentMesh->position;
                     currentMesh->rotation.y = -67.55f;
@@ -1088,26 +1132,22 @@ void Update() {
             }
             
             if (currentMesh->friendlyName == "beholder0") {
-                if (currentMesh->position.x == waypoints[4]->position.x && 
-                    currentMesh->position.z == waypoints[4]->position.z) 
+                if (currentMesh->position == waypoints[4]->position)
                 {
                     currentMesh->target = waypoints[5]->position - currentMesh->position;
                     currentMesh->rotation.y = 0.f;
                 }
-                if (currentMesh->position.x == waypoints[5]->position.x &&
-                    currentMesh->position.z == waypoints[5]->position.z) 
+                if (currentMesh->position == waypoints[5]->position)
                 {
                     currentMesh->target = waypoints[6]->position - currentMesh->position;
                     currentMesh->rotation.y = 67.55f;
                 }
-                if (currentMesh->position.x == waypoints[6]->position.x &&
-                    currentMesh->position.z == waypoints[6]->position.z) 
+                if (currentMesh->position == waypoints[6]->position)
                 {
                     currentMesh->target = waypoints[7]->position - currentMesh->position;
                     currentMesh->rotation.y = -135.10f;
                 }
-                if (currentMesh->position.x == waypoints[7]->position.x &&
-                    currentMesh->position.z == waypoints[7]->position.z) 
+                if (currentMesh->position == waypoints[7]->position)
                 {
                     currentMesh->target = waypoints[4]->position - currentMesh->position;
                     currentMesh->rotation.y = -67.55f;
@@ -1119,27 +1159,23 @@ void Update() {
             }
 
             if (currentMesh->friendlyName == "beholder1") {
-                if (currentMesh->position.x == waypoints[8]->position.x && 
-                    currentMesh->position.z == waypoints[8]->position.z) 
+                if (currentMesh->position == waypoints[8]->position)
                 {
                     currentMesh->target = waypoints[9]->position - currentMesh->position;
 
                     currentMesh->rotation.y = -67.55f;
                 }
-                if (currentMesh->position.x == waypoints[9]->position.x &&
-                    currentMesh->position.z == waypoints[9]->position.z) 
+                if (currentMesh->position == waypoints[9]->position)
                 {
                     currentMesh->target = waypoints[10]->position - currentMesh->position;
                     currentMesh->rotation.y = 0.f;
                 }
-                if (currentMesh->position.x == waypoints[10]->position.x &&
-                    currentMesh->position.z == waypoints[10]->position.z) 
+                if (currentMesh->position == waypoints[10]->position)
                 {
                     currentMesh->target = waypoints[11]->position - currentMesh->position;
                     currentMesh->rotation.y = 67.55f;
                 }
-                if (currentMesh->position.x == waypoints[11]->position.x &&
-                    currentMesh->position.z == waypoints[11]->position.z) 
+                if (currentMesh->position == waypoints[11]->position)
                 {
                     currentMesh->target = waypoints[8]->position - currentMesh->position;
                     currentMesh->rotation.y = -135.10f;
@@ -1229,10 +1265,6 @@ void Update() {
 
     //const GLubyte* vendor = glad_glGetString(GL_VENDOR); // Returns the vendor
     const GLubyte* renderer = glad_glGetString(GL_RENDERER); // Returns a hint to the model
-
-    currentTime = glfwGetTime();
-    timeDiff = currentTime - beginTime;
-    frameCount++;
 
     if (timeDiff >= 1.f / 30.f) {
         std::string frameRate = std::to_string((1.f / timeDiff) * frameCount);

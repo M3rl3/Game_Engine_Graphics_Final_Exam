@@ -1299,6 +1299,7 @@ void Update() {
             }
         }
 
+        // The fight begins
         if (theEditMode == FIGHTCLUB) {
             if (doOnce) {
                 beholders[0]->target = waypoints[17]->position - beholders[0]->position;
@@ -1340,6 +1341,7 @@ void Update() {
                 }
             }  
         }
+        // The death scene
         if (no) {
             if (currentMesh->friendlyName == "beholder0") {
                 currentMesh->target = waypoints[18]->position - currentMesh->position;
@@ -1377,7 +1379,6 @@ void Update() {
 
                 if (currentMesh->position == waypoints[20]->position) {
                     currentMesh->target = waypoints[18]->position - currentMesh->position;
-                    
                 }
 
                 beholders[2]->position = waypoints[21]->position;

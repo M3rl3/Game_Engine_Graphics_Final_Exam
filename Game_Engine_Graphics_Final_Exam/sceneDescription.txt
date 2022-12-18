@@ -91,7 +91,7 @@ rotation 0.0 0.0 0.0
 scale 2.0 2.0 2.0
 
 player
-position -88.0 1.0 0.0
+position -180.0 370.0 400.0
 rotation 0.0 67.55 0.0
 scale 1.0 1.0 1.0
 
@@ -101,9 +101,9 @@ rotation 67.55 0.0 0.0
 scale 1.0 1.0 1.0
 
 moon
-position -180.0 25.0 0.0
+position -180.0 370.0 400.0
 rotation 0.0 0.0 0.0
-scale 10.0 10.0 10.0
+scale 20.0 20.0 20.0
 
 floor
 position 25.0 1.0 -160.0

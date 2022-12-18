@@ -49,7 +49,7 @@ std::vector <cMeshInfo*> beholders;
 unsigned int readIndex = 0;
 int object_index = 0;
 int elapsed_frames = 0;
-float x, y, z, l = 0.f;
+float x, y, z, l = 1.f;
 float speed = 0.f;
 double seconds = 0.0;
 int f_count = 0;
@@ -132,9 +132,9 @@ static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, i
     }
     if (key == GLFW_KEY_F && action == GLFW_PRESS)
     {
-        theEditMode = TAKE_CONTROL;
+        //theEditMode = TAKE_CONTROL;
         //cameraTarget = player_mesh->position;
-        cameraEye = player_mesh->position - glm::vec3(20.f, -4.f, 0.f);
+        //cameraEye = player_mesh->position - glm::vec3(20.f, -4.f, 0.f);
     }
     // Wireframe
     if (key == GLFW_KEY_X && action == GLFW_PRESS) {
@@ -603,7 +603,7 @@ void Render() {
     flat_beholder_mesh->meshName = "beholderr";
     flat_beholder_mesh->friendlyName = "flat_beholder_mesh";
     flat_beholder_mesh->isWireframe = wireFrame;
-    flat_beholder_mesh->RGBAColour = glm::vec4(34.5f, 34.5f, 34.5f, 1.f);
+    flat_beholder_mesh->RGBAColour = glm::vec4(20.5f, 20.5f, 20.5f, 1.f);
     flat_beholder_mesh->useRGBAColour = true;
     meshArray.push_back(flat_beholder_mesh);
     

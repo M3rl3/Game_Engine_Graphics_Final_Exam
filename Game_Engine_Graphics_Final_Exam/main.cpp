@@ -1383,7 +1383,7 @@ void Update() {
                 beholders[2]->position = waypoints[21]->position;
                 
                 currentMesh->target = glm::normalize(currentMesh->target);
-                currentMesh->velocity = currentMesh->target * 0.75f;
+                currentMesh->velocity = currentMesh->target * 0.25f;
                 currentMesh->position += currentMesh->velocity;
             }
         }

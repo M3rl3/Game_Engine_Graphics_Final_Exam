@@ -49,18 +49,20 @@ std::vector <cMeshInfo*> beholders;
 unsigned int readIndex = 0;
 int object_index = 0;
 int elapsed_frames = 0;
-int mouse_hover = 0;
-float x, y, z, l = 1.f;
+float x, y, z, l = 0.f;
 float speed = 0.f;
 double seconds = 0.0;
 int f_count = 0;
 int counter = 0;
+int another_counter = 0;
 
 bool wireFrame = false;
 bool doOnce = true;
 bool enableMouse = false;
 bool mouseClick = false;
 bool spectating = false;
+bool patrolling = true;
+bool fightMode = false;
 bool yes = false;
 bool no = false;
 
@@ -171,11 +173,14 @@ static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, i
     }
     if (key == GLFW_KEY_F6 && action == GLFW_PRESS) {
         theEditMode = SPECTATE;
+        patrolling = true;
         yes = true;
         counter++;
     }
     if (key == GLFW_KEY_F7 && action == GLFW_PRESS) {
         theEditMode = FIGHTCLUB;
+        patrolling = false;
+        doOnce = true;
     }
 
     switch (theEditMode)
@@ -245,7 +250,7 @@ static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, i
             // Cycle through objects in the scene
             if (key == GLFW_KEY_1 && action == GLFW_PRESS)
             {
-                cameraTarget = glm::vec3(0.f, 0.f, 0.f);
+                if (!enableMouse) cameraTarget = glm::vec3(0.f, 0.f, 0.f);
             }
             if (key == GLFW_KEY_2 && action == GLFW_PRESS)
             {
@@ -253,7 +258,7 @@ static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, i
                 if (object_index > meshArray.size()-1) {
                     object_index = 0;
                 }
-                cameraTarget = meshArray[object_index]->position;
+                if (!enableMouse) cameraTarget = meshArray[object_index]->position;
             }
             if (key == GLFW_KEY_3 && action == GLFW_PRESS)
             {
@@ -261,7 +266,7 @@ static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, i
                 if (object_index < 0) {
                     object_index = meshArray.size() - 1;
                 }
-                cameraTarget = meshArray[object_index]->position;
+                if (!enableMouse) cameraTarget = meshArray[object_index]->position;
             }    
         }
         break;
@@ -839,6 +844,11 @@ void Render() {
     waypoint_sphere20->friendlyName = "waypoint20";
     meshArray.push_back(waypoint_sphere20);
 
+    cMeshInfo* waypoint_sphere21 = new cMeshInfo();
+    waypoint_sphere21->meshName = "waypoint_sphere";
+    waypoint_sphere21->friendlyName = "waypoint21";
+    meshArray.push_back(waypoint_sphere21);
+
     
     // Setting textures here
     for (int i = 0; i < meshArray.size(); i++) {
@@ -905,6 +915,7 @@ void Render() {
     // reads scene descripion files for positioning and other info
     ReadSceneDescription();
 
+    //patrol
     waypoints.push_back(waypoint_sphere0);
     waypoints.push_back(waypoint_sphere1);
     waypoints.push_back(waypoint_sphere2);
@@ -917,17 +928,29 @@ void Render() {
     waypoints.push_back(waypoint_sphere9);
     waypoints.push_back(waypoint_sphere10);
     waypoints.push_back(waypoint_sphere11);
+
+    //spectate camera
     waypoints.push_back(waypoint_sphere12);
     waypoints.push_back(waypoint_sphere13);
     waypoints.push_back(waypoint_sphere14);
 
+    //fight phase
+    waypoints.push_back(waypoint_sphere15);
+    waypoints.push_back(waypoint_sphere16);
+    waypoints.push_back(waypoint_sphere17);
+    waypoints.push_back(waypoint_sphere18);
+    waypoints.push_back(waypoint_sphere19);
+    waypoints.push_back(waypoint_sphere20);
+    waypoints.push_back(waypoint_sphere21);
+
+    //beholders
     beholders.push_back(beholder_mesh);
     beholders.push_back(beholder_mesh1);
     beholders.push_back(beholder_mesh2);
 
     for (int i = 0; i < waypoints.size(); i++) {
         cMeshInfo* currentWaypoint = waypoints[i];
-        currentWaypoint->isVisible = true;
+        currentWaypoint->isVisible = false;
     }
 
     // initialize the particle to player position
@@ -1190,91 +1213,210 @@ void Update() {
         }
 
         // Beholder patrol
-        if (currentMesh->meshName == "beholder") {
+        if (patrolling) {
+            if (currentMesh->meshName == "beholder") {
+                if (currentMesh->friendlyName == "beholder2") {
+                    if (currentMesh->position == waypoints[0]->position)
+                    {
+                        currentMesh->target = waypoints[1]->position - currentMesh->position;
+                        currentMesh->rotation.y = 0.f;
+                    }
+                    if (currentMesh->position == waypoints[1]->position)
+                    {
+                        currentMesh->target = waypoints[2]->position - currentMesh->position;
+                        currentMesh->rotation.y = 67.55f;
+                    }
+                    if (currentMesh->position == waypoints[2]->position)
+                    {
+                        currentMesh->target = waypoints[3]->position - currentMesh->position;
+                        currentMesh->rotation.y = -135.10f;
+                    }
+                    if (currentMesh->position == waypoints[3]->position)
+                    {
+                        currentMesh->target = waypoints[0]->position - currentMesh->position;
+                        currentMesh->rotation.y = -67.55f;
+                    }
 
-            if (currentMesh->friendlyName == "beholder2") {
-                if (currentMesh->position == waypoints[0]->position)
-                {
-                    currentMesh->target = waypoints[1]->position - currentMesh->position;
-                    currentMesh->rotation.y = 0.f;
+                    currentMesh->target = glm::normalize(currentMesh->target);
+                    currentMesh->velocity = currentMesh->target * 0.25f;
+                    currentMesh->position += currentMesh->velocity;
                 }
-                if (currentMesh->position == waypoints[1]->position)
-                {
-                    currentMesh->target = waypoints[2]->position - currentMesh->position;
-                    currentMesh->rotation.y = 67.55f;
+
+                if (currentMesh->friendlyName == "beholder0") {
+                    if (currentMesh->position == waypoints[4]->position)
+                    {
+                        currentMesh->target = waypoints[5]->position - currentMesh->position;
+                        currentMesh->rotation.y = 0.f;
+                    }
+                    if (currentMesh->position == waypoints[5]->position)
+                    {
+                        currentMesh->target = waypoints[6]->position - currentMesh->position;
+                        currentMesh->rotation.y = 67.55f;
+                    }
+                    if (currentMesh->position == waypoints[6]->position)
+                    {
+                        currentMesh->target = waypoints[7]->position - currentMesh->position;
+                        currentMesh->rotation.y = -135.10f;
+                    }
+                    if (currentMesh->position == waypoints[7]->position)
+                    {
+                        currentMesh->target = waypoints[4]->position - currentMesh->position;
+                        currentMesh->rotation.y = -67.55f;
+                    }
+
+                    currentMesh->target = glm::normalize(currentMesh->target);
+                    currentMesh->velocity = currentMesh->target * 0.25f;
+                    currentMesh->position += currentMesh->velocity;
                 }
-                if (currentMesh->position == waypoints[2]->position)
-                {
-                    currentMesh->target = waypoints[3]->position - currentMesh->position;
-                    currentMesh->rotation.y = -135.10f;
+
+                if (currentMesh->friendlyName == "beholder1") {
+                    if (currentMesh->position == waypoints[8]->position)
+                    {
+                        currentMesh->target = waypoints[9]->position - currentMesh->position;
+
+                        currentMesh->rotation.y = -67.55f;
+                    }
+                    if (currentMesh->position == waypoints[9]->position)
+                    {
+                        currentMesh->target = waypoints[10]->position - currentMesh->position;
+                        currentMesh->rotation.y = 0.f;
+                    }
+                    if (currentMesh->position == waypoints[10]->position)
+                    {
+                        currentMesh->target = waypoints[11]->position - currentMesh->position;
+                        currentMesh->rotation.y = 67.55f;
+                    }
+                    if (currentMesh->position == waypoints[11]->position)
+                    {
+                        currentMesh->target = waypoints[8]->position - currentMesh->position;
+                        currentMesh->rotation.y = -135.10f;
+                    }
+
+                    currentMesh->target = glm::normalize(currentMesh->target);
+                    currentMesh->velocity = currentMesh->target * 0.25f;
+                    currentMesh->position += currentMesh->velocity;
                 }
-                if (currentMesh->position == waypoints[3]->position)
-                {
-                    currentMesh->target = waypoints[0]->position - currentMesh->position;
-                    currentMesh->rotation.y = -67.55f;
-                }
-                
-                currentMesh->target = glm::normalize(currentMesh->target);
-                currentMesh->velocity = currentMesh->target * 0.25f;
-                currentMesh->position += currentMesh->velocity;
             }
-            
-            if (currentMesh->friendlyName == "beholder0") {
-                if (currentMesh->position == waypoints[4]->position)
-                {
-                    currentMesh->target = waypoints[5]->position - currentMesh->position;
-                    currentMesh->rotation.y = 0.f;
-                }
-                if (currentMesh->position == waypoints[5]->position)
-                {
-                    currentMesh->target = waypoints[6]->position - currentMesh->position;
-                    currentMesh->rotation.y = 67.55f;
-                }
-                if (currentMesh->position == waypoints[6]->position)
-                {
-                    currentMesh->target = waypoints[7]->position - currentMesh->position;
-                    currentMesh->rotation.y = -135.10f;
-                }
-                if (currentMesh->position == waypoints[7]->position)
-                {
-                    currentMesh->target = waypoints[4]->position - currentMesh->position;
-                    currentMesh->rotation.y = -67.55f;
-                }
-                
-                currentMesh->target = glm::normalize(currentMesh->target);
-                currentMesh->velocity = currentMesh->target * 0.25f;
-                currentMesh->position += currentMesh->velocity;
-            }
-
-            if (currentMesh->friendlyName == "beholder1") {
-                if (currentMesh->position == waypoints[8]->position)
-                {
-                    currentMesh->target = waypoints[9]->position - currentMesh->position;
-
-                    currentMesh->rotation.y = -67.55f;
-                }
-                if (currentMesh->position == waypoints[9]->position)
-                {
-                    currentMesh->target = waypoints[10]->position - currentMesh->position;
-                    currentMesh->rotation.y = 0.f;
-                }
-                if (currentMesh->position == waypoints[10]->position)
-                {
-                    currentMesh->target = waypoints[11]->position - currentMesh->position;
-                    currentMesh->rotation.y = 67.55f;
-                }
-                if (currentMesh->position == waypoints[11]->position)
-                {
-                    currentMesh->target = waypoints[8]->position - currentMesh->position;
-                    currentMesh->rotation.y = -135.10f;
-                }
-                
-                currentMesh->target = glm::normalize(currentMesh->target);
-                currentMesh->velocity = currentMesh->target * 0.25f;
-                currentMesh->position += currentMesh->velocity;
-            }   
         }
 
+        if (theEditMode == FIGHTCLUB) {
+            if (doOnce) {
+                beholders[0]->target = waypoints[17]->position - beholders[0]->position;
+                beholders[1]->target = waypoints[15]->position - beholders[1]->position;
+                beholders[2]->target = waypoints[19]->position - beholders[2]->position;
+
+                beholders[0]->rotation.y = 67.55f;
+                beholders[1]->rotation.y = -67.55f;
+                beholders[2]->rotation.y = 0.0f;
+
+                if (beholders[0]->position != waypoints[17]->position) {
+
+                    beholders[0]->target = glm::normalize(beholders[0]->target);
+                    beholders[0]->velocity = beholders[0]->target * 0.0025f;
+                    beholders[0]->position += beholders[0]->velocity;
+                }
+                if (beholders[1]->position != waypoints[15]->position) {
+
+                    beholders[1]->target = glm::normalize(beholders[1]->target);
+                    beholders[1]->velocity = beholders[1]->target * 0.0025f;
+                    beholders[1]->position += beholders[1]->velocity;
+                }
+                if (beholders[2]->position != waypoints[19]->position) {
+
+                    beholders[2]->target = glm::normalize(beholders[2]->target);
+                    beholders[2]->velocity = beholders[2]->target * 0.0025f;
+                    beholders[2]->position += beholders[2]->velocity;
+                }
+
+                elapsed_frames++;
+               
+                
+
+                if (elapsed_frames > 25000) {
+                    theEditMode = MOVING_CAMERA;
+                    elapsed_frames = 0;
+                    no = true;
+                    doOnce = false; 
+                }
+            }  
+        }
+        if (no) {
+            if (currentMesh->friendlyName == "beholder0") {
+                currentMesh->target = waypoints[18]->position - currentMesh->position;
+
+                if (currentMesh->position == waypoints[17]->position) {
+                    currentMesh->target = waypoints[18]->position - currentMesh->position;
+                }
+                if (currentMesh->position == waypoints[18]->position) {
+                    currentMesh->position = waypoints[18]->position;
+                    //currentMesh->target = waypoints[19]->position - currentMesh->position;
+                }
+                currentMesh->target = glm::normalize(currentMesh->target);
+                currentMesh->velocity = currentMesh->target * 0.25f;
+                currentMesh->position += currentMesh->velocity;
+            }
+            if (currentMesh->friendlyName == "beholder1") {
+                currentMesh->target = waypoints[16]->position - currentMesh->position;
+
+                if (currentMesh->position == waypoints[15]->position) {
+                    currentMesh->target = waypoints[16]->position - currentMesh->position;
+                }
+                if (currentMesh->position == waypoints[16]->position) {
+                    currentMesh->position = waypoints[16]->position;
+                    //currentMesh->target = waypoints[19]->position - currentMesh->position;
+                }
+                currentMesh->target = glm::normalize(currentMesh->target);
+                currentMesh->velocity = currentMesh->target * 0.25f;
+                currentMesh->position += currentMesh->velocity;
+            }
+            if (currentMesh->friendlyName == "beholder2") {
+                //beholder_mesh2->target = waypoints[20]->position - beholder_mesh2->position;
+                
+                currentMesh->target = waypoints[20]->position - currentMesh->position;
+                beholders[2]->rotation.y = -135.10f;
+
+                if (currentMesh->position == waypoints[20]->position) {
+                    currentMesh->target = waypoints[18]->position - currentMesh->position;
+                    
+                }
+
+                beholders[2]->position = waypoints[21]->position;
+                
+                currentMesh->target = glm::normalize(currentMesh->target);
+                currentMesh->velocity = currentMesh->target * 0.75f;
+                currentMesh->position += currentMesh->velocity;
+            }
+        }
+        
+        // Spinny dying animation
+        if (glm::distance(beholders[0]->position, beholders[1]->position) < 75.f) {
+
+            beholders[0]->rotation.y += 1.f;
+            beholders[1]->rotation.y += 1.f;
+            beholders[2]->rotation.y += 1.f;
+
+            beholders[0]->scale.x -= 0.0001f;
+            beholders[0]->scale.y -= 0.0001f;
+            beholders[0]->scale.z -= 0.0001f;
+                                     
+            beholders[1]->scale.x -= 0.0001f;
+            beholders[1]->scale.y -= 0.0001f;
+            beholders[1]->scale.z -= 0.0001f;
+            
+            beholders[2]->scale.x -= 0.0001f;
+            beholders[2]->scale.y -= 0.0001f;
+            beholders[2]->scale.z -= 0.0001f;
+
+            f_count++;
+            no = false;
+        }
+        
+        if (f_count > 50000) {
+            beholders[0]->isVisible = false;
+            beholders[1]->isVisible = false;
+            beholders[2]->isVisible = false;
+        }
+        
         glm::vec3 cursorPos;
 
         // Division is expensive
